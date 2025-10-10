@@ -1,11 +1,3 @@
 # Noor Al Yateem
 
-Nonprofit website for orphaned children support.
-
-## Getting Started
-
-Open index.html in your browser.
-
-## About
-
-Supporting orphaned children and vulnerable families.
+Nonprofit supporting orphaned children.
