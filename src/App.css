@@ -1,0 +1,78 @@
+.App {
+  width: 100%;
+  overflow-x: hidden;
+  padding-top: 100px; /* Account for fixed header */
+}
+
+@media (max-width: 968px) {
+  .App {
+    padding-top: 70px; /* Account for smaller header on mobile */
+  }
+}
+
+/* Global Section Styles */
+section {
+  padding: 80px 0;
+  width: 100%;
+}
+
+section > * {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #666;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  section {
+    padding: 60px 0;
+  }
+
+  section > * {
+    padding: 0 30px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 40px 0;
+  }
+
+  section > * {
+    padding: 0 20px;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+}
+
