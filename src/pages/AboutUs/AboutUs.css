@@ -1,0 +1,115 @@
+.about-us-page {
+  width: 100%;
+}
+
+.page-hero {
+  background: linear-gradient(135deg, #aecdd4 0%, #7ab5c1 100%);
+  padding: 120px 20px 80px;
+  text-align: center;
+  color: white;
+}
+
+.page-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.page-hero p {
+  font-size: 1.3rem;
+  opacity: 0.95;
+}
+
+.about-detail {
+  padding: 100px 20px;
+  background: white;
+}
+
+.about-detail-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-detail h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 30px;
+  margin-top: 60px;
+}
+
+.about-detail h2:first-child {
+  margin-top: 0;
+}
+
+.about-detail p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.value-card {
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.value-card h3 {
+  font-size: 1.5rem;
+  color: #aecdd4;
+  margin-bottom: 15px;
+}
+
+.value-card p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 100px 20px 60px;
+  }
+
+  .page-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .page-hero p {
+    font-size: 1.1rem;
+  }
+
+  .about-detail {
+    padding: 60px 20px;
+  }
+
+  .about-detail h2 {
+    font-size: 2rem;
+  }
+
+  .about-detail p {
+    font-size: 1.1rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

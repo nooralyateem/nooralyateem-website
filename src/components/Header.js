@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -8,17 +9,22 @@ function Header() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="header-content">
-        <div className="logo">
+        <Link to="/" className="logo">
           <img src="/NaY Logo transparent.png" alt="Noor Al Yateem" className="logo-image" />
-        </div>
+        </Link>
         
         <nav className={`nav ${isMobileMenuOpen ? 'open' : ''}`}>
-          <a href="#home" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
-          <a href="#about" onClick={() => setIsMobileMenuOpen(false)}>About</a>
-          <a href="#programs" onClick={() => setIsMobileMenuOpen(false)}>Programs</a>
+          <Link to="/about" onClick={closeMobileMenu}>About Us</Link>
+          <Link to="/events" onClick={closeMobileMenu}>Events</Link>
+          <Link to="/gallery" onClick={closeMobileMenu}>Gallery</Link>
+          <Link to="/contact" onClick={closeMobileMenu}>Contact Us</Link>
         </nav>
 
         <div className="header-actions">
@@ -32,12 +38,12 @@ function Header() {
             <span></span>
           </button>
           
-          <a href="#contact" className="btn-donate">
+          <Link to="/donate" className="btn-donate">
             Donate
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </header>
