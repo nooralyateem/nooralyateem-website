@@ -13,9 +13,9 @@ A modern, responsive website for Noor Al Yateem - a nonprofit organization dedic
 
 ## 📋 Important Setup Step
 
-Before running the project, add your logo images to the `public/` folder:
+Before running the project, ensure your assets are in the `public/` folder:
 - `NaY Logo transparent.png` - Transparent logo for header
-- `NaY Logo and Plain Background.png` - Logo with background for About section
+- `hero-video.mp4` - Background video for hero section
 
 ## 🚀 Getting Started
 
@@ -37,14 +37,12 @@ cd nooralyateem-website
 npm install
 ```
 
-3. Add your logo images to the `public/` folder (see above)
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm start
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### Available Scripts
 
@@ -59,17 +57,38 @@ npm start
 nooralyateem-website/
 ├── public/
 │   ├── index.html
-│   └── [Add your logo images here]
+│   ├── NaY Logo transparent.png
+│   └── hero-video.mp4
 ├── src/
 │   ├── components/
 │   │   ├── Header.js/css       # Navigation bar
-│   │   ├── Hero.js/css         # Hero section with mission
-│   │   ├── About.js/css        # About & mission statement
-│   │   ├── Programs.js/css     # Programs showcase
-│   │   ├── News.js/css         # Recent news section
-│   │   ├── DonationCTA.js/css  # Donation call-to-action
 │   │   └── Footer.js/css       # Footer with links
-│   ├── App.js
+│   ├── pages/
+│   │   ├── Home/
+│   │   │   ├── Home.js         # Homepage (Hero, Programs, About)
+│   │   │   ├── Home.css
+│   │   │   └── index.js
+│   │   ├── AboutUs/
+│   │   │   ├── AboutUs.js      # About Us page
+│   │   │   ├── AboutUs.css
+│   │   │   └── index.js
+│   │   ├── Events/
+│   │   │   ├── Events.js       # Events page
+│   │   │   ├── Events.css
+│   │   │   └── index.js
+│   │   ├── Gallery/
+│   │   │   ├── Gallery.js      # Gallery page
+│   │   │   ├── Gallery.css
+│   │   │   └── index.js
+│   │   ├── Contact/
+│   │   │   ├── Contact.js      # Contact page
+│   │   │   ├── Contact.css
+│   │   │   └── index.js
+│   │   └── Donate/
+│   │       ├── Donate.js       # Donation page
+│   │       ├── Donate.css
+│   │       └── index.js
+│   ├── App.js                  # Router configuration
 │   ├── App.css
 │   ├── index.js
 │   └── index.css
@@ -77,18 +96,19 @@ nooralyateem-website/
 └── README.md
 ```
 
-## 🌟 Sections
+## 🌟 Pages
 
-- **Home**: Hero section with mission statement
-- **About**: Organization overview and values
-- **Programs**: Comprehensive support programs
-- **News**: Recent updates and achievements
-- **Donation CTA**: Multiple ways to contribute
-- **Contact**: Footer with contact information
+- **Home** (`/`): Hero section with video background, about overview, and programs showcase
+- **About Us** (`/about`): Detailed organization story, mission, and values
+- **Events** (`/events`): Upcoming and past events
+- **Gallery** (`/gallery`): Photo gallery showcasing moments and activities
+- **Contact Us** (`/contact`): Contact form and information
+- **Donate** (`/donate`): Donation page with multiple giving options and payment form
 
 ## 🛠️ Built With
 
 - React 18
+- React Router DOM (for navigation)
 - CSS3 (Custom styling)
 - Create React App
 
