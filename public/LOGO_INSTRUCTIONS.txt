@@ -1,0 +1,27 @@
+📋 LOGO PLACEMENT INSTRUCTIONS
+================================
+
+Please add your logo files to this folder (public/):
+
+Required Files:
+1. NaY Logo transparent.png
+   - Used in: Header navigation (transparent background)
+   - Recommended size: Height ~200px (will be auto-scaled to 60px)
+
+2. NaY Logo and Plain Background.png
+   - Used in: About section
+   - Recommended size: 800x800px or similar square format
+   - This logo will be displayed prominently in the About section
+
+File Requirements:
+- Format: PNG (for transparency support)
+- Names must match exactly (case-sensitive)
+- High resolution recommended for best display quality
+
+After adding the logos:
+1. Save the files in this public/ folder
+2. Refresh your browser to see the logos appear
+3. If logos don't appear immediately, try a hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
+
+Note: The website will still function without the logos, but they will appear as broken image links until you add the files.
+
