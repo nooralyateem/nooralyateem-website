@@ -84,7 +84,7 @@ import Home from './pages/Home/Home';
 - Each page has its own CSS file - keep styles scoped to that page
 - Use the global color palette:
   - Primary Cream: `#faf2e5`
-  - Primary Blue: `#aecdd4`
+  - Primary Blue: `#55b9e0`
 - Font family: `'Righteous', cursive` (already loaded globally)
 - Follow mobile-first responsive design
 - Include media queries for tablets (`768px`) and mobile (`480px`)

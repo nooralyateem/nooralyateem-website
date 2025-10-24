@@ -3,7 +3,7 @@
 }
 
 .page-hero {
-  background: linear-gradient(135deg, #aecdd4 0%, #7ab5c1 100%);
+  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
   padding: 120px 20px 80px;
   text-align: center;
   color: white;
@@ -58,13 +58,13 @@
 }
 
 .type-btn:hover {
-  border-color: #aecdd4;
+  border-color: #55b9e0;
 }
 
 .type-btn.active {
-  background: #aecdd4;
+  background: #55b9e0;
   color: white;
-  border-color: #aecdd4;
+  border-color: #55b9e0;
 }
 
 /* Donation Form */
@@ -98,14 +98,14 @@
 }
 
 .amount-card:hover {
-  border-color: #aecdd4;
+  border-color: #55b9e0;
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(174, 205, 212, 0.2);
 }
 
 .amount-card.selected {
-  border-color: #aecdd4;
-  background: #aecdd4;
+  border-color: #55b9e0;
+  background: #55b9e0;
   color: white;
 }
 
@@ -163,7 +163,7 @@
 
 .custom-input-wrapper input:focus {
   outline: none;
-  border-color: #aecdd4;
+  border-color: #55b9e0;
 }
 
 /* Donor Info */
@@ -209,14 +209,14 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #aecdd4;
+  border-color: #55b9e0;
 }
 
 /* Submit Button */
 .donate-submit-btn {
   width: 100%;
   padding: 20px 40px;
-  background: #aecdd4;
+  background: #55b9e0;
   color: white;
   border: none;
   border-radius: 8px;
@@ -297,7 +297,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: #aecdd4;
+  background: #55b9e0;
   color: white;
   display: flex;
   align-items: center;
