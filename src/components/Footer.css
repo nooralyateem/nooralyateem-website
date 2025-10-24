@@ -1,5 +1,5 @@
 .footer {
-  background: linear-gradient(135deg, #aecdd4 0%, #8ab4bd 100%);
+  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
   color: #faf2e5;
   padding: 60px 0 20px;
   width: 100%;
@@ -99,7 +99,7 @@
 
 .social-links a:hover {
   background: #faf2e5;
-  color: #aecdd4;
+  color: #55b9e0;
   transform: translateY(-3px);
 }
 
@@ -116,7 +116,7 @@
 }
 
 .footer-bottom p {
-  color: #faf2e5;
+  color: #000000;
   opacity: 0.9;
   margin: 0;
 }

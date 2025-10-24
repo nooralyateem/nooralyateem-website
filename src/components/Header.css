@@ -51,23 +51,23 @@
   font-size: 1.3rem;
   transition: color 0.2s ease;
   position: relative;
-  padding: 28px 60px 5px 60px;
+  padding: 28px 60px 28px 60px;
   display: flex;
   align-items: center;
 }
 
 .nav a:not(.btn-donate):hover {
-  color: #aecdd4;
+  color: #55b9e0;
 }
 
 .nav a:not(.btn-donate)::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
   left: 0;
   right: 0;
   height: 3px;
-  background: #aecdd4;
+  background: #55b9e0;
   transform: scaleX(0);
   transition: transform 0.2s ease;
 }
@@ -84,7 +84,7 @@
 }
 
 .btn-donate {
-  background: #aecdd4 !important;
+  background: #55b9e0 !important;
   color: white !important;
   padding: 14px 32px !important;
   border-radius: 8px;
@@ -113,7 +113,7 @@
 }
 
 .btn-donate:hover {
-  background: #8ab4bd !important;
+  background: #55b9e0 !important;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(174, 205, 212, 0.3);
 }

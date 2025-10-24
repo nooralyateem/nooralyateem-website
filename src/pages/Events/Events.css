@@ -3,7 +3,7 @@
 }
 
 .page-hero {
-  background: linear-gradient(135deg, #aecdd4 0%, #7ab5c1 100%);
+  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
   padding: 120px 20px 80px;
   text-align: center;
   color: white;
@@ -71,7 +71,7 @@
 }
 
 .event-date-badge {
-  background: #aecdd4;
+  background: #55b9e0;
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
@@ -118,7 +118,7 @@
 }
 
 .event-btn:hover {
-  background: #aecdd4;
+  background: #55b9e0;
   transform: translateX(5px);
 }
 
@@ -129,7 +129,7 @@
 }
 
 .past-event-card {
-  background: #f8f9fa;
+  background: #55b9e0;
   border-radius: 16px;
   padding: 40px 30px;
   text-align: center;
@@ -153,7 +153,7 @@
 
 .past-event-date {
   font-size: 1rem;
-  color: #aecdd4;
+  color: #55b9e0;
   font-weight: 600;
   margin-bottom: 15px;
 }

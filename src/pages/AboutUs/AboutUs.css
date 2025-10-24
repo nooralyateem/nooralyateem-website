@@ -3,7 +3,7 @@
 }
 
 .page-hero {
-  background: linear-gradient(135deg, #aecdd4 0%, #7ab5c1 100%);
+  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
   padding: 120px 20px 80px;
   text-align: center;
   color: white;
@@ -73,7 +73,7 @@
 
 .value-card h3 {
   font-size: 1.5rem;
-  color: #aecdd4;
+  color: #55b9e0;
   margin-bottom: 15px;
 }
 
