@@ -3,10 +3,10 @@
 }
 
 .page-hero {
-  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 100%);
   padding: 120px 20px 80px;
   text-align: center;
-  color: white;
+  color: var(--color-text-white);
 }
 
 .page-hero-content {
@@ -26,7 +26,7 @@
 
 .gallery-section {
   padding: 100px 20px;
-  background: white;
+  background: var(--color-bg-cream);
 }
 
 .gallery-content {
@@ -41,13 +41,13 @@
 
 .gallery-intro h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 20px;
 }
 
 .gallery-intro p {
   font-size: 1.2rem;
-  color: #666;
+  color: var(--color-text-gray);
   line-height: 1.8;
   max-width: 800px;
   margin: 0 auto;
@@ -129,7 +129,7 @@
   left: 0;
   right: 0;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: white;
+  color: var(--color-text-white);
   padding: 20px;
   transform: translateY(100%);
   transition: transform 0.3s ease;
@@ -157,7 +157,7 @@
   top: 50%;
   transform: translateY(-50%);
   background: rgba(85, 185, 224, 0.9);
-  color: white;
+  color: var(--color-text-white);
   border: none;
   width: 50px;
   height: 50px;
@@ -169,7 +169,7 @@
 }
 
 .carousel-btn:hover {
-  background: #55b9e0;
+  background: var(--color-primary);
   transform: translateY(-50%) scale(1.05);
 }
 
@@ -182,7 +182,7 @@
 }
 
 .gallery-cta {
-  background: #f8f9fa;
+  background: var(--color-bg-cream);
   padding: 60px 50px;
   border-radius: 16px;
   text-align: center;
@@ -191,19 +191,19 @@
 
 .gallery-cta h3 {
   font-size: 2rem;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 15px;
 }
 
 .gallery-cta p {
   font-size: 1.2rem;
-  color: #666;
+  color: var(--color-text-gray);
   margin-bottom: 30px;
 }
 
 .cta-btn {
-  background: #55b9e0;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-white);
   border: none;
   padding: 16px 40px;
   border-radius: 8px;
@@ -211,10 +211,11 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-shadow: var(--shadow-text);
 }
 
 .cta-btn:hover {
-  background: #333;
+  background: var(--color-text-dark);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -222,7 +223,7 @@
 /* Album Page Styles */
 .album-page {
   min-height: 100vh;
-  background: white;
+  background: var(--color-bg-white);
   opacity: 0;
   transition: opacity 0.6s ease;
 }
@@ -232,10 +233,10 @@
 }
 
 .album-header {
-  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 100%);
   padding: 120px 20px 80px;
   text-align: center;
-  color: white;
+  color: var(--color-text-white);
 }
 
 .back-btn {
@@ -243,7 +244,7 @@
   top: 20px;
   left: 20px;
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: var(--color-text-white);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 10px 20px;
   border-radius: 25px;
@@ -338,13 +339,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-text-white);
   font-size: 1.5rem;
   transition: all 0.3s ease;
 }
 
 .play-button:hover {
-  background: #55b9e0;
+  background: var(--color-primary);
   transform: scale(1.1);
 }
 

@@ -3,10 +3,10 @@
 }
 
 .page-hero {
-  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 100%) !important;
   padding: 120px 20px 80px;
   text-align: center;
-  color: white;
+  color: var(--color-text-white) !important;
 }
 
 .page-hero-content {
@@ -26,7 +26,7 @@
 
 .about-detail {
   padding: 100px 20px;
-  background: white;
+  background: var(--color-bg-cream);
 }
 
 .about-detail-content {
@@ -36,7 +36,7 @@
 
 .about-detail h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 30px;
   margin-top: 60px;
 }
@@ -110,17 +110,18 @@
 }
 
 .team-name {
-  color: #55b9e0;
+  color: var(--color-primary);
   font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
   padding: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .about-detail p {
   font-size: 1.2rem;
   line-height: 1.8;
-  color: #555;
+  color: var(--color-text-gray);
   margin-bottom: 20px;
 }
 
@@ -133,7 +134,7 @@
 
 .value-card {
   padding: 30px;
-  background: #f8f9fa;
+  background: var(--color-bg-cream);
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -145,13 +146,14 @@
 
 .value-card h3 {
   font-size: 1.5rem;
-  color: #55b9e0;
+  color: var(--color-primary);
   margin-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .value-card p {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-gray);
   margin-bottom: 0;
 }
 

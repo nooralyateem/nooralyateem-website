@@ -1,6 +1,6 @@
 .footer {
-  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
-  color: #faf2e5;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 100%) !important;
+  color: var(--color-text-white) !important;
   padding: 60px 0 20px;
   width: 100%;
 }
@@ -23,27 +23,27 @@
 .footer-title {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #faf2e5;
+  color: var(--color-text-white);
   margin-bottom: 5px;
 }
 
 .footer-tagline {
   font-size: 1.1rem;
-  color: #faf2e5;
+  color: var(--color-text-white);
   opacity: 0.9;
   margin-bottom: 15px;
 }
 
 .footer-description {
   line-height: 1.8;
-  color: #faf2e5;
+  color: var(--color-text-white);
   opacity: 0.9;
 }
 
 .footer-section h4 {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #faf2e5;
+  color: var(--color-text-white);
 }
 
 .footer-links {
@@ -56,7 +56,7 @@
 }
 
 .footer-links a {
-  color: #faf2e5;
+  color: var(--color-text-white);
   opacity: 0.9;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -73,7 +73,7 @@
 }
 
 .contact-info p {
-  color: #faf2e5;
+  color: var(--color-text-white);
   opacity: 0.9;
   margin-bottom: 10px;
   line-height: 1.8;
@@ -88,18 +88,18 @@
 .social-links a {
   width: 40px;
   height: 40px;
-  background: rgba(250, 242, 229, 0.2);
+  background: var(--color-overlay-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #faf2e5;
+  color: var(--color-text-white);
   transition: all 0.3s ease;
 }
 
 .social-links a:hover {
-  background: #faf2e5;
-  color: #55b9e0;
+  background: var(--color-bg-white);
+  color: var(--color-primary);
   transform: translateY(-3px);
 }
 
@@ -107,7 +107,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 30px 20px 0;
-  border-top: 1px solid rgba(250, 242, 229, 0.3);
+  border-top: 1px solid var(--color-overlay-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -116,7 +116,7 @@
 }
 
 .footer-bottom p {
-  color: #000000;
+  color: var(--color-text-white);
   opacity: 0.9;
   margin: 0;
 }
@@ -128,7 +128,7 @@
 }
 
 .footer-bottom-links a {
-  color: #faf2e5;
+  color: var(--color-text-white);
   opacity: 0.9;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -139,7 +139,7 @@
 }
 
 .footer-bottom-links span {
-  color: #faf2e5;
+  color: var(--color-text-white);
   opacity: 0.7;
 }
 
