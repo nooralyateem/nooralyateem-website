@@ -58,7 +58,7 @@ function AboutUs() {
               </div>
             </div>
             <div className="team-photo-container">
-              <img src="events.jpg" alt="Events Team" className="team-photo" />
+              <img src="events.JPG" alt="Events Team" className="team-photo" />
               <div className="team-photo-overlay">
                 <span className="team-name">Events Team</span>
               </div>
