@@ -6,6 +6,13 @@
   background: #faf2e5;
   width: 100%;
   z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: rgba(250, 242, 229, 0.95);
+  backdrop-filter: blur(10px);
 }
 
 .header-content {
