@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import './Gallery.css';
 
@@ -90,10 +90,34 @@ const photoAlbums = [
   }
 ];
 
+// Sample vlogs data - using existing local media
+const vlogs = [
+  { id: 'v1', title: 'GBM^2 Vlog', url: '/media/gallery/gbms/gbms-vlog.mp4' },
+  { id: 'v2', title: 'Popups Recap', url: '/media/gallery/popups/popups-7.mov' },
+  { id: 'v3', title: 'GBM Highlights', url: '/media/gallery/gbms/gbms-3.mov' },
+  { id: 'v4', title: 'Service Moments', url: '/media/gallery/events/events-2.mov' },
+  { id: 'v5', title: 'End-of-Semester', url: '/media/gallery/end-of-semester/end-of-semester-1.mov' },
+];
+
 // Photo Carousel Component
 function PhotoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const autoplayRef = useRef(null);
+
+  const stopAutoplay = useCallback(() => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % photoAlbums.length);
+    }, 3000);
+  }, [stopAutoplay]);
 
   const handleAlbumClick = (albumId) => {
     navigate(`/gallery/${albumId}`);
@@ -101,11 +125,19 @@ function PhotoCarousel() {
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % photoAlbums.length);
+    startAutoplay();
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + photoAlbums.length) % photoAlbums.length);
+    startAutoplay();
   };
+
+  // Autoplay carousel
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
+  }, [startAutoplay, stopAutoplay]);
 
   const getVisibleAlbums = () => {
     const visible = [];
@@ -113,7 +145,7 @@ function PhotoCarousel() {
     
     for (let i = -2; i <= 2; i++) {
       const index = (currentIndex + i + total) % total;
-      visible.push({ ...photoAlbums[index], position: i });
+      visible.push({ ...photoAlbums[index], position: i, arrayIndex: index });
     }
     
     return visible;
@@ -150,7 +182,13 @@ function PhotoCarousel() {
                   <div
                     key={album.id}
                     className={`carousel-item ${album.position === 0 ? 'center' : ''} ${album.position !== 0 ? 'faded' : ''}`}
-                    onClick={() => handleAlbumClick(album.id)}
+                    onClick={() => {
+                      if (album.position === 0) {
+                        handleAlbumClick(album.id);
+                      } else {
+                        setCurrentIndex(album.arrayIndex);
+                      }
+                    }}
                   >
                     <div className="album-thumbnail">
                       <img src={album.thumbnail} alt={album.title} />
@@ -169,13 +207,156 @@ function PhotoCarousel() {
             </div>
           </div>
 
-          <div className="gallery-cta">
-            <h3>Share Your Photos</h3>
-            <p>Have photos from our events? We'd love to feature them in our gallery!</p>
-            <button className="cta-btn">Submit Photos</button>
-          </div>
+          <VlogsCarousel />
         </div>
       </section>
+    </div>
+  );
+}
+
+// Vlogs Carousel Component (Video)
+function VlogsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const videoRefs = useRef({});
+  const [isUnmuted, setIsUnmuted] = useState(false);
+
+  const next = () => {
+    // Pause current center video
+    const currentVideo = videoRefs.current[`vlog-${currentIndex}`];
+    if (currentVideo) {
+      currentVideo.pause();
+      currentVideo.currentTime = 0;
+    }
+    setCurrentIndex((p) => (p + 1) % vlogs.length);
+    setIsUnmuted(false);
+  };
+
+  const prev = () => {
+    // Pause current center video
+    const currentVideo = videoRefs.current[`vlog-${currentIndex}`];
+    if (currentVideo) {
+      currentVideo.pause();
+      currentVideo.currentTime = 0;
+    }
+    setCurrentIndex((p) => (p - 1 + vlogs.length) % vlogs.length);
+    setIsUnmuted(false);
+  };
+
+  const getVisible = () => {
+    const visible = [];
+    const total = vlogs.length;
+    for (let i = -2; i <= 2; i++) {
+      const index = (currentIndex + i + total) % total;
+      visible.push({ ...vlogs[index], position: i, arrayIndex: index });
+    }
+    return visible;
+  };
+
+  // Handle video play/pause based on position
+  useEffect(() => {
+    const visible = [];
+    const total = vlogs.length;
+    for (let i = -2; i <= 2; i++) {
+      const index = (currentIndex + i + total) % total;
+      visible.push({ ...vlogs[index], position: i, arrayIndex: index });
+    }
+    
+    visible.forEach((item) => {
+      const video = videoRefs.current[`vlog-${item.arrayIndex}`];
+      if (video) {
+        if (item.position === 0) {
+          // Center video should play
+          video.play().catch(() => {
+            // Autoplay might be blocked, but we'll try
+          });
+        } else {
+          // Side videos should pause and reset
+          video.pause();
+          video.currentTime = 0;
+          video.muted = true;
+        }
+      }
+    });
+  }, [currentIndex]);
+
+  return (
+    <div className="vlogs-section">
+      <div className="gallery-intro">
+        <h2>In the NAYborhood Vlogs</h2>
+        <p>
+          Short videos capturing our favorite moments in the NAYborhood — quick looks
+          into community impact, behind-the-scenes highlights, and stories that inspire.
+        </p>
+      </div>
+
+      <div className="carousel-container">
+        <div className="carousel-wrapper">
+          <button className="carousel-btn prev" onClick={prev}>‹</button>
+
+          <div className="carousel-track">
+            {getVisible().map((item) => (
+              <div
+                key={item.id}
+                className={`carousel-item ${item.position === 0 ? 'center' : ''} ${item.position !== 0 ? 'faded' : ''}`}
+                onClick={() => {
+                  if (item.position !== 0) {
+                    setCurrentIndex(item.arrayIndex);
+                  }
+                }}
+              >
+                <div className="vlog-thumbnail">
+                  <video
+                    ref={(el) => {
+                      if (el) videoRefs.current[`vlog-${item.arrayIndex}`] = el;
+                    }}
+                    src={item.url}
+                    muted={item.position !== 0 || !isUnmuted}
+                    playsInline
+                    loop
+                    preload="metadata"
+                    poster=""
+                  />
+                  {item.position === 0 && (
+                    <button
+                      className="mute-toggle-btn"
+                      onClick={() => {
+                        const video = videoRefs.current[`vlog-${item.arrayIndex}`];
+                        if (video) {
+                          const shouldMute = isUnmuted; // if currently unmuted, we want to mute it
+                          video.muted = shouldMute;
+                          setIsUnmuted(!shouldMute);
+                          if (!shouldMute) {
+                            video.play().catch(() => {});
+                          }
+                        }
+                      }}
+                      aria-label={isUnmuted ? "Mute video" : "Unmute video"}
+                      title={isUnmuted ? "Mute" : "Unmute"}
+                    >
+                      {/* Speaker icon (no slash when unmuted) */}
+                      {isUnmuted ? (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3 9V15H7L12 20V4L7 9H3Z" fill="currentColor"/>
+                          <path d="M16 7C17.6569 8.65685 17.6569 15.3431 16 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M19 4C22.3137 7.31371 22.3137 16.6863 19 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      ) : (
+                        // Speaker with slash when muted
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3 9V15H7L12 20V4L7 9H3Z" fill="currentColor"/>
+                          <path d="M22 2L2 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                        </svg>
+                      )}
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button className="carousel-btn next" onClick={next}>›</button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -185,6 +366,7 @@ function AlbumPage() {
   const { albumId } = useParams();
   const navigate = useNavigate();
   const [fadeIn, setFadeIn] = useState(false);
+  const [selectedPhotoUrl, setSelectedPhotoUrl] = useState(null);
 
   const album = photoAlbums.find(a => a.id === albumId);
 
@@ -224,11 +406,26 @@ function AlbumPage() {
                 </div>
               </div>
             ) : (
-              <img src={photo.url} alt={`${album.title} ${photo.id}`} />
+              <img
+                src={photo.url}
+                alt={`${album.title} ${photo.id}`}
+                onClick={() => setSelectedPhotoUrl(photo.url)}
+              />
             )}
           </div>
         ))}
       </div>
+
+      {selectedPhotoUrl && (
+        <div className="image-modal-overlay" onClick={() => setSelectedPhotoUrl(null)}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="image-modal-close" aria-label="Close" onClick={() => setSelectedPhotoUrl(null)}>
+              ×
+            </button>
+            <img src={selectedPhotoUrl} alt="Selected" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
