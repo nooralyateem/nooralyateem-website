@@ -20,6 +20,7 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Form submission logic would go here
+    // In a real application, you would send formData to your server/backend here.
     alert('Thank you for reaching out! We will get back to you soon.');
     setFormData({
       name: '',
@@ -50,13 +51,8 @@ function Contact() {
               </p>
 
               <div className="info-items">
-                <div className="info-item">
-                  <div className="info-icon">📍</div>
-                  <div className="info-text">
-                    <h3>Address</h3>
-                    <p>123 Hope Street<br />City, Country 12345</p>
-                  </div>
-                </div>
+                {/* --- Removed Address Info Item --- */}
+                {/* --- Removed Phone Info Item --- */}
 
                 <div className="info-item">
                   <div className="info-icon">📧</div>
@@ -67,21 +63,12 @@ function Contact() {
                 </div>
 
                 <div className="info-item">
-                  <div className="info-icon">📞</div>
-                  <div className="info-text">
-                    <h3>Phone</h3>
-                    <p>+1 (555) 123-4567<br />Mon-Fri, 9:00 AM - 5:00 PM</p>
-                  </div>
-                </div>
-
-                <div className="info-item">
                   <div className="info-icon">🌐</div>
                   <div className="info-text">
                     <h3>Social Media</h3>
                     <div className="social-links">
-                      <a href="#facebook">Facebook</a>
-                      <a href="#instagram">Instagram</a>
-                      <a href="#twitter">Twitter</a>
+                      {/* Updated Instagram link with the provided URL */}
+                      <a href="https://www.instagram.com/nooralyateemutd/" target="_blank" rel="noopener noreferrer">Instagram</a>
                     </div>
                   </div>
                 </div>
@@ -158,9 +145,30 @@ function Contact() {
           </div>
         </div>
       </section>
+      
+      {/* --- FAQ Section Added Here --- */}
+      <section className="faq-section">
+        <div className="faq-content">
+          <h2>Frequently Asked Questions</h2>
+          <div className="faq-items">
+            <div className="faq-item">
+              <h3>What is your mission?</h3>
+              <p>Our mission is to provide support and resources to orphans and vulnerable children, ensuring they have access to education, care, and a brighter future.</p>
+            </div>
+            <div className="faq-item">
+              <h3>How can I volunteer?</h3>
+              <p>Please reach out to us using the contact form above with the subject "Volunteer Inquiry," and a team member will follow up with you shortly!</p>
+            </div>
+            <div className="faq-item">
+              <h3>Are my donations tax-deductible?</h3>
+              <p>Yes, we are a registered non-profit organization, and all donations are tax-deductible to the full extent of the law. Contact us for more details.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ---------------------------------- */}
     </div>
   );
 }
 
 export default Contact;
-

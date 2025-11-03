@@ -1,0 +1,57 @@
+/* 
+ * Central Color Palette
+ * Edit these CSS variables to change colors throughout the entire website
+ */
+
+:root {
+  /* Primary Colors */
+  --color-primary: #92cfdd;           /* Main brand color - used for buttons, highlights */
+  --color-primary-light: rgba(174, 205, 212, 0.2); /* Light version for backgrounds */
+  
+  /* Background Colors */
+  --color-bg-cream: #fcf6e9;          /* Cream background - header, sections */
+  --color-bg-white: #ffffff;          /* White background - cards, content areas */
+  
+  /* Text Colors */
+  --color-text-dark: #333;            /* Primary text color */
+  --color-text-darker: #2d3748;       /* Darker text for headings */
+  --color-text-darkest: #1a202c;      /* Darkest text for emphasis */
+  --color-text-medium: #4a5568;       /* Medium gray text */
+  --color-text-gray: #666;            /* Light gray text */
+  --color-text-white: #ffffff;        /* White text */
+  
+  /* Border Colors */
+  --color-border-light: #e0e0e0;      /* Light border for cards */
+  --color-border-lighter: #f0f0f0;    /* Lighter border */
+  
+  /* Overlay Colors */
+  --color-overlay-dark: rgba(61, 61, 61, 0.7);        /* Dark overlay for hero video */
+  --color-overlay-light: rgba(250, 242, 229, 0.2);    /* Light overlay for social icons */
+  --color-overlay-border: rgba(250, 242, 229, 0.3);   /* Border overlay */
+  --color-overlay-divider: rgba(74, 85, 104, 0.2);    /* Divider lines */
+  --color-overlay-divider-light: rgba(74, 85, 104, 0.15); /* Lighter divider */
+  
+  /* Shadow Colors */
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 5px 30px rgba(0, 0, 0, 0.2);
+  --shadow-primary: 0 4px 20px rgba(174, 205, 212, 0.3);
+  --shadow-primary-hover: 0 6px 30px rgba(174, 205, 212, 0.4);
+  --shadow-card: 0 12px 35px rgba(174, 205, 212, 0.2);
+  --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-stat: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Optional: Dark mode support (uncomment and customize if needed)
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #92cfdd;
+    --color-bg-cream: #1a202c;
+    --color-bg-white: #2d3748;
+    --color-text-dark: #e2e8f0;
+    --color-text-darker: #f7fafc;
+    --color-text-medium: #cbd5e0;
+    --color-text-gray: #a0aec0;
+  }
+}
+*/
+
