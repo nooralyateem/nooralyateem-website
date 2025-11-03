@@ -4,10 +4,10 @@
 }
 
 .page-hero {
-  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 100%);
   padding: 120px 20px 80px;
   text-align: center;
-  color: #faf2e5;
+  color: var(--color-text-white);
 }
 
 .page-hero-content {
@@ -27,7 +27,7 @@
 
 .events-section {
   padding: 100px 20px;
-  background: #faf2e5;
+  background: var(--color-bg-cream);
 }
 
 .events-content {
@@ -42,13 +42,13 @@
 
 .section-header h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 15px;
 }
 
 .section-header p {
   font-size: 1.2rem;
-  color: #666;
+  color: var(--color-text-gray);
 }
 
 .events-grid {
@@ -58,8 +58,8 @@
 }
 
 .event-card {
-  background: white;
-  border: 2px solid #e0e0e0;
+  background: var(--color-bg-white);
+  border: 2px solid var(--color-border-light);
   border-radius: 16px;
   padding: 30px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -72,19 +72,20 @@
 }
 
 .event-date-badge {
-  background: #55b9e0;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-white);
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
   display: inline-block;
   margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .event-card h3 {
   font-size: 1.6rem;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 20px;
 }
 
@@ -94,20 +95,20 @@
 
 .event-details p {
   font-size: 1rem;
-  color: #555;
+  color: var(--color-text-gray);
   margin: 8px 0;
 }
 
 .event-description {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-gray);
   line-height: 1.6;
   margin: 20px 0;
 }
 
 .event-btn {
-  background: #333;
-  color: white;
+  background: var(--color-text-dark);
+  color: var(--color-text-white);
   border: none;
   padding: 12px 30px;
   border-radius: 8px;
@@ -119,7 +120,7 @@
 }
 
 .event-btn:hover {
-  background: #55b9e0;
+  background: var(--color-primary);
   transform: translateX(5px);
 }
 
@@ -130,11 +131,12 @@
 }
 
 .past-event-card {
-  background: #55b9e0;
+  background: var(--color-primary);
   border-radius: 16px;
   padding: 40px 30px;
   text-align: center;
   transition: transform 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .past-event-card:hover {
@@ -148,20 +150,21 @@
 
 .past-event-card h3 {
   font-size: 1.5rem;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 10px;
 }
 
 .past-event-date {
   font-size: 1rem;
-  color: #55b9e0;
+  color: var(--color-primary);
   font-weight: 600;
   margin-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .past-event-description {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-gray);
   line-height: 1.6;
 }
 
