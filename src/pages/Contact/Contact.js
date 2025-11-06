@@ -157,6 +157,7 @@ function Contact() {
             <div className="faq-item" onClick={() => setOpenFaq(openFaq === 0 ? null : 0)}>
               <div className="faq-question">
                 <h3>WHAT IS YOUR MISSION?</h3>
+                <span className={`faq-arrow ${openFaq === 0 ? 'open' : ''}`}>+</span>
               </div>
               {openFaq === 0 && (
                 <div className="faq-answer">
@@ -167,6 +168,7 @@ function Contact() {
             <div className="faq-item" onClick={() => setOpenFaq(openFaq === 1 ? null : 1)}>
               <div className="faq-question">
                 <h3>WHEN AND WHY WAS NOOR AL YATEEM FOUNDED?</h3>
+                <span className={`faq-arrow ${openFaq === 1 ? 'open' : ''}`}>+</span>
               </div>
               {openFaq === 1 && (
                 <div className="faq-answer">
@@ -177,6 +179,7 @@ function Contact() {
             <div className="faq-item" onClick={() => setOpenFaq(openFaq === 2 ? null : 2)}>
               <div className="faq-question">
                 <h3>WHERE DO YOU OPERATE AND PROVIDE AID?</h3>
+                <span className={`faq-arrow ${openFaq === 2 ? 'open' : ''}`}>+</span>
               </div>
               {openFaq === 2 && (
                 <div className="faq-answer">
@@ -187,6 +190,7 @@ function Contact() {
             <div className="faq-item" onClick={() => setOpenFaq(openFaq === 3 ? null : 3)}>
               <div className="faq-question">
                 <h3>ARE YOU A REGISTERED ORGANIZATION?</h3>
+                <span className={`faq-arrow ${openFaq === 3 ? 'open' : ''}`}>+</span>
               </div>
               {openFaq === 3 && (
                 <div className="faq-answer">
@@ -197,6 +201,7 @@ function Contact() {
             <div className="faq-item" onClick={() => setOpenFaq(openFaq === 4 ? null : 4)}>
               <div className="faq-question">
                 <h3>HOW CAN I VOLUNTEER WITH YOUR ORGANIZATION?</h3>
+                <span className={`faq-arrow ${openFaq === 4 ? 'open' : ''}`}>+</span>
               </div>
               {openFaq === 4 && (
                 <div className="faq-answer">
