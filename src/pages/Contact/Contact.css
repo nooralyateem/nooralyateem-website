@@ -209,6 +209,10 @@
 
 .faq-question {
   margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .faq-question h3 {
@@ -219,6 +223,20 @@
   text-transform: uppercase;
   margin: 0;
   line-height: 1.6;
+  flex: 1;
+}
+
+.faq-arrow {
+  color: var(--color-primary);
+  font-size: 2rem;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.faq-arrow.open {
+  transform: rotate(45deg);
 }
 
 .faq-answer {
