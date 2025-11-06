@@ -3,44 +3,17 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
-  const programs = [
-    {
-      title: "Education Support",
-      icon: "📚",
-      description: "Providing access to quality education, school supplies, tutoring, and scholarship opportunities to ensure every child can pursue their dreams.",
-      highlights: ["School Supplies", "Tutoring", "Scholarships", "Digital Learning"]
-    },
-    {
-      title: "Healthcare Services",
-      icon: "🏥",
-      description: "Comprehensive healthcare including regular check-ups, vaccinations, dental care, and mental health support for holistic well-being.",
-      highlights: ["Medical Care", "Dental Services", "Mental Health", "Nutrition"]
-    },
-    {
-      title: "Safe Housing",
-      icon: "🏠",
-      description: "Providing safe, nurturing homes where children feel loved, protected, and supported by caring staff and foster families.",
-      highlights: ["Foster Care", "Group Homes", "Family Support", "Safety Programs"]
-    },
-    {
-      title: "Skill Development",
-      icon: "💼",
-      description: "Vocational training, mentorship programs, and life skills workshops to prepare youth for successful, independent futures.",
-      highlights: ["Vocational Training", "Mentorship", "Life Skills", "Career Guidance"]
-    },
-    {
-      title: "Recreational Activities",
-      icon: "⚽",
-      description: "Sports, arts, music, and cultural programs that promote creativity, teamwork, and healthy physical and emotional development.",
-      highlights: ["Sports Programs", "Arts & Crafts", "Music Classes", "Cultural Events"]
-    },
-    {
-      title: "Emergency Relief",
-      icon: "🆘",
-      description: "Rapid response support for children in crisis situations, providing immediate shelter, food, medical care, and emotional support.",
-      highlights: ["Crisis Response", "Emergency Shelter", "Food Security", "Trauma Support"]
-    }
-  ];
+  // Upcoming event data - get first upcoming event
+  const upcomingEvent = {
+    id: 1,
+    title: "Field Day - Collab with Ihsan",
+    date: "2025-11-09",
+    time: "12:00 PM – 5:00 PM",
+    location: "Maruf Dallas",
+    description: "A fun field day with activities and community collaboration.",
+    fullDescription: "Join us for Field Day in collaboration with Ihsan. Enjoy games, sports, and community bonding throughout the afternoon.",
+    image: "/media/gallery/field-days/Mar'uf flyer.png"
+  };
 
   return (
     <>
@@ -61,33 +34,52 @@ function Home() {
           </p>
           
           <div className="hero-buttons">
-            <Link to="/donate" className="btn btn-primary">Donate</Link>
+            <a href="https://www.zeffy.com/en-US/donation-form/support-orphans-and-refugees-in-need" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Donate</a>
           </div>
           
           <a href="#about" className="hero-learn-more">Learn More ↓</a>
         </div>
       </section>
 
-      {/* Programs Section */}
-      <section id="programs" className="programs">
-        <h2 className="section-title">Our Programs</h2>
-        <p className="section-subtitle">
-          Comprehensive support designed to nurture every aspect of a child's growth and development
-        </p>
+      {/* Upcoming Event Section */}
+      <section id="upcoming-event" className="upcoming-event-section">
+        <h2 className="section-title">Upcoming Event</h2>
         
-        <div className="programs-grid">
-          {programs.map((program, index) => (
-            <div key={index} className="program-card">
-              <div className="program-icon">{program.icon}</div>
-              <h3 className="program-title">{program.title}</h3>
-              <p className="program-description">{program.description}</p>
-              <div className="program-highlights">
-                {program.highlights.map((highlight, idx) => (
-                  <span key={idx} className="highlight-badge">{highlight}</span>
-                ))}
+        <div className="upcoming-event-container">
+          <div className="upcoming-event-card">
+            {upcomingEvent.image && (
+              <div className="event-image-wrapper">
+                <img 
+                  src={upcomingEvent.image} 
+                  alt={upcomingEvent.title}
+                  className="event-image"
+                />
               </div>
+            )}
+            
+            <div className="event-content-wrapper">
+              <div className="event-date-badge">{upcomingEvent.date}</div>
+              
+              <h3 className="event-title">{upcomingEvent.title}</h3>
+              
+              <div className="event-details">
+                <div className="event-detail-item">
+                  <span className="event-icon">⏰</span>
+                  <span className="event-detail-text">{upcomingEvent.time}</span>
+                </div>
+                <div className="event-detail-item">
+                  <span className="event-icon">📍</span>
+                  <span className="event-detail-text">{upcomingEvent.location}</span>
+                </div>
+              </div>
+              
+              <p className="event-description">{upcomingEvent.description}</p>
+              
+              <Link to="/events" className="event-details-btn">
+                View Details & RSVP
+              </Link>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
@@ -106,7 +98,7 @@ function Home() {
               We're building a comprehensive support system to transform lives through education, 
               healthcare, and empowerment programs.
             </p>
-            <a href="#programs" className="about-btn">
+            <a href="#upcoming-event" className="about-btn">
               Explore Our Impact
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
