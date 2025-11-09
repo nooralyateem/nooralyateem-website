@@ -45,9 +45,7 @@ function Footer() {
             <div className="footer-nav-column">
               <h4 className="footer-nav-header">TAKE ACTION</h4>
               <ul className="footer-nav-list">
-                <li><Link to="/donate">Donate</Link></li>
-                <li><Link to="/donate">Ways to support</Link></li>
-                <li><a href="#store">Store <span className="external-icon">↗</span></a></li>
+                <li><a href="https://www.zeffy.com/en-US/donation-form/support-orphans-and-refugees-in-need" target="_blank" rel="noopener noreferrer">Donate <span className="external-icon">↗</span></a></li>
               </ul>
             </div>
 
@@ -64,7 +62,7 @@ function Footer() {
               <h4 className="footer-nav-header">LEARN MORE</h4>
               <ul className="footer-nav-list">
                 <li><Link to="/gallery">News & Media</Link></li>
-                <li><a href="#resources">Resources</a></li>
+                <li><a href="/contact#faq">FAQ</a></li>
               </ul>
             </div>
           </div>
