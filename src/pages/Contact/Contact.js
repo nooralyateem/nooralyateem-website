@@ -54,10 +54,7 @@ function Contact() {
       <section className="contact-section">
         <div className="contact-content">
           <div className="contact-form-wrapper">
-            <h2>We're here to help</h2>
-            <p className="form-intro">
-              Have a question about our work, resources, or how you can support our mission? We have the answers.
-            </p>
+            <h2>Get In Touch</h2>
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-group">
                 <label htmlFor="firstName">FIRST NAME *</label>
@@ -118,10 +115,43 @@ function Contact() {
           </div>
         </div>
       </section>
+
+      <section className="ways-to-reach-section">
+        <div className="ways-to-reach-content">
+          <h2 className="ways-to-reach-title">Ways to Reach Us</h2>
+          
+          <div className="reach-cards">
+            <div className="reach-card">
+              <div className="reach-icon email-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="white" strokeWidth="2"/>
+                  <path d="M3 7L12 13L21 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3>Email Us</h3>
+              <p className="reach-description">Primary contact for all inquiries</p>
+              <a href="mailto:nooralyateemutd@gmail.com" className="reach-link">nooralyateemutd@gmail.com</a>
+            </div>
+            
+            <div className="reach-card">
+              <div className="reach-icon instagram-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="white" strokeWidth="2"/>
+                  <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="2"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+                </svg>
+              </div>
+              <h3>Follow Us</h3>
+              <p className="reach-description">Stay updated with our latest activities</p>
+              <a href="https://www.instagram.com/nooralyateemutd/" target="_blank" rel="noopener noreferrer" className="reach-link">@nooralyateemutd</a>
+            </div>
+          </div>
+        </div>
+      </section>
       
       <section id="faq" className="faq-section">
         <div className="faq-content">
-          <h2 className="faq-title">FAQ</h2>
+          <h2 className="faq-title">Frequently Asked Questions</h2>
           <div className="faq-items">
             <div
               className={`faq-item ${openFaq === 0 ? 'open' : ''}`}

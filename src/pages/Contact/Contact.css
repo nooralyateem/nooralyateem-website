@@ -4,7 +4,7 @@
 
 .page-hero {
   background: var(--color-primary);
-  padding: 100px 20px 70px;
+  padding: 100px 20px 80px;
   text-align: center;
   color: var(--color-text-white);
 }
@@ -46,18 +46,26 @@
 .contact-form-wrapper h2 {
   font-size: 2.5rem;
   color: #2d3748;
-  margin-bottom: 16px;
+  margin-bottom: 40px;
   font-weight: 600;
-  text-align: left;
+  text-align: center;
   font-family: 'Righteous', cursive;
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
-.form-intro {
-  font-size: 1rem;
-  color: #4a5568;
-  line-height: 1.6;
-  margin-bottom: 40px;
-  text-align: left;
+.contact-form-wrapper h2::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #2d3748;
+  border-radius: 2px;
+  opacity: 0.6;
 }
 
 .contact-form {
@@ -137,9 +145,123 @@
   height: 16px;
 }
 
+/* --- WAYS TO REACH US SECTION --- */
+.ways-to-reach-section {
+  padding: 80px 20px;
+  background: var(--color-bg-cream);
+}
+
+.ways-to-reach-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ways-to-reach-title {
+  font-size: 2.5rem;
+  color: #2d3748;
+  margin-bottom: 60px;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.ways-to-reach-title::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #2d3748;
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.reach-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.reach-card {
+  background: #ffffff;
+  border: 1px solid #2d3748;
+  border-radius: 8px;
+  padding: 48px 32px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.reach-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.reach-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.email-icon {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.instagram-icon {
+  background: linear-gradient(135deg, #e1306c, #c13584, #833ab4);
+}
+
+.reach-card h3 {
+  font-size: 1.35rem;
+  color: #2d3748;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15px;
+  text-transform: uppercase;
+}
+
+.reach-description {
+  font-size: 1rem;
+  color: rgba(60, 60, 60, 0.9);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.reach-link {
+  display: inline-block;
+  background: #92cfdd;
+  border: 1px solid #2d3748;
+  color: var(--color-text-white);
+  padding: 14px 24px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+.reach-link:hover {
+  background: #2d3748;
+  color: var(--color-bg-white);
+  text-decoration: none;
+}
+
 /* --- FAQ SECTION STYLES --- */
 .faq-section {
-  padding: 40px 20px 120px 20px;
+  padding: 80px 20px 100px 20px;
   background-color: var(--color-bg-cream);
 }
 
@@ -180,7 +302,7 @@
 .faq-item {
   cursor: pointer;
   transition: opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
-  border: 2px solid #2d3748;
+  border: 1px solid #2d3748;
   border-radius: 8px;
   padding: 24px;
   background: #ffffff;
@@ -299,12 +421,45 @@
   }
 
   .contact-section {
-    padding: 64px 20px;
+    padding: 60px 20px;
+  }
+
+  /* Ways to Reach Us mobile adjustments */
+  .ways-to-reach-section {
+    padding: 60px 20px;
+  }
+
+  .ways-to-reach-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .reach-cards {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .reach-card {
+    padding: 36px 24px;
+  }
+
+  .reach-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .reach-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .reach-link {
+    font-size: 0.9rem;
+    padding: 12px 20px;
   }
   
   /* Applying mobile padding to FAQ */
   .faq-section {
-    padding: 40px 20px 100px 20px;
+    padding: 60px 20px 80px 20px;
   }
 
   .contact-form-wrapper h2 {
