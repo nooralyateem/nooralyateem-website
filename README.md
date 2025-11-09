@@ -6,7 +6,7 @@ A modern, responsive website for Noor Al Yateem - a nonprofit organization dedic
 
 ## 🎨 Design Features
 
-- **Color Palette**: Cream (#faf2e5) & Blue (#55b9e0)
+- **Color Palette**: Cream (#faf2e5) & Blue (#aecdd4)
 - **Typography**: Righteous font (retro-style)
 - **Responsive Design**: Mobile-first approach
 - **Modern UI**: Smooth animations and transitions
