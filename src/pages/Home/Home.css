@@ -45,6 +45,44 @@
   z-index: 1;
 }
 
+.hero-overlay::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(252, 246, 233, 0.01) 5%,
+    rgba(252, 246, 233, 0.02) 10%,
+    rgba(252, 246, 233, 0.04) 15%,
+    rgba(252, 246, 233, 0.06) 20%,
+    rgba(252, 246, 233, 0.09) 25%,
+    rgba(252, 246, 233, 0.13) 30%,
+    rgba(252, 246, 233, 0.18) 35%,
+    rgba(252, 246, 233, 0.24) 40%,
+    rgba(252, 246, 233, 0.31) 45%,
+    rgba(252, 246, 233, 0.39) 50%,
+    rgba(252, 246, 233, 0.48) 55%,
+    rgba(252, 246, 233, 0.57) 60%,
+    rgba(252, 246, 233, 0.66) 65%,
+    rgba(252, 246, 233, 0.74) 70%,
+    rgba(252, 246, 233, 0.81) 75%,
+    rgba(252, 246, 233, 0.87) 80%,
+    rgba(252, 246, 233, 0.91) 85%,
+    rgba(252, 246, 233, 0.94) 88%,
+    rgba(252, 246, 233, 0.96) 91%,
+    rgba(252, 246, 233, 0.97) 94%,
+    rgba(252, 246, 233, 0.98) 96%,
+    rgba(252, 246, 233, 0.99) 98%,
+    rgba(252, 246, 233, 0.995) 99%,
+    rgba(252, 246, 233, 0.998) 99.5%,
+    var(--color-bg-cream) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
 .hero-content {
   position: relative;
   text-align: center;
