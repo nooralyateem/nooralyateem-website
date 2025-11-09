@@ -194,8 +194,8 @@
 
 .vlog-thumbnail {
   position: relative;
-  width: 200px;
-  height: 300px;
+  width: 300px;
+  height: 200px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -203,41 +203,16 @@
 }
 
 .carousel-item.center .vlog-thumbnail {
-  width: 280px;
-  height: 400px;
+  width: 400px;
+  height: 280px;
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
 
-.vlog-thumbnail video {
+.vlog-thumbnail iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border-radius: inherit;
-}
-
-.mute-toggle-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: var(--color-primary);
-  color: var(--color-bg-cream); /* icon uses beige color */
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.mute-toggle-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .gallery-cta h3 {
@@ -504,6 +479,16 @@
     height: 180px;
   }
 
+  .vlog-thumbnail {
+    width: 200px;
+    height: 140px;
+  }
+
+  .carousel-item.center .vlog-thumbnail {
+    width: 250px;
+    height: 180px;
+  }
+
   .carousel-btn {
     width: 40px;
     height: 40px;
@@ -550,6 +535,16 @@
   }
 
   .carousel-item.center .album-thumbnail {
+    width: 180px;
+    height: 130px;
+  }
+
+  .vlog-thumbnail {
+    width: 150px;
+    height: 100px;
+  }
+
+  .carousel-item.center .vlog-thumbnail {
     width: 180px;
     height: 130px;
   }
