@@ -39,11 +39,6 @@ PageName/
 **Files:** `Contact.js`, `Contact.css`  
 **Description:** Contact form and organization contact information
 
-### Donate (`/donate`)
-**Path:** `src/pages/Donate/`  
-**Files:** `Donate.js`, `Donate.css`  
-**Description:** Donation page with one-time and monthly giving options
-
 ## 🛠️ How to Work with Pages
 
 ### Editing an Existing Page
@@ -73,7 +68,7 @@ Thanks to the `index.js` files, imports are clean:
 ```javascript
 // ✅ Good - Clean import
 import Home from './pages/Home';
-import Donate from './pages/Donate';
+import Contact from './pages/Contact';
 
 // ❌ No need for this anymore
 import Home from './pages/Home/Home';
@@ -84,7 +79,7 @@ import Home from './pages/Home/Home';
 - Each page has its own CSS file - keep styles scoped to that page
 - Use the global color palette:
   - Primary Cream: `#faf2e5`
-  - Primary Blue: `#55b9e0`
+  - Primary Blue: `#aecdd4`
 - Font family: `'Righteous', cursive` (already loaded globally)
 - Follow mobile-first responsive design
 - Include media queries for tablets (`768px`) and mobile (`480px`)
@@ -97,7 +92,6 @@ All routes are defined in `src/App.js`. The current route structure:
 - `/events` → Events
 - `/gallery` → Gallery
 - `/contact` → Contact
-- `/donate` → Donate
 
 ## 📦 Components
 
