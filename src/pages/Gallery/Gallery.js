@@ -90,13 +90,12 @@ const photoAlbums = [
   }
 ];
 
-// Sample vlogs data - using existing local media
+// In the NAYborhood Vlogs - YouTube videos
 const vlogs = [
-  { id: 'v1', title: 'GBM^2 Vlog', url: '/media/gallery/gbms/gbms-vlog.mp4' },
-  { id: 'v2', title: 'Popups Recap', url: '/media/gallery/popups/popups-7.mov' },
-  { id: 'v3', title: 'GBM Highlights', url: '/media/gallery/gbms/gbms-3.mov' },
-  { id: 'v4', title: 'Service Moments', url: '/media/gallery/events/events-2.mov' },
-  { id: 'v5', title: 'End-of-Semester', url: '/media/gallery/end-of-semester/end-of-semester-1.mov' },
+  { id: 'v1', title: 'Vlog #1', youtubeId: 'IieUssQ73Qk' },
+  { id: 'v2', title: 'Vlog #2', youtubeId: 'vHzWmwjOlRo' },
+  { id: 'v3', title: 'Vlog #3', youtubeId: '1RTZyMzFk-s' },
+  { id: 'v4', title: 'Vlog #4', youtubeId: 'G2GPRYeG3LU' },
 ];
 
 // Photo Carousel Component
@@ -217,29 +216,13 @@ function PhotoCarousel() {
 // Vlogs Carousel Component (Video)
 function VlogsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const videoRefs = useRef({});
-  const [isUnmuted, setIsUnmuted] = useState(false);
 
   const next = () => {
-    // Pause current center video
-    const currentVideo = videoRefs.current[`vlog-${currentIndex}`];
-    if (currentVideo) {
-      currentVideo.pause();
-      currentVideo.currentTime = 0;
-    }
     setCurrentIndex((p) => (p + 1) % vlogs.length);
-    setIsUnmuted(false);
   };
 
   const prev = () => {
-    // Pause current center video
-    const currentVideo = videoRefs.current[`vlog-${currentIndex}`];
-    if (currentVideo) {
-      currentVideo.pause();
-      currentVideo.currentTime = 0;
-    }
     setCurrentIndex((p) => (p - 1 + vlogs.length) % vlogs.length);
-    setIsUnmuted(false);
   };
 
   const getVisible = () => {
@@ -251,33 +234,6 @@ function VlogsCarousel() {
     }
     return visible;
   };
-
-  // Handle video play/pause based on position
-  useEffect(() => {
-    const visible = [];
-    const total = vlogs.length;
-    for (let i = -2; i <= 2; i++) {
-      const index = (currentIndex + i + total) % total;
-      visible.push({ ...vlogs[index], position: i, arrayIndex: index });
-    }
-    
-    visible.forEach((item) => {
-      const video = videoRefs.current[`vlog-${item.arrayIndex}`];
-      if (video) {
-        if (item.position === 0) {
-          // Center video should play
-          video.play().catch(() => {
-            // Autoplay might be blocked, but we'll try
-          });
-        } else {
-          // Side videos should pause and reset
-          video.pause();
-          video.currentTime = 0;
-          video.muted = true;
-        }
-      }
-    });
-  }, [currentIndex]);
 
   return (
     <div className="vlogs-section">
@@ -305,50 +261,13 @@ function VlogsCarousel() {
                 }}
               >
                 <div className="vlog-thumbnail">
-                  <video
-                    ref={(el) => {
-                      if (el) videoRefs.current[`vlog-${item.arrayIndex}`] = el;
-                    }}
-                    src={item.url}
-                    muted={item.position !== 0 || !isUnmuted}
-                    playsInline
-                    loop
-                    preload="metadata"
-                    poster=""
-                  />
-                  {item.position === 0 && (
-                    <button
-                      className="mute-toggle-btn"
-                      onClick={() => {
-                        const video = videoRefs.current[`vlog-${item.arrayIndex}`];
-                        if (video) {
-                          const shouldMute = isUnmuted; // if currently unmuted, we want to mute it
-                          video.muted = shouldMute;
-                          setIsUnmuted(!shouldMute);
-                          if (!shouldMute) {
-                            video.play().catch(() => {});
-                          }
-                        }
-                      }}
-                      aria-label={isUnmuted ? "Mute video" : "Unmute video"}
-                      title={isUnmuted ? "Mute" : "Unmute"}
-                    >
-                      {/* Speaker icon (no slash when unmuted) */}
-                      {isUnmuted ? (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3 9V15H7L12 20V4L7 9H3Z" fill="currentColor"/>
-                          <path d="M16 7C17.6569 8.65685 17.6569 15.3431 16 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M19 4C22.3137 7.31371 22.3137 16.6863 19 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      ) : (
-                        // Speaker with slash when muted
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3 9V15H7L12 20V4L7 9H3Z" fill="currentColor"/>
-                          <path d="M22 2L2 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                        </svg>
-                      )}
-                    </button>
-                  )}
+                  <iframe
+                    src={`https://www.youtube.com/embed/${item.youtubeId}?loop=1&playlist=${item.youtubeId}`}
+                    title={item.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
               </div>
             ))}
