@@ -10,6 +10,8 @@ function Contact() {
     message: ''
   });
 
+  const [openFaq, setOpenFaq] = useState(null);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -148,20 +150,64 @@ function Contact() {
       
       {/* --- FAQ Section Added Here --- */}
       <section className="faq-section">
+        <div className="faq-divider"></div>
         <div className="faq-content">
-          <h2>Frequently Asked Questions</h2>
+          <h2 className="faq-title">FAQ</h2>
           <div className="faq-items">
-            <div className="faq-item">
-              <h3>What is your mission?</h3>
-              <p>Our mission is to provide support and resources to orphans and vulnerable children, ensuring they have access to education, care, and a brighter future.</p>
+            <div className="faq-item" onClick={() => setOpenFaq(openFaq === 0 ? null : 0)}>
+              <div className="faq-question">
+                <h3>WHAT IS YOUR MISSION?</h3>
+                <span className={`faq-arrow ${openFaq === 0 ? 'open' : ''}`}>+</span>
+              </div>
+              {openFaq === 0 && (
+                <div className="faq-answer">
+                  <p>Our mission is to provide support, love, and a nurturing environment for orphaned and refugee children, empowering them to thrive despite their circumstances. Through comprehensive care, education, and mentorship, we aim to instill confidence, skills, and hope for a brighter future.</p>
+                </div>
+              )}
             </div>
-            <div className="faq-item">
-              <h3>How can I volunteer?</h3>
-              <p>Please reach out to us using the contact form above with the subject "Volunteer Inquiry," and a team member will follow up with you shortly!</p>
+            <div className="faq-item" onClick={() => setOpenFaq(openFaq === 1 ? null : 1)}>
+              <div className="faq-question">
+                <h3>WHEN AND WHY WAS NOOR AL YATEEM FOUNDED?</h3>
+                <span className={`faq-arrow ${openFaq === 1 ? 'open' : ''}`}>+</span>
+              </div>
+              {openFaq === 1 && (
+                <div className="faq-answer">
+                  <p>Noor Al Yateem was founded in August 2024 with the goal of creating a compassionate community dedicated to uplifting and empowering orphaned and displaced children affected by conflict and poverty.</p>
+                </div>
+              )}
             </div>
-            <div className="faq-item">
-              <h3>Are my donations tax-deductible?</h3>
-              <p>Yes, we are a registered non-profit organization, and all donations are tax-deductible to the full extent of the law. Contact us for more details.</p>
+            <div className="faq-item" onClick={() => setOpenFaq(openFaq === 2 ? null : 2)}>
+              <div className="faq-question">
+                <h3>WHERE DO YOU OPERATE AND PROVIDE AID?</h3>
+                <span className={`faq-arrow ${openFaq === 2 ? 'open' : ''}`}>+</span>
+              </div>
+              {openFaq === 2 && (
+                <div className="faq-answer">
+                  <p>We operate locally in Richardson, Texas, in collaboration with Helping Hands. Together, we extend our support to conflict-affected areas across the Middle East and Asia.</p>
+                </div>
+              )}
+            </div>
+            <div className="faq-item" onClick={() => setOpenFaq(openFaq === 3 ? null : 3)}>
+              <div className="faq-question">
+                <h3>ARE YOU A REGISTERED ORGANIZATION?</h3>
+                <span className={`faq-arrow ${openFaq === 3 ? 'open' : ''}`}>+</span>
+              </div>
+              {openFaq === 3 && (
+                <div className="faq-answer">
+                  <p>Yes! Noor Al Yateem is a registered organization under UTD! Your donation may be eligible for tax-deduction.</p>
+                </div>
+              )}
+            </div>
+            <div className="faq-item" onClick={() => setOpenFaq(openFaq === 4 ? null : 4)}>
+              <div className="faq-question">
+                <h3>HOW CAN I VOLUNTEER WITH YOUR ORGANIZATION?</h3>
+                <span className={`faq-arrow ${openFaq === 4 ? 'open' : ''}`}>+</span>
+              </div>
+              {openFaq === 4 && (
+                <div className="faq-answer">
+                  <p>Follow our <a href="https://www.instagram.com/nooralyateemutd/" target="_blank" rel="noopener noreferrer">Instagram</a> and join our WhatsApp to get involved!</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
