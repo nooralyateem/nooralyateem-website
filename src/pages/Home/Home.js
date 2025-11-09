@@ -1,18 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
-  // Upcoming event data - get first upcoming event
-  const upcomingEvent = {
-    id: 1,
-    title: "Field Day - Collab with Ihsan",
-    date: "2025-11-09",
-    time: "12:00 PM – 5:00 PM",
-    location: "Maruf Dallas",
-    description: "A fun field day with activities and community collaboration.",
-    fullDescription: "Join us for Field Day in collaboration with Ihsan. Enjoy games, sports, and community bonding throughout the afternoon.",
-    image: "/media/gallery/field-days/Mar'uf flyer.png"
+  // Upcoming events data - get first 3 upcoming events
+  const upcomingEvents = [
+    {
+      id: 1,
+      title: "Field Day - Collab with Ihsan",
+      date: "2025-11-09",
+      time: "12:00 PM – 5:00 PM",
+      location: "Maruf Dallas",
+      description: "A fun field day with activities and community collaboration.",
+      fullDescription: "Join us for Field Day in collaboration with Ihsan. Enjoy games, sports, and community bonding throughout the afternoon.",
+      image: "/media/gallery/field-days/Mar'uf flyer.png"
+    },
+    {
+      id: 2,
+      title: "Popups 4 A Purpose",
+      date: "2025-11-10",
+      time: "2:00 PM – 4:00 PM",
+      location: "The Plinth",
+      description: "Featuring vendors, including Hot Chocolate by NaY.",
+      fullDescription: "Support local vendors and community initiatives at Popups 4 A Purpose. Vendors include Hot Chocolate by NaY.",
+      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
+    },
+    {
+      id: 3,
+      title: "Quran Night - Collab with MSA",
+      date: "2025-11-14",
+      time: "5:00 PM – 10:00 PM",
+      location: "SSA Auditorium",
+      description: "An evening of Quran recitation and reflection with MSA.",
+      fullDescription: "Experience a special Quran Night in collaboration with MSA, featuring recitations, reflections, and community gathering.",
+      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
+    }
+  ];
+
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
+
+  const nextEvent = () => {
+    setCurrentEventIndex((prevIndex) => (prevIndex + 1) % upcomingEvents.length);
+  };
+
+  const prevEvent = () => {
+    setCurrentEventIndex((prevIndex) => (prevIndex - 1 + upcomingEvents.length) % upcomingEvents.length);
+  };
+
+  const getVisibleEvents = () => {
+    const visible = [];
+    const total = upcomingEvents.length;
+    
+    // Show 5 items: -2, -1, 0, 1, 2 (or fewer if we have less than 5 events)
+    const range = Math.min(2, Math.floor(total / 2));
+    for (let i = -range; i <= range; i++) {
+      const index = (currentEventIndex + i + total) % total;
+      visible.push({ ...upcomingEvents[index], position: i, arrayIndex: index });
+    }
+    
+    return visible;
   };
 
   return (
@@ -43,42 +89,67 @@ function Home() {
 
       {/* Upcoming Event Section */}
       <section id="upcoming-event" className="upcoming-event-section">
-        <h2 className="section-title">Upcoming Event</h2>
+        <h2 className="section-title">Upcoming Events</h2>
         
         <div className="upcoming-event-container">
-          <div className="upcoming-event-card">
-            {upcomingEvent.image && (
-              <div className="event-image-wrapper">
-                <img 
-                  src={upcomingEvent.image} 
-                  alt={upcomingEvent.title}
-                  className="event-image"
-                />
-              </div>
-            )}
+          <div className="event-carousel-wrapper">
+            <button 
+              className="carousel-arrow carousel-arrow-left" 
+              onClick={prevEvent}
+              aria-label="Previous event"
+            >
+              ‹
+            </button>
             
-            <div className="event-content-wrapper">
-              <div className="event-date-badge">{upcomingEvent.date}</div>
-              
-              <h3 className="event-title">{upcomingEvent.title}</h3>
-              
-              <div className="event-details">
-                <div className="event-detail-item">
-                  <span className="event-icon">⏰</span>
-                  <span className="event-detail-text">{upcomingEvent.time}</span>
+            <div className="event-carousel-track">
+              {getVisibleEvents().map((event) => (
+                <div
+                  key={event.id}
+                  className={`event-card-wrapper ${event.position === 0 ? 'center' : ''} ${event.position !== 0 ? 'faded' : ''}`}
+                  onClick={() => {
+                    if (event.position !== 0) {
+                      setCurrentEventIndex(event.arrayIndex);
+                    }
+                  }}
+                >
+                  {event.image && (
+                    <div className="event-image-wrapper">
+                      <img 
+                        src={event.image} 
+                        alt={event.title}
+                        className="event-image"
+                      />
+                    </div>
+                  )}
+                  <div className="event-content-wrapper">
+                    <div className="event-date-badge">{event.date}</div>
+                    <h3 className="event-title">{event.title}</h3>
+                    <div className="event-details">
+                      <div className="event-detail-item">
+                        <span className="event-icon">⏰</span>
+                        <span className="event-detail-text">{event.time}</span>
+                      </div>
+                      <div className="event-detail-item">
+                        <span className="event-icon">📍</span>
+                        <span className="event-detail-text">{event.location}</span>
+                      </div>
+                    </div>
+                    <p className="event-description">{event.description}</p>
+                    <Link to="/events" className="event-details-btn">
+                      View Details & RSVP
+                    </Link>
+                  </div>
                 </div>
-                <div className="event-detail-item">
-                  <span className="event-icon">📍</span>
-                  <span className="event-detail-text">{upcomingEvent.location}</span>
-                </div>
-              </div>
-              
-              <p className="event-description">{upcomingEvent.description}</p>
-              
-              <Link to="/events" className="event-details-btn">
-                View Details & RSVP
-              </Link>
+              ))}
             </div>
+
+            <button 
+              className="carousel-arrow carousel-arrow-right" 
+              onClick={nextEvent}
+              aria-label="Next event"
+            >
+              ›
+            </button>
           </div>
         </div>
       </section>
