@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
-  // Upcoming events data - get first 3 upcoming events
+  // Upcoming events data - get first 3 upcoming events from Events page
   const upcomingEvents = [
     {
       id: 1,
       title: "Field Day - Collab with Ihsan",
       date: "2025-11-09",
-      time: "12:00 PM – 5:00 PM",
+      time: "12:00 PM - 5:00 PM",
       location: "Maruf Dallas",
       description: "A fun field day with activities and community collaboration.",
       fullDescription: "Join us for Field Day in collaboration with Ihsan. Enjoy games, sports, and community bonding throughout the afternoon.",
@@ -19,21 +19,21 @@ function Home() {
       id: 2,
       title: "Popups 4 A Purpose",
       date: "2025-11-10",
-      time: "2:00 PM – 4:00 PM",
+      time: "2:00 PM - 4:00 PM",
       location: "The Plinth",
       description: "Featuring vendors, including Hot Chocolate by NaY.",
       fullDescription: "Support local vendors and community initiatives at Popups 4 A Purpose. Vendors include Hot Chocolate by NaY.",
-      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
+      image: "/media/gallery/popups/popups-thumbnail.JPG"
     },
     {
       id: 3,
       title: "Quran Night - Collab with MSA",
       date: "2025-11-14",
-      time: "5:00 PM – 10:00 PM",
+      time: "5:00 PM - 10:00 PM",
       location: "SSA Auditorium",
       description: "An evening of Quran recitation and reflection with MSA.",
       fullDescription: "Experience a special Quran Night in collaboration with MSA, featuring recitations, reflections, and community gathering.",
-      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
+      image: "/media/gallery/events/events-thumbnail.JPG"
     }
   ];
 
@@ -134,7 +134,7 @@ function Home() {
                         <span className="event-detail-text">{event.location}</span>
                       </div>
                     </div>
-                    <p className="event-description">{event.description}</p>
+                    <p className="event-description">{event.fullDescription || event.description}</p>
                     <Link to="/events" className="event-details-btn">
                       View Details & RSVP
                     </Link>
