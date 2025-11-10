@@ -12,30 +12,31 @@
 
 /* Global Section Styles */
 section {
-  padding: 80px 0;
+  padding: var(--spacing-4xl) 0;
   width: 100%;
 }
 
 section > * {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--spacing-lg);
 }
 
 .section-title {
   font-size: 3rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 20px;
-  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-darker);
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .section-subtitle {
   font-size: 1.2rem;
   text-align: center;
   color: var(--color-text-gray);
-  margin-bottom: 60px;
+  margin-bottom: var(--spacing-2xl);
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -44,13 +45,23 @@ section > * {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   section {
-    padding: 60px 0;
+    padding: var(--spacing-3xl) 0;
   }
 
   section > * {
-    padding: 0 30px;
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  section > * {
+    padding: 0 var(--spacing-lg);
   }
 
   .section-title {
@@ -59,16 +70,17 @@ section > * {
 
   .section-subtitle {
     font-size: 1rem;
+    margin-bottom: var(--spacing-xl);
   }
 }
 
 @media (max-width: 480px) {
   section {
-    padding: 40px 0;
+    padding: var(--spacing-xl) 0;
   }
 
   section > * {
-    padding: 0 20px;
+    padding: 0 var(--spacing-lg);
   }
 
   .section-title {
