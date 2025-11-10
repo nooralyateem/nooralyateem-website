@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import './Gallery.css';
 
@@ -90,10 +90,33 @@ const photoAlbums = [
   }
 ];
 
+// In the NAYborhood Vlogs - YouTube videos
+const vlogs = [
+  { id: 'v1', title: 'Vlog #1', youtubeId: 'IieUssQ73Qk' },
+  { id: 'v2', title: 'Vlog #2', youtubeId: 'vHzWmwjOlRo' },
+  { id: 'v3', title: 'Vlog #3', youtubeId: '1RTZyMzFk-s' },
+  { id: 'v4', title: 'Vlog #4', youtubeId: 'G2GPRYeG3LU' },
+];
+
 // Photo Carousel Component
 function PhotoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const autoplayRef = useRef(null);
+
+  const stopAutoplay = useCallback(() => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % photoAlbums.length);
+    }, 3000);
+  }, [stopAutoplay]);
 
   const handleAlbumClick = (albumId) => {
     navigate(`/gallery/${albumId}`);
@@ -101,11 +124,19 @@ function PhotoCarousel() {
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % photoAlbums.length);
+    startAutoplay();
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + photoAlbums.length) % photoAlbums.length);
+    startAutoplay();
   };
+
+  // Autoplay carousel
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
+  }, [startAutoplay, stopAutoplay]);
 
   const getVisibleAlbums = () => {
     const visible = [];
@@ -113,7 +144,7 @@ function PhotoCarousel() {
     
     for (let i = -2; i <= 2; i++) {
       const index = (currentIndex + i + total) % total;
-      visible.push({ ...photoAlbums[index], position: i });
+      visible.push({ ...photoAlbums[index], position: i, arrayIndex: index });
     }
     
     return visible;
@@ -150,7 +181,13 @@ function PhotoCarousel() {
                   <div
                     key={album.id}
                     className={`carousel-item ${album.position === 0 ? 'center' : ''} ${album.position !== 0 ? 'faded' : ''}`}
-                    onClick={() => handleAlbumClick(album.id)}
+                    onClick={() => {
+                      if (album.position === 0) {
+                        handleAlbumClick(album.id);
+                      } else {
+                        setCurrentIndex(album.arrayIndex);
+                      }
+                    }}
                   >
                     <div className="album-thumbnail">
                       <img src={album.thumbnail} alt={album.title} />
@@ -169,13 +206,76 @@ function PhotoCarousel() {
             </div>
           </div>
 
-          <div className="gallery-cta">
-            <h3>Share Your Photos</h3>
-            <p>Have photos from our events? We'd love to feature them in our gallery!</p>
-            <button className="cta-btn">Submit Photos</button>
-          </div>
+          <VlogsCarousel />
         </div>
       </section>
+    </div>
+  );
+}
+
+// Vlogs Carousel Component (Video)
+function VlogsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const next = () => {
+    setCurrentIndex((p) => (p + 1) % vlogs.length);
+  };
+
+  const prev = () => {
+    setCurrentIndex((p) => (p - 1 + vlogs.length) % vlogs.length);
+  };
+
+  const getVisible = () => {
+    const visible = [];
+    const total = vlogs.length;
+    for (let i = -2; i <= 2; i++) {
+      const index = (currentIndex + i + total) % total;
+      visible.push({ ...vlogs[index], position: i, arrayIndex: index });
+    }
+    return visible;
+  };
+
+  return (
+    <div className="vlogs-section">
+      <div className="gallery-intro">
+        <h2>In the NAYborhood Vlogs</h2>
+        <p>
+          Short videos capturing our favorite moments in the NAYborhood — quick looks
+          into community impact, behind-the-scenes highlights, and stories that inspire.
+        </p>
+      </div>
+
+      <div className="carousel-container">
+        <div className="carousel-wrapper">
+          <button className="carousel-btn prev" onClick={prev}>‹</button>
+
+          <div className="carousel-track">
+            {getVisible().map((item) => (
+              <div
+                key={item.id}
+                className={`carousel-item ${item.position === 0 ? 'center' : ''} ${item.position !== 0 ? 'faded' : ''}`}
+                onClick={() => {
+                  if (item.position !== 0) {
+                    setCurrentIndex(item.arrayIndex);
+                  }
+                }}
+              >
+                <div className="vlog-thumbnail">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${item.youtubeId}?loop=1&playlist=${item.youtubeId}`}
+                    title={item.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button className="carousel-btn next" onClick={next}>›</button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -185,6 +285,7 @@ function AlbumPage() {
   const { albumId } = useParams();
   const navigate = useNavigate();
   const [fadeIn, setFadeIn] = useState(false);
+  const [selectedPhotoUrl, setSelectedPhotoUrl] = useState(null);
 
   const album = photoAlbums.find(a => a.id === albumId);
 
@@ -224,11 +325,26 @@ function AlbumPage() {
                 </div>
               </div>
             ) : (
-              <img src={photo.url} alt={`${album.title} ${photo.id}`} />
+              <img
+                src={photo.url}
+                alt={`${album.title} ${photo.id}`}
+                onClick={() => setSelectedPhotoUrl(photo.url)}
+              />
             )}
           </div>
         ))}
       </div>
+
+      {selectedPhotoUrl && (
+        <div className="image-modal-overlay" onClick={() => setSelectedPhotoUrl(null)}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="image-modal-close" aria-label="Close" onClick={() => setSelectedPhotoUrl(null)}>
+              ×
+            </button>
+            <img src={selectedPhotoUrl} alt="Selected" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -244,4 +360,3 @@ function Gallery() {
 }
 
 export default Gallery;
-

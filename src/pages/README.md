@@ -74,6 +74,7 @@ Thanks to the `index.js` files, imports are clean:
 // ✅ Good - Clean import
 import Home from './pages/Home';
 import Donate from './pages/Donate';
+import Contact from './pages/Contact';
 
 // ❌ No need for this anymore
 import Home from './pages/Home/Home';
@@ -84,7 +85,7 @@ import Home from './pages/Home/Home';
 - Each page has its own CSS file - keep styles scoped to that page
 - Use the global color palette:
   - Primary Cream: `#faf2e5`
-  - Primary Blue: `#55b9e0`
+  - Primary Blue: `#aecdd4`
 - Font family: `'Righteous', cursive` (already loaded globally)
 - Follow mobile-first responsive design
 - Include media queries for tablets (`768px`) and mobile (`480px`)
