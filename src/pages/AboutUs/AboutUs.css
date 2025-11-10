@@ -3,10 +3,10 @@
 }
 
 .page-hero {
-  background: linear-gradient(135deg, #55b9e0 0%, #55b9e0 100%);
+  background: linear-gradient(135deg, #faf2e5 0%, #faf2e5 100%);
   padding: 120px 20px 80px;
   text-align: center;
-  color: white;
+  color: #333;
 }
 
 .page-hero-content {
@@ -26,7 +26,7 @@
 
 .about-detail {
   padding: 100px 20px;
-  background: white;
+  background: #faf2e5;
 }
 
 .about-detail-content {
