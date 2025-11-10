@@ -6,7 +6,7 @@ A modern, responsive website for Noor Al Yateem - a nonprofit organization dedic
 
 ## 🎨 Design Features
 
-- **Color Palette**: Cream (#faf2e5) & Blue (#55b9e0)
+- **Color Palette**: Cream (#faf2e5) & Blue (#aecdd4)
 - **Typography**: Righteous font (retro-style)
 - **Responsive Design**: Mobile-first approach
 - **Modern UI**: Smooth animations and transitions
@@ -84,10 +84,6 @@ nooralyateem-website/
 │   │   │   ├── Contact.js      # Contact page
 │   │   │   ├── Contact.css
 │   │   │   └── index.js
-│   │   └── Donate/
-│   │       ├── Donate.js       # Donation page
-│   │       ├── Donate.css
-│   │       └── index.js
 │   ├── App.js                  # Router configuration
 │   ├── App.css
 │   ├── index.js
@@ -103,7 +99,6 @@ nooralyateem-website/
 - **Events** (`/events`): Upcoming and past events
 - **Gallery** (`/gallery`): Photo gallery showcasing moments and activities
 - **Contact Us** (`/contact`): Contact form and information
-- **Donate** (`/donate`): Donation page with multiple giving options and payment form
 
 ## 🛠️ Built With
 

@@ -1,45 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
-  const programs = [
+  // Upcoming events data - get first 3 upcoming events
+  const upcomingEvents = [
     {
-      title: "Education Support",
-      icon: "📚",
-      description: "Providing access to quality education, school supplies, tutoring, and scholarship opportunities to ensure every child can pursue their dreams.",
-      highlights: ["School Supplies", "Tutoring", "Scholarships", "Digital Learning"]
+      id: 1,
+      title: "Field Day - Collab with Ihsan",
+      date: "2025-11-09",
+      time: "12:00 PM – 5:00 PM",
+      location: "Maruf Dallas",
+      description: "A fun field day with activities and community collaboration.",
+      fullDescription: "Join us for Field Day in collaboration with Ihsan. Enjoy games, sports, and community bonding throughout the afternoon.",
+      image: "/media/gallery/field-days/Mar'uf flyer.png"
     },
     {
-      title: "Healthcare Services",
-      icon: "🏥",
-      description: "Comprehensive healthcare including regular check-ups, vaccinations, dental care, and mental health support for holistic well-being.",
-      highlights: ["Medical Care", "Dental Services", "Mental Health", "Nutrition"]
+      id: 2,
+      title: "Popups 4 A Purpose",
+      date: "2025-11-10",
+      time: "2:00 PM – 4:00 PM",
+      location: "The Plinth",
+      description: "Featuring vendors, including Hot Chocolate by NaY.",
+      fullDescription: "Support local vendors and community initiatives at Popups 4 A Purpose. Vendors include Hot Chocolate by NaY.",
+      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
     },
     {
-      title: "Safe Housing",
-      icon: "🏠",
-      description: "Providing safe, nurturing homes where children feel loved, protected, and supported by caring staff and foster families.",
-      highlights: ["Foster Care", "Group Homes", "Family Support", "Safety Programs"]
-    },
-    {
-      title: "Skill Development",
-      icon: "💼",
-      description: "Vocational training, mentorship programs, and life skills workshops to prepare youth for successful, independent futures.",
-      highlights: ["Vocational Training", "Mentorship", "Life Skills", "Career Guidance"]
-    },
-    {
-      title: "Recreational Activities",
-      icon: "⚽",
-      description: "Sports, arts, music, and cultural programs that promote creativity, teamwork, and healthy physical and emotional development.",
-      highlights: ["Sports Programs", "Arts & Crafts", "Music Classes", "Cultural Events"]
-    },
-    {
-      title: "Emergency Relief",
-      icon: "🆘",
-      description: "Rapid response support for children in crisis situations, providing immediate shelter, food, medical care, and emotional support.",
-      highlights: ["Crisis Response", "Emergency Shelter", "Food Security", "Trauma Support"]
+      id: 3,
+      title: "Quran Night - Collab with MSA",
+      date: "2025-11-14",
+      time: "5:00 PM – 10:00 PM",
+      location: "SSA Auditorium",
+      description: "An evening of Quran recitation and reflection with MSA.",
+      fullDescription: "Experience a special Quran Night in collaboration with MSA, featuring recitations, reflections, and community gathering.",
+      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
     }
   ];
+
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
+
+  const nextEvent = () => {
+    setCurrentEventIndex((prevIndex) => (prevIndex + 1) % upcomingEvents.length);
+  };
+
+  const prevEvent = () => {
+    setCurrentEventIndex((prevIndex) => (prevIndex - 1 + upcomingEvents.length) % upcomingEvents.length);
+  };
+
+  const getVisibleEvents = () => {
+    const visible = [];
+    const total = upcomingEvents.length;
+    
+    // Show 5 items: -2, -1, 0, 1, 2 (or fewer if we have less than 5 events)
+    const range = Math.min(2, Math.floor(total / 2));
+    for (let i = -range; i <= range; i++) {
+      const index = (currentEventIndex + i + total) % total;
+      visible.push({ ...upcomingEvents[index], position: i, arrayIndex: index });
+    }
+    
+    return visible;
+  };
 
   return (
     <>
@@ -56,37 +76,81 @@ function Home() {
           </div>
                   
           <p className="hero-subtitle">
-            home is where humanity is
+          home is where humanity is
           </p>
           
           <div className="hero-buttons">
-            <a href="/donate" className="btn btn-primary">Donate</a>
+            <a href="https://www.zeffy.com/en-US/donation-form/support-orphans-and-refugees-in-need" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Donate</a>
           </div>
           
           <a href="#about" className="hero-learn-more">Learn More ↓</a>
         </div>
       </section>
 
-      {/* Programs Section */}
-      <section id="programs" className="programs">
-        <h2 className="section-title">Our Programs</h2>
-        <p className="section-subtitle">
-          Comprehensive support designed to nurture every aspect of a child's growth and development
-        </p>
+      {/* Upcoming Event Section */}
+      <section id="upcoming-event" className="upcoming-event-section">
+        <h2 className="section-title">Upcoming Events</h2>
         
-        <div className="programs-grid">
-          {programs.map((program, index) => (
-            <div key={index} className="program-card">
-              <div className="program-icon">{program.icon}</div>
-              <h3 className="program-title">{program.title}</h3>
-              <p className="program-description">{program.description}</p>
-              <div className="program-highlights">
-                {program.highlights.map((highlight, idx) => (
-                  <span key={idx} className="highlight-badge">{highlight}</span>
-                ))}
-              </div>
+        <div className="upcoming-event-container">
+          <div className="event-carousel-wrapper">
+            <button 
+              className="carousel-arrow carousel-arrow-left" 
+              onClick={prevEvent}
+              aria-label="Previous event"
+            >
+              ‹
+            </button>
+            
+            <div className="event-carousel-track">
+              {getVisibleEvents().map((event) => (
+                <div
+                  key={event.id}
+                  className={`event-card-wrapper ${event.position === 0 ? 'center' : ''} ${event.position !== 0 ? 'faded' : ''}`}
+                  onClick={() => {
+                    if (event.position !== 0) {
+                      setCurrentEventIndex(event.arrayIndex);
+                    }
+                  }}
+                >
+                  {event.image && (
+                    <div className="event-image-wrapper">
+                      <img 
+                        src={event.image} 
+                        alt={event.title}
+                        className="event-image"
+                      />
+                    </div>
+                  )}
+                  <div className="event-content-wrapper">
+                    <div className="event-date-badge">{event.date}</div>
+                    <h3 className="event-title">{event.title}</h3>
+                    <div className="event-details">
+                      <div className="event-detail-item">
+                        <span className="event-icon">⏰</span>
+                        <span className="event-detail-text">{event.time}</span>
+                      </div>
+                      <div className="event-detail-item">
+                        <span className="event-icon">📍</span>
+                        <span className="event-detail-text">{event.location}</span>
+                      </div>
+                    </div>
+                    <p className="event-description">{event.description}</p>
+                    <Link to="/events" className="event-details-btn">
+                      View Details & RSVP
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+
+            <button 
+              className="carousel-arrow carousel-arrow-right" 
+              onClick={nextEvent}
+              aria-label="Next event"
+            >
+              ›
+            </button>
+          </div>
         </div>
       </section>
 
@@ -105,7 +169,7 @@ function Home() {
               We're building a comprehensive support system to transform lives through education, 
               healthcare, and empowerment programs.
             </p>
-            <a href="#programs" className="about-btn">
+            <a href="#upcoming-event" className="about-btn">
               Explore Our Impact
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
