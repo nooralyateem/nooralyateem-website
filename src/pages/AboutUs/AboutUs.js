@@ -13,38 +13,58 @@ function AboutUs() {
 
       <section className="about-detail">
         <div className="about-detail-content">
-          <h2>Our Story</h2>
+          <h2>Mission</h2>
           <p>
-            Noor Al Yateem was founded with a simple yet powerful mission: to bring light 
-            and hope to the lives of orphaned children. Since our inception, we have been 
-            dedicated to providing comprehensive support that goes beyond basic needs.
-          </p>
-          <p>
-            We believe every child deserves access to quality education, healthcare, 
-            emotional support, and opportunities to thrive. Through our programs and 
-            dedicated team, we work tirelessly to create a brighter future for the 
-            children in our care.
+            Inspired by the values of compassion and charity in Islam, We're committed to uplifting orphaned and refugee children by offering love, support, and a nurturing space to help them thrive. Our organization strives to equip these children with the tools and opportunities needed to spread kindness, empower resilience, and inspire a spirit of giving throughout the community.
           </p>
 
-          <h2>Our Values</h2>
-          <div className="values-grid">
-            <div className="value-card">
-              <h3>Compassion</h3>
-              <p>We approach every child with empathy, understanding, and unconditional support.</p>
+          <h2>Meet the Team</h2>
+
+          <div className="board-picture">
+            <img src="board-pic.JPG" alt="Full Board" className="board-img" />
+          </div> 
+
+
+          {/* Team Photos Section */}
+          <div className="team-photos-grid">
+            <div className="team-photo-container">
+              <img src="executives.jpg" alt="Executive Team" className="team-photo" />
+              <div className="team-photo-overlay">
+                <span className="team-name">Executive Team</span>
+              </div>
             </div>
-            <div className="value-card">
-              <h3>Integrity</h3>
-              <p>We maintain transparency and accountability in all our operations and partnerships.</p>
+            <div className="team-photo-container">
+              <img src="marketing.JPG" alt="Marketing Team" className="team-photo" />
+              <div className="team-photo-overlay">
+                <span className="team-name">Marketing Team</span>
+              </div>
             </div>
-            <div className="value-card">
-              <h3>Excellence</h3>
-              <p>We strive for the highest standards in care, education, and program delivery.</p>
+            <div className="team-photo-container">
+              <img src="fundraising.PNG" alt="Fundraising Team" className="team-photo" />
+              <div className="team-photo-overlay">
+                <span className="team-name">Fundraising Team</span>
+              </div>
             </div>
-            <div className="value-card">
-              <h3>Community</h3>
-              <p>We build strong relationships and foster a sense of belonging for every child.</p>
+            <div className="team-photo-container">
+              <img src="outreach.JPG" alt="Outreach Team" className="team-photo" />
+              <div className="team-photo-overlay">
+                <span className="team-name">Outreach Team</span>
+              </div>
+            </div>
+            <div className="team-photo-container">
+              <img src="programs.jpg" alt="Programs Team" className="team-photo" />
+              <div className="team-photo-overlay">
+                <span className="team-name">Programs Team</span>
+              </div>
+            </div>
+            <div className="team-photo-container">
+              <img src="events.JPG" alt="Events Team" className="team-photo" />
+              <div className="team-photo-overlay">
+                <span className="team-name">Events Team</span>
+              </div>
             </div>
           </div>
+
         </div>
       </section>
     </div>
