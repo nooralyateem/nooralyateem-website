@@ -84,6 +84,10 @@ nooralyateem-website/
 │   │   │   ├── Contact.js      # Contact page
 │   │   │   ├── Contact.css
 │   │   │   └── index.js
+│   │   └── Donate/
+│   │       ├── Donate.js       # Donation page
+│   │       ├── Donate.css
+│   │       └── index.js
 │   ├── App.js                  # Router configuration
 │   ├── App.css
 │   ├── index.js
@@ -99,6 +103,7 @@ nooralyateem-website/
 - **Events** (`/events`): Upcoming and past events
 - **Gallery** (`/gallery`): Photo gallery showcasing moments and activities
 - **Contact Us** (`/contact`): Contact form and information
+- **Donate** (`/donate`): Donation page with multiple giving options and payment form
 
 ## 🛠️ Built With
 
