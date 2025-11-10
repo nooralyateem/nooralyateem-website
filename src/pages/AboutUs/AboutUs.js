@@ -7,7 +7,7 @@ function AboutUs() {
       <section className="page-hero">
         <div className="page-hero-content">
           <h1>About Us</h1>
-          <p>Learn more about our mission and the impact we're making</p>
+          <p> learn more about our mission and the impact we're making</p>
         </div>
       </section>
 
