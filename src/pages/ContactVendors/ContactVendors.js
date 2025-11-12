@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
-import './Contact.css';
+import '../Contact/Contact.css';
 
-function Contact() {
+function ContactVendors() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
+    phone: '',
+    subject: '',
     message: ''
   });
 
   const [openFaq, setOpenFaq] = useState(null);
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
-  const handleFaqKeyDown = (index) => (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleFaq(index);
-    }
-  };
 
   const handleChange = (e) => {
     setFormData({
@@ -29,15 +19,25 @@ function Contact() {
     });
   };
 
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const handleFaqKeyDown = (index) => (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleFaq(index);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Form submission logic would go here
-    // In a real application, you would send formData to your server/backend here.
-    alert('Thank you for reaching out! We will get back to you soon.');
+    alert('Thank you for your interest in partnering with us. We will reach out soon!');
     setFormData({
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
+      phone: '',
+      subject: '',
       message: ''
     });
   };
@@ -46,42 +46,30 @@ function Contact() {
     <div className="contact-page">
       <section className="page-hero">
         <div className="page-hero-content">
-          <h1>Contact Us</h1>
-          <p>Get in touch - we'd love to hear from you</p>
+          <h1>Vendor Partnerships</h1>
+          <p>Partner with Noor Al Yateem to make every event impactful</p>
         </div>
       </section>
 
       <section className="contact-section">
         <div className="contact-content">
           <div className="contact-form-wrapper">
-            <h2>Get In Touch</h2>
+            <h2>Partner With Us</h2>
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-group">
-                <label htmlFor="firstName">FIRST NAME *</label>
+                <label htmlFor="name">Business Name *</label>
                 <input
                   type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="lastName">LAST NAME *</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">EMAIL *</label>
+                <label htmlFor="email">Email Address *</label>
                 <input
                   type="email"
                   id="email"
@@ -93,7 +81,30 @@ function Contact() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">MESSAGE:</label>
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="subject">Primary Contact *</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="message">Tell Us About Your Products *</label>
                 <textarea
                   id="message"
                   name="message"
@@ -105,11 +116,7 @@ function Contact() {
               </div>
 
               <button type="submit" className="submit-btn">
-                Submit
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
+                Submit Vendor Inquiry
               </button>
             </form>
           </div>
@@ -129,7 +136,7 @@ function Contact() {
                 </svg>
               </div>
               <h3>Email Us</h3>
-              <p className="reach-description">Primary contact for all inquiries</p>
+              <p className="reach-description">Vendor support and partnership questions</p>
               <a href="mailto:nooralyateemutd@gmail.com" className="reach-link">nooralyateemutd@gmail.com</a>
             </div>
             
@@ -142,16 +149,24 @@ function Contact() {
                 </svg>
               </div>
               <h3>Follow Us</h3>
-              <p className="reach-description">Stay updated with our latest activities</p>
-              <a href="https://www.instagram.com/nooralyateemutd/" target="_blank" rel="noopener noreferrer" className="reach-link">@nooralyateemutd</a>
+              <p className="reach-description">Stay updated on upcoming vendor opportunities</p>
+              <a
+                href="https://www.instagram.com/nooralyateemutd/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="reach-link"
+              >
+                @nooralyateemutd
+              </a>
             </div>
           </div>
         </div>
       </section>
-      
-      <section id="faq" className="faq-section">
+
+      <section className="faq-section">
+        <div className="faq-divider"></div>
         <div className="faq-content">
-          <h2 className="faq-title">FAQ</h2>
+          <h2 className="faq-title">Vendor FAQ</h2>
           <div className="faq-items">
             <div
               className={`faq-item ${openFaq === 0 ? 'open' : ''}`}
@@ -161,16 +176,16 @@ function Contact() {
               onKeyDown={handleFaqKeyDown(0)}
             >
               <div className="faq-question">
-                <h3>WHAT IS YOUR MISSION?</h3>
+                <h3>HOW DO I BECOME AN APPROVED VENDOR?</h3>
                 <span className={`faq-arrow ${openFaq === 0 ? 'open' : ''}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </div>
               {openFaq === 0 && (
                 <div className="faq-answer">
-                  <p>Our mission is to provide support, love, and a nurturing environment for orphaned and refugee children, empowering them to thrive despite their circumstances. Through comprehensive care, education, and mentorship, we aim to instill confidence, skills, and hope for a brighter future.</p>
+                  <p>Complete the form on this page with information about your business and offerings. Our vendor relations team reviews submissions weekly and will connect with you to confirm availability and fit for upcoming events.</p>
                 </div>
               )}
             </div>
@@ -182,16 +197,16 @@ function Contact() {
               onKeyDown={handleFaqKeyDown(1)}
             >
               <div className="faq-question">
-                <h3>WHEN AND WHY WAS NOOR AL YATEEM FOUNDED?</h3>
+                <h3>WHAT DOCUMENTATION DO I NEED TO PROVIDE?</h3>
                 <span className={`faq-arrow ${openFaq === 1 ? 'open' : ''}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </div>
               {openFaq === 1 && (
                 <div className="faq-answer">
-                  <p>Noor Al Yateem was founded in August 2024 with the goal of creating a compassionate community dedicated to uplifting and empowering orphaned and displaced children affected by conflict and poverty.</p>
+                  <p>Please be prepared to share your sales tax permit, product list, and any applicable health or food handling certificates. We will outline the exact requirements once we review your inquiry.</p>
                 </div>
               )}
             </div>
@@ -203,16 +218,16 @@ function Contact() {
               onKeyDown={handleFaqKeyDown(2)}
             >
               <div className="faq-question">
-                <h3>WHERE DO YOU OPERATE AND PROVIDE AID?</h3>
+                <h3>ARE THERE FEES ASSOCIATED WITH VENDING?</h3>
                 <span className={`faq-arrow ${openFaq === 2 ? 'open' : ''}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </div>
               {openFaq === 2 && (
                 <div className="faq-answer">
-                  <p>We operate locally in Richardson, Texas, in collaboration with Helping Hands. Together, we extend our support to conflict-affected areas across the Middle East and Asia.</p>
+                  <p>Event fees vary depending on the venue and scope of the program. We will share the full cost breakdown and payment schedule as part of the onboarding process for each event.</p>
                 </div>
               )}
             </div>
@@ -224,16 +239,16 @@ function Contact() {
               onKeyDown={handleFaqKeyDown(3)}
             >
               <div className="faq-question">
-                <h3>ARE YOU A REGISTERED ORGANIZATION?</h3>
+                <h3>HOW FAR IN ADVANCE SHOULD I APPLY?</h3>
                 <span className={`faq-arrow ${openFaq === 3 ? 'open' : ''}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </div>
               {openFaq === 3 && (
                 <div className="faq-answer">
-                  <p>Yes! Noor Al Yateem is a registered organization under UTD! Your donation may be eligible for tax-deduction.</p>
+                  <p>We encourage vendors to apply at least four weeks before the event date to allow time for review, approvals, and marketing coordination. Late applications may be considered if space permits.</p>
                 </div>
               )}
             </div>
@@ -245,16 +260,16 @@ function Contact() {
               onKeyDown={handleFaqKeyDown(4)}
             >
               <div className="faq-question">
-                <h3>HOW CAN I VOLUNTEER WITH YOUR ORGANIZATION?</h3>
+                <h3>WHO CAN I CONTACT FOR EVENT LOGISTICS?</h3>
                 <span className={`faq-arrow ${openFaq === 4 ? 'open' : ''}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </div>
               {openFaq === 4 && (
                 <div className="faq-answer">
-                  <p>Follow our <a href="https://www.instagram.com/nooralyateemutd/" target="_blank" rel="noopener noreferrer">Instagram</a> and join our WhatsApp to get involved!</p>
+                  <p>Once approved, you will receive a direct contact for the event logistics lead, who will assist with setup details, load-in times, and promotional materials.</p>
                 </div>
               )}
             </div>
@@ -265,4 +280,5 @@ function Contact() {
   );
 }
 
-export default Contact;
+export default ContactVendors;
+
