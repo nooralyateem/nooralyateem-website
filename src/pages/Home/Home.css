@@ -32,6 +32,7 @@
 }
 
 .hero-overlay {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -43,6 +44,102 @@
   min-height: 100%;
   background: var(--color-overlay-dark);
   z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+.hero-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; 
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  background:rgba(61, 61, 61, 0.2);
+  z-index: 1;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+.hero-overlay::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(252, 246, 233, 0.01) 5%,
+    rgba(252, 246, 233, 0.02) 10%,
+    rgba(252, 246, 233, 0.04) 15%,
+    rgba(252, 246, 233, 0.06) 20%,
+    rgba(252, 246, 233, 0.09) 25%,
+    rgba(252, 246, 233, 0.13) 30%,
+    rgba(252, 246, 233, 0.18) 35%,
+    rgba(252, 246, 233, 0.24) 40%,
+    rgba(252, 246, 233, 0.31) 45%,
+    rgba(252, 246, 233, 0.39) 50%,
+    rgba(252, 246, 233, 0.48) 55%,
+    rgba(252, 246, 233, 0.57) 60%,
+    rgba(252, 246, 233, 0.66) 65%,
+    rgba(252, 246, 233, 0.74) 70%,
+    rgba(252, 246, 233, 0.81) 75%,
+    rgba(252, 246, 233, 0.87) 80%,
+    rgba(252, 246, 233, 0.91) 85%,
+    rgba(252, 246, 233, 0.94) 88%,
+    rgba(252, 246, 233, 0.96) 91%,
+    rgba(252, 246, 233, 0.97) 94%,
+    rgba(252, 246, 233, 0.98) 96%,
+    rgba(252, 246, 233, 0.99) 98%,
+    rgba(252, 246, 233, 0.995) 99%,
+    rgba(252, 246, 233, 0.998) 99.5%,
+    var(--color-bg-cream) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-overlay::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(252, 246, 233, 0.01) 5%,
+    rgba(252, 246, 233, 0.02) 10%,
+    rgba(252, 246, 233, 0.04) 15%,
+    rgba(252, 246, 233, 0.06) 20%,
+    rgba(252, 246, 233, 0.09) 25%,
+    rgba(252, 246, 233, 0.13) 30%,
+    rgba(252, 246, 233, 0.18) 35%,
+    rgba(252, 246, 233, 0.24) 40%,
+    rgba(252, 246, 233, 0.31) 45%,
+    rgba(252, 246, 233, 0.39) 50%,
+    rgba(252, 246, 233, 0.48) 55%,
+    rgba(252, 246, 233, 0.57) 60%,
+    rgba(252, 246, 233, 0.66) 65%,
+    rgba(252, 246, 233, 0.74) 70%,
+    rgba(252, 246, 233, 0.81) 75%,
+    rgba(252, 246, 233, 0.87) 80%,
+    rgba(252, 246, 233, 0.91) 85%,
+    rgba(252, 246, 233, 0.94) 88%,
+    rgba(252, 246, 233, 0.96) 91%,
+    rgba(252, 246, 233, 0.97) 94%,
+    rgba(252, 246, 233, 0.98) 96%,
+    rgba(252, 246, 233, 0.99) 98%,
+    rgba(252, 246, 233, 0.995) 99%,
+    rgba(252, 246, 233, 0.998) 99.5%,
+    var(--color-bg-cream) 100%);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .hero-overlay::after {
@@ -91,6 +188,10 @@
   animation: fadeInUp 1s ease-out;
   padding: 0 60px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes fadeInUp {
@@ -112,6 +213,7 @@
   animation: fadeInUp 0.8s ease-out;
   letter-spacing: -0.5px;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -531,6 +633,7 @@
   .hero-logo-text {
     font-size: 3rem;
     margin-bottom: 25px;
+    white-space: nowrap;
   }
 
   .hero-subtitle {
@@ -551,6 +654,7 @@
 
   .hero-logo-text {
     font-size: 2.5rem;
+    white-space: nowrap;
   }
 
   .hero-subtitle {
