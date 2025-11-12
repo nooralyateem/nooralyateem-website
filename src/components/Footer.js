@@ -7,11 +7,6 @@ function Footer() {
   const [email, setEmail] = useState('');
   const [showNewsletterModal, setShowNewsletterModal] = useState(false);
 
-  const handleNewsletterButtonClick = (e) => {
-    e.preventDefault();
-    setShowNewsletterModal(true);
-  };
-
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
     // TODO: Implement newsletter signup functionality
