@@ -483,6 +483,10 @@
     font-size: 1.1rem;
   }
 
+  .hero-fade {
+    height: 150px;
+  }
+
   .about-detail {
     margin-top: 0;
     margin-bottom: 0;

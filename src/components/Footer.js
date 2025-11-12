@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [showNewsletterModal, setShowNewsletterModal] = useState(false);
+
+  const handleNewsletterButtonClick = (e) => {
+    e.preventDefault();
+    setShowNewsletterModal(true);
+  };
+
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Implement newsletter signup functionality
+    console.log('Newsletter signup:', email);
+    setEmail('');
+    setShowNewsletterModal(false);
+  };
+
+  const closeNewsletterModal = () => {
+    setShowNewsletterModal(false);
+    setEmail('');
+  };
 
   return (
     <footer id="contact" className="footer">
@@ -91,6 +111,35 @@ function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Newsletter Modal */}
+      {showNewsletterModal && (
+        <div className="newsletter-modal-overlay" onClick={closeNewsletterModal}>
+          <div className="newsletter-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="newsletter-modal-close" onClick={closeNewsletterModal} aria-label="Close">
+              ×
+            </button>
+            <h3 className="newsletter-modal-title">Join Our Newsletter</h3>
+            <p className="newsletter-modal-description">
+              Stay updated with our latest news, events, and initiatives.
+            </p>
+            <form onSubmit={handleNewsletterSubmit} className="newsletter-modal-form">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="newsletter-modal-input"
+                required
+                autoFocus
+              />
+              <button type="submit" className="newsletter-modal-submit">
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }
