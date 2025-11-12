@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
 import './Events.css';
 
 const normalizeDate = (date) => {
@@ -29,6 +30,10 @@ function Events() {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState('All');
+  
+  // Scroll animations
+  const [calendarSectionRef, calendarVisible] = useScrollAnimation();
+  const [upcomingEventsRef, upcomingEventsVisible] = useScrollAnimation();
 
   const eventsData = [
     {
@@ -184,10 +189,10 @@ function Events() {
 
   const renderEventGrid = (events) => (
     <div className="events-grid">
-      {events.map((event) => (
+      {events.map((event, index) => (
         <div 
           key={event.id}
-          className="event-card upcoming"
+          className={`event-card upcoming slide-up delay-${Math.min(index + 1, 6)} ${upcomingEventsVisible ? 'visible' : ''}`}
           style={{
             borderColor: getEventTypeColor(event.type),
             borderWidth: '3px'
@@ -286,13 +291,13 @@ function Events() {
 
       <section className="events-section">
         <div className="events-content">
-          <div className="section-header">
+          <div className={`section-header slide-up ${calendarVisible ? 'visible' : ''}`} ref={calendarSectionRef}>
             <h2>Interactive Calendar</h2>
           </div>
 
           <div className="calendar-events-wrapper">
             <div className="calendar-today-wrapper">
-              <div className="calendar-container">
+              <div className={`calendar-container slide-up delay-1 ${calendarVisible ? 'visible' : ''}`}>
                 <div className="calendar-header">
                   <button 
                     className="calendar-nav-btn"
@@ -414,7 +419,7 @@ function Events() {
               </div>
             </div>
 
-            <div className="upcoming-events-section">
+            <div className={`upcoming-events-section slide-up ${upcomingEventsVisible ? 'visible' : ''}`} ref={upcomingEventsRef}>
               <h2>Upcoming Events</h2>
               <div className="event-filters">
                 {eventTypes.map((type) => (

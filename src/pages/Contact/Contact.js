@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
 import './Contact.css';
 
 function Contact() {
@@ -10,6 +11,11 @@ function Contact() {
   });
 
   const [openFaq, setOpenFaq] = useState(null);
+  
+  // Scroll animations
+  const [formSectionRef, formSectionVisible] = useScrollAnimation();
+  const [reachSectionRef, reachSectionVisible] = useScrollAnimation();
+  const [faqSectionRef, faqSectionVisible] = useScrollAnimation();
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -51,9 +57,9 @@ function Contact() {
         </div>
       </section>
 
-      <section className="contact-section">
+      <section id="get-in-touch" className="contact-section">
         <div className="contact-content">
-          <div className="contact-form-wrapper">
+          <div className={`contact-form-wrapper slide-up ${formSectionVisible ? 'visible' : ''}`} ref={formSectionRef}>
             <h2>Get In Touch</h2>
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-group">
@@ -116,12 +122,12 @@ function Contact() {
         </div>
       </section>
 
-      <section className="ways-to-reach-section">
+      <section className="ways-to-reach-section" ref={reachSectionRef}>
         <div className="ways-to-reach-content">
-          <h2 className="ways-to-reach-title">Ways to Reach Us</h2>
+          <h2 className={`ways-to-reach-title slide-up ${reachSectionVisible ? 'visible' : ''}`}>Ways to Reach Us</h2>
           
           <div className="reach-cards">
-            <div className="reach-card">
+            <div className={`reach-card slide-up delay-1 ${reachSectionVisible ? 'visible' : ''}`}>
               <div className="reach-icon email-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="3" y="5" width="18" height="14" rx="2" stroke="white" strokeWidth="2"/>
@@ -133,7 +139,7 @@ function Contact() {
               <a href="mailto:nooralyateemutd@gmail.com" className="reach-link">nooralyateemutd@gmail.com</a>
             </div>
             
-            <div className="reach-card">
+            <div className={`reach-card slide-up delay-2 ${reachSectionVisible ? 'visible' : ''}`}>
               <div className="reach-icon instagram-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="3" y="3" width="18" height="18" rx="5" stroke="white" strokeWidth="2"/>
@@ -149,12 +155,12 @@ function Contact() {
         </div>
       </section>
       
-      <section id="faq" className="faq-section">
+      <section id="faq" className="faq-section" ref={faqSectionRef}>
         <div className="faq-content">
-          <h2 className="faq-title">Frequently Asked Questions</h2>
+          <h2 className={`faq-title slide-up ${faqSectionVisible ? 'visible' : ''}`}>Frequently Asked Questions</h2>
           <div className="faq-items">
             <div
-              className={`faq-item ${openFaq === 0 ? 'open' : ''}`}
+              className={`faq-item slide-up delay-1 ${openFaq === 0 ? 'open' : ''} ${faqSectionVisible ? 'visible' : ''}`}
               onClick={() => toggleFaq(0)}
               role="button"
               tabIndex={0}
@@ -175,7 +181,7 @@ function Contact() {
               )}
             </div>
             <div
-              className={`faq-item ${openFaq === 1 ? 'open' : ''}`}
+              className={`faq-item slide-up delay-2 ${openFaq === 1 ? 'open' : ''} ${faqSectionVisible ? 'visible' : ''}`}
               onClick={() => toggleFaq(1)}
               role="button"
               tabIndex={0}
@@ -196,7 +202,7 @@ function Contact() {
               )}
             </div>
             <div
-              className={`faq-item ${openFaq === 2 ? 'open' : ''}`}
+              className={`faq-item slide-up delay-3 ${openFaq === 2 ? 'open' : ''} ${faqSectionVisible ? 'visible' : ''}`}
               onClick={() => toggleFaq(2)}
               role="button"
               tabIndex={0}
@@ -217,7 +223,7 @@ function Contact() {
               )}
             </div>
             <div
-              className={`faq-item ${openFaq === 3 ? 'open' : ''}`}
+              className={`faq-item slide-up delay-4 ${openFaq === 3 ? 'open' : ''} ${faqSectionVisible ? 'visible' : ''}`}
               onClick={() => toggleFaq(3)}
               role="button"
               tabIndex={0}
@@ -238,7 +244,7 @@ function Contact() {
               )}
             </div>
             <div
-              className={`faq-item ${openFaq === 4 ? 'open' : ''}`}
+              className={`faq-item slide-up delay-5 ${openFaq === 4 ? 'open' : ''} ${faqSectionVisible ? 'visible' : ''}`}
               onClick={() => toggleFaq(4)}
               role="button"
               tabIndex={0}

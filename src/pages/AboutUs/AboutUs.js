@@ -1,12 +1,18 @@
 import React from 'react';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
 import './AboutUs.css';
 
 function AboutUs() {
+  // Scroll animations
+  const [missionRef, missionVisible] = useScrollAnimation();
+  const [teamTitleRef, teamTitleVisible] = useScrollAnimation();
+  const [leadsGridRef, leadsGridVisible] = useScrollAnimation();
+
   return (
     <div className="about-us-page">
       <section className="full-page-hero">
         <div className="hero-image-wrapper">
-          <img src="board-pic.JPG" alt="Full Board" className="hero-background-image" />
+          <img src="board-pic.JPG" alt="Full Board" className="hero-background-image" loading="lazy" />
           <div className="about-hero-overlay"></div>
         </div>
         <div className="about-hero-content">
@@ -18,18 +24,22 @@ function AboutUs() {
 
       <section className="about-detail">
         <div className="about-detail-content">
-          <h2>Mission</h2>
-          <p>
-            Inspired by the values of compassion and charity in Islam, We're committed to uplifting orphaned and refugee children by offering love, support, and a nurturing space to help them thrive. Our organization strives to equip these children with the tools and opportunities needed to spread kindness, empower resilience, and inspire a spirit of giving throughout the community.
-          </p>
+          <div id="mission" ref={missionRef} className={`slide-up ${missionVisible ? 'visible' : ''}`}>
+            <h2>Mission</h2>
+            <p>
+              Inspired by the values of compassion and charity in Islam, We're committed to uplifting orphaned and refugee children by offering love, support, and a nurturing space to help them thrive. Our organization strives to equip these children with the tools and opportunities needed to spread kindness, empower resilience, and inspire a spirit of giving throughout the community.
+            </p>
+          </div>
 
-          <h2>Meet the Team</h2>
+          <div id="team" ref={teamTitleRef} className={`slide-up delay-1 ${teamTitleVisible ? 'visible' : ''}`}>
+            <h2>Meet the Team</h2>
+          </div>
 
           {/* Leads Section */}
-          <div className="leads-grid">
-            <div className="lead-card">
+          <div className="leads-grid" ref={leadsGridRef}>
+            <div className={`lead-card slide-up delay-1 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/president.JPG" alt="Taha - President" className="lead-image" />
+                <img src="/media/leads/president.JPG" alt="Taha - President" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Taha Ahmed</h3>
@@ -38,9 +48,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-2 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/ExternalVP.JPG" alt="Saad - External Vice President" className="lead-image" />
+                <img src="/media/leads/ExternalVP.JPG" alt="Saad - External Vice President" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Saad Syed</h3>
@@ -49,9 +59,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-3 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/InternalVP.JPG" alt="Saniyya - Internal Vice President" className="lead-image" />
+                <img src="/media/leads/InternalVP.JPG" alt="Saniyya - Internal Vice President" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Saniyya Sharif</h3>
@@ -60,9 +70,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-4 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Secretary.JPG" alt="Nabeeha - Secretary" className="lead-image" />
+                <img src="/media/leads/Secretary.JPG" alt="Nabeeha - Secretary" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Nabeeha Rehman</h3>
@@ -71,9 +81,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-5 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Treasurer.jpeg" alt="Labeebah Altaf - Treasurer" className="lead-image" />
+                <img src="/media/leads/Treasurer.jpeg" alt="Labeebah Altaf - Treasurer" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Labeebah Altaf</h3>
@@ -82,9 +92,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-6 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/ProgramsLead.JPG" alt="Naheel - Programs Lead" className="lead-image" />
+                <img src="/media/leads/ProgramsLead.JPG" alt="Naheel - Programs Lead" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Naheel Abdeljaber</h3>
@@ -93,12 +103,13 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-1 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
                 <img 
                   src="/media/leads/ExternalOutreachLead.JPG" 
                   alt="Sameeha - External Outreach Lead" 
                   className="lead-image"
+                  loading="lazy"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Q5ZDlkOSIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+';
@@ -112,9 +123,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-2 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/InternalOutreach.JPG" alt="Maryam - Internal Outreach Lead" className="lead-image" />
+                <img src="/media/leads/InternalOutreach.JPG" alt="Maryam - Internal Outreach Lead" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Maryam Ali</h3>
@@ -123,9 +134,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-3 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Fundraising.JPG" alt="Sana - Fundraising Lead" className="lead-image" />
+                <img src="/media/leads/Fundraising.JPG" alt="Sana - Fundraising Lead" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Sana Sawani</h3>
@@ -134,9 +145,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-4 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/EventsLead.JPG" alt="Rameen - Events Lead" className="lead-image" />
+                <img src="/media/leads/EventsLead.JPG" alt="Rameen - Events Lead" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Rameen Raza</h3>
@@ -145,9 +156,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-5 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Marketing.JPG" alt="Ahmed - Marketing Lead" className="lead-image" />
+                <img src="/media/leads/Marketing.JPG" alt="Ahmed - Marketing Lead" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Ahmed Khan</h3>
@@ -156,9 +167,9 @@ function AboutUs() {
               </div>
             </div>
 
-            <div className="lead-card">
+            <div className={`lead-card slide-up delay-6 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Marketing2.JPG" alt="Zuhaab - Marketing Lead" className="lead-image" />
+                <img src="/media/leads/Marketing2.JPG" alt="Zuhaab - Marketing Lead" className="lead-image" loading="lazy" />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Zuhaab Agha</h3>

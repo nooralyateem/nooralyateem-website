@@ -6,9 +6,10 @@
   background: var(--color-bg-cream);
   width: 100%;
   z-index: 1000;
-  box-shadow: var(--shadow-medium);
+  box-shadow: var(--shadow-light);
   transform: translateY(0);
-  transition: transform 0.3s ease-in-out;
+  transition: all var(--transition-base);
+  backdrop-filter: blur(10px);
 }
 
 .header.hidden {

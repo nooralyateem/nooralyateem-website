@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
 import './Gallery.css';
 
 // Sample photo albums data - replace with your Google Drive integration
@@ -151,6 +152,9 @@ function PhotoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
   const autoplayRef = useRef(null);
+  
+  // Scroll animations
+  const [galleryIntroRef, galleryIntroVisible] = useScrollAnimation();
 
   const stopAutoplay = useCallback(() => {
     if (autoplayRef.current) {
@@ -245,7 +249,7 @@ function PhotoCarousel() {
 
       <section className="gallery-section">
         <div className="gallery-content">
-          <div className="gallery-intro">
+          <div className={`gallery-intro slide-up ${galleryIntroVisible ? 'visible' : ''}`} ref={galleryIntroRef}>
             <h2>Our Photo Gallery</h2>
             <p>
               Our gallery shows the moments of joy, growth, and hope that we create at our events. 
@@ -272,7 +276,7 @@ function PhotoCarousel() {
                     }}
                   >
                     <div className="album-thumbnail">
-                      <img src={album.thumbnail} alt={album.title} />
+                      <img src={album.thumbnail} alt={album.title} loading="lazy" />
                       <div className="album-overlay">
                         <h3>{album.title}</h3>
                         <p>{album.description}</p>
@@ -298,6 +302,10 @@ function PhotoCarousel() {
 // Vlogs Carousel Component (Video)
 function VlogsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Scroll animation for vlogs section
+  const [vlogsSectionRef] = useScrollAnimation();
+  const [vlogsIntroRef, vlogsIntroVisible] = useScrollAnimation();
 
   const next = () => {
     setCurrentIndex((p) => (p + 1) % vlogs.length);
@@ -328,8 +336,8 @@ function VlogsCarousel() {
   }, [currentIndex]);
 
   return (
-    <div className="vlogs-section">
-      <div className="gallery-intro">
+    <div className="vlogs-section" ref={vlogsSectionRef}>
+      <div className={`gallery-intro slide-up ${vlogsIntroVisible ? 'visible' : ''}`} ref={vlogsIntroRef}>
         <h2>
           In the NAYborhood Vlogs
           <a 
@@ -344,6 +352,7 @@ function VlogsCarousel() {
                 src="/media/gallery/nay-circular-logo.png" 
                 alt="Noor Al Yateem Logo" 
                 className="youtube-logo-img"
+                loading="lazy"
               />
             </span>
           </a>
@@ -488,6 +497,7 @@ function AlbumPage() {
                 src={photo.url}
                 alt={`${album.title} ${photo.id}`}
                 onClick={() => setSelectedPhotoUrl(photo.url)}
+                loading="lazy"
               />
             )}
           </div>
@@ -500,7 +510,7 @@ function AlbumPage() {
             <button className="image-modal-close" aria-label="Close" onClick={() => setSelectedPhotoUrl(null)}>
               ×
             </button>
-            <img src={selectedPhotoUrl} alt="Selected" />
+            <img src={selectedPhotoUrl} alt="Selected" loading="lazy" />
           </div>
         </div>
       )}

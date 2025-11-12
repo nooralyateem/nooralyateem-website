@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
+import useCountUp from '../../hooks/useCountUp';
 import './Home.css';
 
 function Home() {
@@ -38,6 +40,21 @@ function Home() {
   ];
 
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
+  
+  // Scroll animations
+  const [heroLogoRef, heroLogoVisible] = useScrollAnimation();
+  const [heroSubtitleRef, heroSubtitleVisible] = useScrollAnimation();
+  const [heroButtonsRef, heroButtonsVisible] = useScrollAnimation();
+  const [heroLearnMoreRef, heroLearnMoreVisible] = useScrollAnimation();
+  const [eventsSectionRef, eventsVisible] = useScrollAnimation();
+  const [aboutSectionRef] = useScrollAnimation();
+  const [aboutContentRef, aboutContentVisible] = useScrollAnimation();
+  const [statsRef, statsVisible] = useScrollAnimation();
+
+  // Count-up animations for stats
+  const [stat1Ref, stat1Count] = useCountUp('500+', 2500);
+  const [stat2Ref, stat2Count] = useCountUp('10000+', 2500);
+  const [stat3Ref, stat3Count] = useCountUp(15, 2000);
 
   const nextEvent = () => {
     setCurrentEventIndex((prevIndex) => (prevIndex + 1) % upcomingEvents.length);
@@ -71,25 +88,40 @@ function Home() {
         </video>
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <div className="hero-logo-text">
+          <div 
+            className={`hero-logo-text slide-up ${heroLogoVisible ? 'visible' : ''}`}
+            ref={heroLogoRef}
+          >
             Noor Al-Yateem
           </div>
                   
-          <p className="hero-subtitle">
-          home is where humanity is
+          <p 
+            className={`hero-subtitle slide-up delay-1 ${heroSubtitleVisible ? 'visible' : ''}`}
+            ref={heroSubtitleRef}
+          >
+            home is where humanity is
           </p>
           
-          <div className="hero-buttons">
+          <div 
+            className={`hero-buttons slide-up delay-2 ${heroButtonsVisible ? 'visible' : ''}`}
+            ref={heroButtonsRef}
+          >
             <a href="https://www.zeffy.com/en-US/donation-form/support-orphans-and-refugees-in-need" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Donate</a>
           </div>
           
-          <a href="#about" className="hero-learn-more">Learn More ↓</a>
+          <a 
+            href="#about" 
+            className={`hero-learn-more slide-up delay-3 ${heroLearnMoreVisible ? 'visible' : ''}`}
+            ref={heroLearnMoreRef}
+          >
+            Learn More ↓
+          </a>
         </div>
       </section>
 
       {/* Upcoming Event Section */}
-      <section id="upcoming-event" className="upcoming-event-section">
-        <h2 className="section-title">Upcoming Events</h2>
+      <section id="upcoming-event" className="upcoming-event-section" ref={eventsSectionRef}>
+        <h2 className={`section-title slide-up ${eventsVisible ? 'visible' : ''}`}>Upcoming Events</h2>
         
         <div className="upcoming-event-container">
           <div className="event-carousel-wrapper">
@@ -118,6 +150,7 @@ function Home() {
                         src={event.image} 
                         alt={event.title}
                         className="event-image"
+                        loading="lazy"
                       />
                     </div>
                   )}
@@ -155,9 +188,9 @@ function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="about">
+      <section id="about" className="about" ref={aboutSectionRef}>
         <div className="about-container">
-          <div className="about-content">
+          <div className={`about-content slide-right ${aboutContentVisible ? 'visible' : ''}`} ref={aboutContentRef}>
             <h2 className="about-title">
               Every child deserves a chance to thrive
             </h2>
@@ -177,24 +210,24 @@ function Home() {
             </a>
           </div>
 
-          <div className="about-stats">
+          <div className={`about-stats slide-left ${statsVisible ? 'visible' : ''}`} ref={statsRef}>
             <p className="stats-header">Since starting our work, we've:</p>
             
             <div className="stat-item">
               <div className="stat-category">TRANSFORMED LIVES.</div>
-              <div className="stat-number">500+</div>
+              <div className="stat-number" ref={stat1Ref}>{stat1Count}</div>
               <div className="stat-desc">children supported through our programs</div>
             </div>
 
             <div className="stat-item">
               <div className="stat-category">PROVIDED NOURISHMENT.</div>
-              <div className="stat-number">10,000+</div>
+              <div className="stat-number" ref={stat2Ref}>{stat2Count}</div>
               <div className="stat-desc">meals served to children in need</div>
             </div>
 
             <div className="stat-item">
               <div className="stat-category">EXPANDED GLOBAL REACH.</div>
-              <div className="stat-number">15</div>
+              <div className="stat-number" ref={stat3Ref}>{stat3Count}</div>
               <div className="stat-desc">countries where we make a difference</div>
             </div>
           </div>

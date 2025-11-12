@@ -8,7 +8,7 @@
 /* Upper Section - White Background */
 .footer-upper {
   background: var(--color-bg-cream);
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: var(--spacing-3xl) var(--spacing-lg);
   width: 100%;
 }
 
@@ -59,6 +59,18 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-xl);
+}
+
+@media (max-width: 968px) {
+  .footer-nav-columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-nav-columns {
+    grid-template-columns: 1fr;
+  }
 }
 
 .footer-nav-column {
