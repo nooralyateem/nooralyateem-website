@@ -28,7 +28,6 @@ function Events() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [rsvpForm, setRsvpForm] = useState({ name: '', email: '', phone: '', guests: 1 });
   const [selectedFilter, setSelectedFilter] = useState('All');
 
   const eventsData = [
@@ -41,7 +40,8 @@ function Events() {
       description: "A fun field day with activities and community collaboration.",
       fullDescription: "Join us for Field Day in collaboration with Ihsan. Enjoy games, sports, and community bonding throughout the afternoon.",
       price: "Free",
-      type: "Off campus"
+      type: "Off campus",
+      rsvpLink: "https://docs.google.com/forms/d/1yA7k_a-DAP5BqaVtXATMTGxUFPCyV2o9DuU4_MnkRGE/viewform?edit_requested=true&edit_requested=true"
     },
     {
       id: 2,
@@ -63,7 +63,8 @@ function Events() {
       description: "An evening of Quran recitation and reflection with MSA.",
       fullDescription: "Experience a special Quran Night in collaboration with MSA, featuring recitations, reflections, and community gathering.",
       price: "Free",
-      type: "Social"
+      type: "Social",
+      rsvpLink: "https://docs.google.com/forms/d/e/1FAIpQLScoUl3OPQ1QzCnGByK61xf2vXaUVcK4cAcRwUX-_wwqbGZFuw/viewform"
     },
     {
       id: 4,
@@ -97,15 +98,6 @@ function Events() {
     const matchesFilter = selectedFilter === 'All' || event.type === selectedFilter;
     return isUpcoming && matchesFilter;
   });
-
-  const pastEvents = [
-    {
-      title: "Field Day",
-      date: "September 2024",
-      description: "A fun field day with activities and community collaboration.",
-      image: "📚"
-    },
-  ];
 
   // Calendar functionality
   const currentDate = new Date();
@@ -184,14 +176,6 @@ function Events() {
     setShowEventModal(false);
   };
 
-  const handleRsvpSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically send the RSVP data to your backend
-    alert(`Thank you ${rsvpForm.name}! Your RSVP has been submitted.`);
-    setRsvpForm({ name: '', email: '', phone: '', guests: 1 });
-    setShowEventModal(false);
-  };
-
   const today = normalizeDate(new Date());
   const todayKey = getDateKey(today);
   const todaysEvents = getEventsForDate(today);
@@ -241,7 +225,7 @@ function Events() {
               setShowEventModal(true);
             }}
           >
-            View Details & RSVP
+            {event.rsvpLink ? 'View Details & RSVP Link' : 'View Details'}
           </button>
         </div>
       ))}
@@ -459,21 +443,6 @@ function Events() {
             </div>
           </div>
 
-          <div className="section-header" style={{ marginTop: '80px' }}>
-            <h2>Past Events</h2>
-            <p>Celebrating our achievements together</p>
-          </div>
-
-          <div className="past-events-grid">
-            {pastEvents.map((event, index) => (
-              <div key={index} className="past-event-card">
-                <div className="past-event-icon">{event.image}</div>
-                <h3>{event.title}</h3>
-                <p className="past-event-date">{event.date}</p>
-                <p className="past-event-description">{event.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -526,69 +495,22 @@ function Events() {
               <p>{selectedEvent.fullDescription}</p>
             </div>
 
-            <div className="rsvp-section">
-              <h3>RSVP</h3>
-              <form onSubmit={handleRsvpSubmit} className="rsvp-form">
-                <div className="form-group">
-                  <label htmlFor="name">Full Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={rsvpForm.name}
-                    onChange={(e) => setRsvpForm({...rsvpForm, name: e.target.value})}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={rsvpForm.email}
-                    onChange={(e) => setRsvpForm({...rsvpForm, email: e.target.value})}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    value={rsvpForm.phone}
-                    onChange={(e) => setRsvpForm({...rsvpForm, phone: e.target.value})}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="guests">Number of Guests</label>
-                  <input
-                    type="number"
-                    id="guests"
-                    min="1"
-                    max="10"
-                    value={rsvpForm.guests}
-                    onChange={(e) => {
-                      const value = e.target.value === '' ? 1 : parseInt(e.target.value) || 1;
-                      setRsvpForm({...rsvpForm, guests: Math.max(1, Math.min(10, value))});
-                    }}
-                  />
-                </div>
-                <div className="form-actions">
-                  <button type="submit" className="rsvp-submit-btn">
-                    Submit RSVP
-                  </button>
-                  {selectedEvent.rsvpLink && (
-                    <a 
-                      href={selectedEvent.rsvpLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="external-rsvp-btn"
-                    >
-                      External RSVP Link
-                    </a>
-                  )}
-                </div>
-              </form>
-            </div>
+            {selectedEvent.rsvpLink && (
+              <div className="rsvp-section">
+                <h3>RSVP</h3>
+                <p>Please RSVP using the external form below:</p>
+                <p>
+                  <a
+                    href={selectedEvent.rsvpLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="external-rsvp-link"
+                  >
+                    @{selectedEvent.rsvpLink}
+                  </a>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
