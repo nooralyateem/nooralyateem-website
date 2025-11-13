@@ -48,14 +48,14 @@ function Footer() {
               <h4 className="footer-nav-header">ABOUT US</h4>
               <ul className="footer-nav-list">
                 <li><a href="/about#mission">Our Mission</a></li>
-                <li><a href="/about#team">Meet our team</a></li>
+                <li><a href="/about#team">Meet Our Team</a></li>
               </ul>
             </div>
 
             <div className="footer-nav-column">
               <h4 className="footer-nav-header">LEARN MORE</h4>
               <ul className="footer-nav-list">
-                <li><a href="/contact#get-in-touch">Get in touch</a></li>
+                <li><a href="/contact#get-in-touch">Get in Touch</a></li>
                 <li><a href="/contact#faq">FAQ</a></li>
               </ul>
             </div>

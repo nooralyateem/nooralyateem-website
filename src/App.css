@@ -1,12 +1,12 @@
 .App {
   width: 100%;
   overflow-x: hidden;
-  padding-top: 70px; /* Account for fixed header */
+  padding-top: 110px; /* Account for fixed header */
 }
 
 @media (max-width: 968px) {
   .App {
-    padding-top: 60px; /* Account for smaller header on mobile */
+    padding-top: 90px; /* Account for smaller header on mobile */
   }
 }
 
