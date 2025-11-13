@@ -3,11 +3,16 @@ import '../Contact/Contact.css';
 
 function ContactVendors() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    businessName: '',
+    contactEmail: '',
+    contactInstagram: '',
+    productType: '',
+    averagePriceRange: '',
+    profitMargin: '',
+    bestSellers: '',
+    inventory: '',
+    paymentMethod: '',
+    profitShare: ''
   });
 
   const [openFaq, setOpenFaq] = useState(null);
@@ -34,11 +39,16 @@ function ContactVendors() {
     e.preventDefault();
     alert('Thank you for your interest in partnering with us. We will reach out soon!');
     setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
+      businessName: '',
+      contactEmail: '',
+      contactInstagram: '',
+      productType: '',
+      averagePriceRange: '',
+      profitMargin: '',
+      bestSellers: '',
+      inventory: '',
+      paymentMethod: '',
+      profitShare: ''
     });
   };
 
@@ -56,63 +66,132 @@ function ContactVendors() {
           <div className="contact-form-wrapper">
             <h2>Partner With Us</h2>
             <form onSubmit={handleSubmit} className="contact-form">
+              <h3>Business Info</h3>
               <div className="form-group">
-                <label htmlFor="name">Business Name *</label>
+                <label htmlFor="businessName">What is your business name? *</label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="businessName"
+                  name="businessName"
+                  value={formData.businessName}
                   onChange={handleChange}
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email Address *</label>
+                <label htmlFor="contactEmail">Contact Email *</label>
                 <input
                   type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  id="contactEmail"
+                  name="contactEmail"
+                  value={formData.contactEmail}
                   onChange={handleChange}
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="phone">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">Primary Contact *</label>
+                <label htmlFor="contactInstagram">Instagram Handle</label>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
+                  id="contactInstagram"
+                  name="contactInstagram"
+                  value={formData.contactInstagram}
                   onChange={handleChange}
-                  required
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Tell Us About Your Products *</label>
+                <label htmlFor="productType">What type of products do you plan to sell? *</label>
                 <textarea
-                  id="message"
-                  name="message"
-                  rows="6"
-                  value={formData.message}
+                  id="productType"
+                  name="productType"
+                  rows="4"
+                  value={formData.productType}
                   onChange={handleChange}
                   required
                 ></textarea>
+              </div>
+
+              <h3>Sales Info</h3>
+              <div className="form-group">
+                <label htmlFor="averagePriceRange">What is your average product price range? *</label>
+                <textarea
+                  id="averagePriceRange"
+                  name="averagePriceRange"
+                  rows="3"
+                  value={formData.averagePriceRange}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="profitMargin">Average profit margin (%) *</label>
+                <input
+                  type="number"
+                  id="profitMargin"
+                  name="profitMargin"
+                  value={formData.profitMargin}
+                  onChange={handleChange}
+                  min="0"
+                  max="100"
+                  step="1"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="bestSellers">What are your best selling products? *</label>
+                <textarea
+                  id="bestSellers"
+                  name="bestSellers"
+                  rows="4"
+                  value={formData.bestSellers}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="inventory">How much inventory do you usually bring to an event? *</label>
+                <textarea
+                  id="inventory"
+                  name="inventory"
+                  rows="3"
+                  value={formData.inventory}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="paymentMethod">What is your main source of payment method? *</label>
+                <input
+                  type="text"
+                  id="paymentMethod"
+                  name="paymentMethod"
+                  value={formData.paymentMethod}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="profitShare">
+                  We operate on a profit share agreement, what % would you be comfortable donating? (50%, 60%, 80%, 100%) *
+                </label>
+                <input
+                  type="text"
+                  id="profitShare"
+                  name="profitShare"
+                  value={formData.profitShare}
+                  onChange={handleChange}
+                  required
+                  placeholder="Choose: 50%, 60%, 80%, or 100%"
+                  pattern="^(50%|60%|80%|100%)$"
+                />
               </div>
 
               <button type="submit" className="submit-btn">
