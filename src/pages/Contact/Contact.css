@@ -157,8 +157,9 @@
 }
 
 /* --- WAYS TO REACH US SECTION --- */
-.ways-to-reach-section {
-  padding: var(--spacing-4xl) var(--spacing-lg);
+.ways-to-reach-section,
+.ways-to-reach {
+  padding: 80px 20px;
   background: var(--color-bg-cream);
 }
 
