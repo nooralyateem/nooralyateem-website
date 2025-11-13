@@ -1,95 +1,75 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import useScrollAnimation from '../../hooks/useScrollAnimation';
 import './Gallery.css';
 
 // Sample photo albums data - replace with your Google Drive integration
 const photoAlbums = [
-  {
-    id: 'popups',
-    title: 'Popups for a Purpose',
-    description: 'Where every bite meets the perfect sip',
-    thumbnail: '/media/gallery/popups/popups-thumbnail.jpg', // Local image path
-    photos: [
-      { id: 1, url: '/media/gallery/popups/popups-1.jpg', type: 'image' }, // Local image path
-      { id: 2, url: '/media/gallery/popups/popups-2.jpg', type: 'image' }, // Local image path
-      { id: 3, url: '/media/gallery/popups/popups-3.jpeg', type: 'image' },
-      { id: 4, url: '/media/gallery/popups/popups-4.jpeg', type: 'image' },
-      { id: 5, url: '/media/gallery/popups/popups-5.jpeg', type: 'image' },
-      { id: 6, url: '/media/gallery/popups/popups-6.jpg', type: 'image' },
-      { id: 7, url: '/media/gallery/popups/popups-7.jpg', type: 'image' },
-      { id: 8, url: '/media/gallery/popups/popups-8.jpg', type: 'image' },
-      { id: 9, url: '/media/gallery/popups/popups-9.jpg', type: 'image' },
-      { id: 10, url: '/media/gallery/popups/popups-10.jpg', type: 'image' },
-      { id: 11, url: '/media/gallery/popups/popups-11.jpg', type: 'image' },
-      { id: 12, url: '/media/gallery/popups/popups-12.jpg', type: 'image' },
-      { id: 13, url: '/media/gallery/popups/popups-13.jpg', type: 'image' },
-      { id: 14, url: '/media/gallery/popups/popups-14.jpg', type: 'image' },
-      { id: 15, url: '/media/gallery/popups/popups-15.jpg', type: 'image' },
-      { id: 16, url: '/media/gallery/popups/popups-16.jpg', type: 'image' },
-      { id: 17, url: '/media/gallery/popups/popups-17.jpg', type: 'image' },
-      { id: 18, url: '/media/gallery/popups/popups-18.jpg', type: 'image' },
-      { id: 19, url: '/media/gallery/popups/popups-19.jpg', type: 'image' },
-      { id: 20, url: '/media/gallery/popups/popups-20.jpg', type: 'image' },
-      { id: 21, url: '/media/gallery/popups/popups-21.jpg', type: 'image' },
-      { id: 22, url: '/media/gallery/popups/popups-22.jpg', type: 'image' },
-      { id: 23, url: '/media/gallery/popups/popups-23.jpg', type: 'image' },
-      { id: 24, url: '/media/gallery/popups/popups-24.jpg', type: 'image' },
-      { id: 25, url: '/media/gallery/popups/popups-25.jpg', type: 'image' },
-      { id: 26, url: '/media/gallery/popups/popups-26.jpg', type: 'image' },
-      { id: 27, url: '/media/gallery/popups/popups-27.jpg', type: 'image' },
-      { id: 28, url: '/media/gallery/popups/popups-28.jpg', type: 'image' },
-      { id: 29, url: '/media/gallery/popups/popups-29.jpg', type: 'image' },
-      { id: 30, url: '/media/gallery/popups/popups-30.jpg', type: 'image' },
-      { id: 31, url: '/media/gallery/popups/popups-31.jpg', type: 'image' },
-      { id: 32, url: '/media/gallery/popups/popups-32.jpg', type: 'image' },
-    ]
-  },
   {
     id: 'field-days',
     title: 'Refugee Field Days',
     description: 'Afternoons full of fun activities for refugee children',
     thumbnail: '/media/gallery/field-days/field-days-thumbnail.jpeg',
     photos: [
-      { id: 1, url: '/media/gallery/field-days/field-days-1.jpeg', type: 'image' },
-      { id: 2, url: '/media/gallery/field-days/field-days-2.jpg', type: 'image' },
-      { id: 3, url: '/media/gallery/field-days/field-days-3.jpg', type: 'image' },
-      { id: 4, url: '/media/gallery/field-days/field-days-4.jpg', type: 'image' },
-      { id: 5, url: '/media/gallery/field-days/field-days-5.jpg', type: 'image' },
-      { id: 6, url: '/media/gallery/field-days/field-days-6.jpeg', type: 'image' },
-      { id: 7, url: '/media/gallery/field-days/field-days-7.jpg', type: 'image' },
-      { id: 8, url: '/media/gallery/field-days/field-days-8.jpg', type: 'image' },
-      { id: 9, url: '/media/gallery/field-days/field-days-9.jpg', type: 'image' },
-      { id: 10, url: '/media/gallery/field-days/field-days-10.jpg', type: 'image' },
-      { id: 11, url: '/media/gallery/field-days/field-days-11.jpg', type: 'image' },
-    ]
-  },
-  {
-    id: 'gbms',
-    title: 'General Body Meetings',
-    description: 'Fun evenings to connect and learn more about our organization',
-    thumbnail: '/media/gallery/gbms/gbms-thumbnail.jpg',
-    photos: [
-      { id: 1, url: '/media/gallery/gbms/gbms-1.jpg', type: 'image' },
-      { id: 2, url: '/media/gallery/gbms/gbms-2.jpg', type: 'image' },
-      { id: 3, url: '/media/gallery/gbms/gbms-3.jpg', type: 'image' },
-      { id: 4, url: '/media/gallery/gbms/gbms-4.jpg', type: 'image' },
-      { id: 5, url: '/media/gallery/gbms/gbms-5.jpg', type: 'image' },
-      { id: 6, url: '/media/gallery/gbms/gbms-6.jpg', type: 'image' },
-      { id: 7, url: '/media/gallery/gbms/gbms-7.jpg', type: 'image' },
-      { id: 8, url: '/media/gallery/gbms/gbms-8.jpg', type: 'image' },
-      { id: 9, url: '/media/gallery/gbms/gbms-9.jpg', type: 'image' },
-      { id: 10, url: '/media/gallery/gbms/gbms-10.jpg', type: 'image' },
-      { id: 11, url: '/media/gallery/gbms/gbms-11.jpg', type: 'image' },
-      { id: 12, url: '/media/gallery/gbms/gbms-12.jpg', type: 'image' },
-      { id: 13, url: '/media/gallery/gbms/gbms-13.jpg', type: 'image' },
-      { id: 14, url: '/media/gallery/gbms/gbms-14.jpg', type: 'image' },
-      { id: 15, url: '/media/gallery/gbms/gbms-15.jpg', type: 'image' },
-      { id: 16, url: '/media/gallery/gbms/gbms-16.jpg', type: 'image' },
-      { id: 17, url: '/media/gallery/gbms/gbms-17.jpg', type: 'image' },
-      { id: 18, url: '/media/gallery/gbms/gbms-18.jpg', type: 'image' },
-      { id: 19, url: '/media/gallery/gbms/gbms-19.jpg', type: 'image' },
-      { id: 20, url: '/media/gallery/gbms/gbms-20.jpg', type: 'image' },
-      { id: 21, url: '/media/gallery/gbms/gbms-21.jpg', type: 'image' },
+      { id: 1, url: '/media/gallery/field-days/fall25-maruf-field-day-1.jpg', type: 'image' },
+      { id: 2, url: '/media/gallery/field-days/fall25-maruf-field-day-2.jpg', type: 'image' },
+      { id: 3, url: '/media/gallery/field-days/fall25-maruf-field-day-3.jpg', type: 'image' },
+      { id: 4, url: '/media/gallery/field-days/fall25-maruf-field-day-4.jpg', type: 'image' },
+      { id: 5, url: '/media/gallery/field-days/fall25-maruf-field-day-5.jpg', type: 'image' },
+      { id: 6, url: '/media/gallery/field-days/fall25-maruf-field-day-6.jpg', type: 'image' },
+      { id: 7, url: '/media/gallery/field-days/fall25-maruf-field-day-7.jpg', type: 'image' },
+      { id: 8, url: '/media/gallery/field-days/fall25-maruf-field-day-8.jpg', type: 'image' },
+      { id: 9, url: '/media/gallery/field-days/fall25-maruf-field-day-9.jpg', type: 'image' },
+      { id: 10, url: '/media/gallery/field-days/fall25-maruf-field-day-10.jpg', type: 'image' },
+      { id: 11, url: '/media/gallery/field-days/fall25-maruf-field-day-11.jpg', type: 'image' },
+      { id: 12, url: '/media/gallery/field-days/fall25-maruf-field-day-12.jpg', type: 'image' },
+      { id: 13, url: '/media/gallery/field-days/fall25-maruf-field-day-13.jpg', type: 'image' },
+      { id: 14, url: '/media/gallery/field-days/fall25-maruf-field-day-14.jpg', type: 'image' },
+      { id: 15, url: '/media/gallery/field-days/fall25-maruf-field-day-15.jpg', type: 'image' },
+      { id: 16, url: '/media/gallery/field-days/fall25-maruf-field-day-16.jpg', type: 'image' },
+      { id: 17, url: '/media/gallery/field-days/fall25-maruf-field-day-17.jpg', type: 'image' },
+      { id: 18, url: '/media/gallery/field-days/fall25-maruf-field-day-18.jpg', type: 'image' },
+      { id: 19, url: '/media/gallery/field-days/fall25-maruf-field-day-19.jpg', type: 'image' },
+      { id: 20, url: '/media/gallery/field-days/fall25-maruf-field-day-20.jpg', type: 'image' },
+      { id: 21, url: '/media/gallery/field-days/fall25-maruf-field-day-21.jpg', type: 'image' },
+      { id: 22, url: '/media/gallery/field-days/fall25-maruf-field-day-22.jpg', type: 'image' },
+      { id: 23, url: '/media/gallery/field-days/fall25-maruf-field-day-23.jpg', type: 'image' },
+      { id: 24, url: '/media/gallery/field-days/fall25-maruf-field-day-24.jpg', type: 'image' },
+      { id: 25, url: '/media/gallery/field-days/fall25-maruf-field-day-25.jpg', type: 'image' },
+      { id: 26, url: '/media/gallery/field-days/fall25-maruf-field-day-26.jpg', type: 'image' },
+      { id: 27, url: '/media/gallery/field-days/fall25-maruf-field-day-27.jpg', type: 'image' },
+      { id: 28, url: '/media/gallery/field-days/fall25-maruf-field-day-28.jpg', type: 'image' },
+      { id: 29, url: '/media/gallery/field-days/fall25-maruf-field-day-29.jpg', type: 'image' },
+      { id: 30, url: '/media/gallery/field-days/fall25-maruf-field-day-30.jpg', type: 'image' },
+      { id: 31, url: '/media/gallery/field-days/fall25-maruf-field-day-31.jpg', type: 'image' },
+      { id: 32, url: '/media/gallery/field-days/fall25-maruf-field-day-32.jpg', type: 'image' },
+      { id: 33, url: '/media/gallery/field-days/fall25-maruf-field-day-33.jpg', type: 'image' },
+      { id: 34, url: '/media/gallery/field-days/fall25-maruf-field-day-34.jpg', type: 'image' },
+      { id: 35, url: '/media/gallery/field-days/fall25-maruf-field-day-35.jpg', type: 'image' },
+      { id: 36, url: '/media/gallery/field-days/fall25-maruf-field-day-36.jpg', type: 'image' },
+      { id: 37, url: '/media/gallery/field-days/fall25-maruf-field-day-37.jpg', type: 'image' },
+      { id: 38, url: '/media/gallery/field-days/fall25-maruf-field-day-38.jpg', type: 'image' },
+      { id: 39, url: '/media/gallery/field-days/fall25-maruf-field-day-39.jpg', type: 'image' },
+      { id: 40, url: '/media/gallery/field-days/fall25-maruf-field-day-40.jpg', type: 'image' },
+      { id: 41, url: '/media/gallery/field-days/fall25-maruf-field-day-41.jpg', type: 'image' },
+      { id: 42, url: '/media/gallery/field-days/fall25-maruf-field-day-42.jpg', type: 'image' },
+      { id: 43, url: '/media/gallery/field-days/fall25-maruf-field-day-43.jpg', type: 'image' },
+      { id: 44, url: '/media/gallery/field-days/fall25-maruf-field-day-44.jpg', type: 'image' },
+      { id: 45, url: '/media/gallery/field-days/fall25-maruf-field-day-45.jpg', type: 'image' },
+      { id: 46, url: '/media/gallery/field-days/fall25-maruf-field-day-46.jpg', type: 'image' },
+      { id: 47, url: '/media/gallery/field-days/fall25-maruf-field-day-47.jpg', type: 'image' },
+      { id: 48, url: '/media/gallery/field-days/fall25-maruf-field-day-48.jpg', type: 'image' },
+      { id: 49, url: '/media/gallery/field-days/field-days-1.jpeg', type: 'image' },
+      { id: 50, url: '/media/gallery/field-days/field-days-2.jpg', type: 'image' },
+      { id: 51, url: '/media/gallery/field-days/field-days-3.jpg', type: 'image' },
+      { id: 52, url: '/media/gallery/field-days/field-days-4.jpg', type: 'image' },
+      { id: 53, url: '/media/gallery/field-days/field-days-5.jpg', type: 'image' },
+      { id: 54, url: '/media/gallery/field-days/field-days-6.jpeg', type: 'image' },
+      { id: 55, url: '/media/gallery/field-days/field-days-7.jpg', type: 'image' },
+      { id: 56, url: '/media/gallery/field-days/field-days-8.jpg', type: 'image' },
+      { id: 57, url: '/media/gallery/field-days/field-days-9.jpg', type: 'image' },
+      { id: 58, url: '/media/gallery/field-days/field-days-10.jpg', type: 'image' },
+      { id: 59, url: '/media/gallery/field-days/field-days-11.jpg', type: 'image' },
     ]
   },
   {
@@ -98,20 +78,88 @@ const photoAlbums = [
     description: 'Creating smiles for those in need',
     thumbnail: '/media/gallery/events/events-thumbnail.jpg',
     photos: [
-      { id: 3, url: '/media/gallery/events/events-3.jpg', type: 'image' },
-      { id: 4, url: '/media/gallery/events/events-4.jpg', type: 'image' },
-      { id: 5, url: '/media/gallery/events/events-5.jpg', type: 'image' },
-      { id: 6, url: '/media/gallery/events/events-6.jpg', type: 'image' },
-      { id: 7, url: '/media/gallery/events/events-7.jpg', type: 'image' },
-      { id: 8, url: '/media/gallery/events/events-8.jpg', type: 'image' },
-      { id: 9, url: '/media/gallery/events/events-9.jpg', type: 'image' },
-      { id: 10, url: '/media/gallery/events/events-10.jpg', type: 'image' },
-      { id: 12, url: '/media/gallery/events/events-12.jpg', type: 'image' },
-      { id: 13, url: '/media/gallery/events/events-13.jpg', type: 'image' },
-      { id: 14, url: '/media/gallery/events/events-14.jpg', type: 'image' },
-      { id: 15, url: '/media/gallery/events/events-15.jpg', type: 'image' },
-      { id: 16, url: '/media/gallery/events/events-16.jpg', type: 'image' },
-      { id: 17, url: '/media/gallery/events/events-17.jpg', type: 'image' },
+      { id: 1, url: '/media/gallery/events/fall25-goodie-bag-event-1.jpg', type: 'image' },
+      { id: 2, url: '/media/gallery/events/fall25-goodie-bag-event-2.jpg', type: 'image' },
+      { id: 3, url: '/media/gallery/events/fall25-goodie-bag-event-3.jpg', type: 'image' },
+      { id: 4, url: '/media/gallery/events/fall25-goodie-bag-event-4.jpg', type: 'image' },
+      { id: 5, url: '/media/gallery/events/fall25-goodie-bag-event-5.jpg', type: 'image' },
+      { id: 6, url: '/media/gallery/events/fall25-goodie-bag-event-6.jpg', type: 'image' },
+      { id: 7, url: '/media/gallery/events/fall25-goodie-bag-event-7.jpg', type: 'image' },
+      { id: 8, url: '/media/gallery/events/fall25-goodie-bag-event-8.jpg', type: 'image' },
+      { id: 9, url: '/media/gallery/events/fall25-goodie-bag-event-9.jpg', type: 'image' },
+      { id: 10, url: '/media/gallery/events/fall25-goodie-bag-event-10.jpg', type: 'image' },
+      { id: 11, url: '/media/gallery/events/fall25-goodie-bag-event-11.jpg', type: 'image' },
+      { id: 12, url: '/media/gallery/events/fall25-goodie-bag-event-12.jpg', type: 'image' },
+      { id: 13, url: '/media/gallery/events/fall25-goodie-bag-event-13.jpg', type: 'image' },
+      { id: 14, url: '/media/gallery/events/fall25-goodie-bag-event-14.jpg', type: 'image' },
+      { id: 15, url: '/media/gallery/events/fall25-goodie-bag-event-15.jpg', type: 'image' },
+      { id: 16, url: '/media/gallery/events/events-3.jpg', type: 'image' },
+      { id: 17, url: '/media/gallery/events/events-4.jpg', type: 'image' },
+      { id: 18, url: '/media/gallery/events/events-5.jpg', type: 'image' },
+      { id: 19, url: '/media/gallery/events/events-6.jpg', type: 'image' },
+      { id: 20, url: '/media/gallery/events/events-7.jpg', type: 'image' },
+      { id: 21, url: '/media/gallery/events/events-8.jpg', type: 'image' },
+      { id: 22, url: '/media/gallery/events/events-9.jpg', type: 'image' },
+      { id: 23, url: '/media/gallery/events/events-10.jpg', type: 'image' },
+      { id: 24, url: '/media/gallery/events/events-12.jpg', type: 'image' },
+      { id: 25, url: '/media/gallery/events/events-13.jpg', type: 'image' },
+      { id: 26, url: '/media/gallery/events/events-14.jpg', type: 'image' },
+      { id: 27, url: '/media/gallery/events/events-15.jpg', type: 'image' },
+      { id: 28, url: '/media/gallery/events/events-16.jpg', type: 'image' },
+      { id: 29, url: '/media/gallery/events/events-17.jpg', type: 'image' }, 
+    ]
+  },
+  {
+    id: 'popups',
+    title: 'Popups for a Purpose',
+    description: 'Where every bite meets the perfect sip',
+    thumbnail: '/media/gallery/popups/popups-thumbnail.jpg', // Local image path
+    photos: [
+      { id: 1, url: '/media/gallery/popups/102725-popup-1.jpg', type: 'image' },
+      { id: 2, url: '/media/gallery/popups/102725-popup-2.jpg', type: 'image' },
+      { id: 3, url: '/media/gallery/popups/102725-popup-3.jpg', type: 'image' },
+      { id: 4, url: '/media/gallery/popups/102725-popup-4.jpg', type: 'image' },
+      { id: 5, url: '/media/gallery/popups/102725-popup-5.jpg', type: 'image' },
+      { id: 6, url: '/media/gallery/popups/102725-popup-6.jpg', type: 'image' },
+      { id: 7, url: '/media/gallery/popups/102725-popup-7.jpg', type: 'image' },
+      { id: 8, url: '/media/gallery/popups/102725-popup-8.jpg', type: 'image' },
+      { id: 9, url: '/media/gallery/popups/102725-popup-9.jpg', type: 'image' },
+      { id: 10, url: '/media/gallery/popups/102725-popup-10.jpg', type: 'image' },
+      { id: 11, url: '/media/gallery/popups/102725-popup-11.jpg', type: 'image' },
+      { id: 12, url: '/media/gallery/popups/102725-popup-12.jpg', type: 'image' },
+      { id: 13, url: '/media/gallery/popups/102725-popup-13.jpg', type: 'image' },
+      { id: 14, url: '/media/gallery/popups/102725-popup-14.jpg', type: 'image' },
+      { id: 15, url: '/media/gallery/popups/popups-1.jpg', type: 'image' },
+      { id: 16, url: '/media/gallery/popups/popups-2.jpg', type: 'image' },
+      { id: 17, url: '/media/gallery/popups/popups-3.jpeg', type: 'image' },
+      { id: 18, url: '/media/gallery/popups/popups-4.jpeg', type: 'image' },
+      { id: 19, url: '/media/gallery/popups/popups-5.jpeg', type: 'image' },
+      { id: 20, url: '/media/gallery/popups/popups-6.jpg', type: 'image' },
+      { id: 21, url: '/media/gallery/popups/popups-7.jpg', type: 'image' },
+      { id: 22, url: '/media/gallery/popups/popups-8.jpg', type: 'image' },
+      { id: 23, url: '/media/gallery/popups/popups-9.jpg', type: 'image' },
+      { id: 24, url: '/media/gallery/popups/popups-10.jpg', type: 'image' },
+      { id: 26, url: '/media/gallery/popups/popups-12.jpg', type: 'image' },
+      { id: 28, url: '/media/gallery/popups/popups-14.jpg', type: 'image' },
+      { id: 29, url: '/media/gallery/popups/popups-15.jpg', type: 'image' },
+      { id: 30, url: '/media/gallery/popups/popups-16.jpg', type: 'image' },
+      { id: 31, url: '/media/gallery/popups/popups-17.jpg', type: 'image' },
+      { id: 32, url: '/media/gallery/popups/popups-18.jpg', type: 'image' },
+      { id: 33, url: '/media/gallery/popups/popups-19.jpg', type: 'image' },
+      { id: 34, url: '/media/gallery/popups/popups-20.jpg', type: 'image' },
+      { id: 35, url: '/media/gallery/popups/popups-21.jpg', type: 'image' },
+      { id: 36, url: '/media/gallery/popups/popups-22.jpg', type: 'image' },
+      { id: 37, url: '/media/gallery/popups/popups-23.jpg', type: 'image' },
+      { id: 38, url: '/media/gallery/popups/popups-24.jpg', type: 'image' },
+      { id: 39, url: '/media/gallery/popups/popups-25.jpg', type: 'image' },
+      { id: 40, url: '/media/gallery/popups/popups-26.jpg', type: 'image' },
+      { id: 41, url: '/media/gallery/popups/popups-27.jpg', type: 'image' },
+      { id: 42, url: '/media/gallery/popups/popups-28.jpg', type: 'image' },
+      { id: 43, url: '/media/gallery/popups/popups-29.jpg', type: 'image' },
+      { id: 44, url: '/media/gallery/popups/popups-30.jpg', type: 'image' },
+      { id: 45, url: '/media/gallery/popups/popups-31.jpg', type: 'image' },
+      { id: 46, url: '/media/gallery/popups/popups-32.jpg', type: 'image' },
+      { id: 47, url: '/media/gallery/popups/popups-33.jpg', type: 'image' },
     ]
   },
   {
@@ -135,6 +183,58 @@ const photoAlbums = [
       { id: 13, url: '/media/gallery/end-of-semester/end-of-semester-13.jpg', type: 'image' },
       { id: 14, url: '/media/gallery/end-of-semester/end-of-semester-14.jpg', type: 'image' },
     ]
+  },
+  {
+    id: 'gbms',
+    title: 'General Body Meetings',
+    description: 'Fun evenings to connect and learn more about our organization',
+    thumbnail: '/media/gallery/gbms/gbms-thumbnail.jpg',
+    photos: [
+      { id: 1, url: '/media/gallery/gbms/fall25-gbm-1.jpg', type: 'image' },
+      { id: 2, url: '/media/gallery/gbms/fall25-gbm-2.jpg', type: 'image' },
+      { id: 3, url: '/media/gallery/gbms/fall25-gbm-3.jpeg', type: 'image' },
+      { id: 4, url: '/media/gallery/gbms/fall25-gbm-4.jpg', type: 'image' },
+      { id: 5, url: '/media/gallery/gbms/fall25-gbm-5.jpg', type: 'image' },
+      { id: 6, url: '/media/gallery/gbms/fall25-gbm-6.jpg', type: 'image' },
+      { id: 7, url: '/media/gallery/gbms/fall25-gbm-7.jpg', type: 'image' },
+      { id: 8, url: '/media/gallery/gbms/fall25-gbm-8.jpg', type: 'image' },
+      { id: 9, url: '/media/gallery/gbms/fall25-gbm-9.jpg', type: 'image' },
+      { id: 10, url: '/media/gallery/gbms/fall25-gbm-10.jpg', type: 'image' },
+      { id: 11, url: '/media/gallery/gbms/fall25-gbm-11.jpg', type: 'image' },
+      { id: 12, url: '/media/gallery/gbms/fall25-gbm-12.jpg', type: 'image' },
+      { id: 13, url: '/media/gallery/gbms/fall25-gbm-13.jpg', type: 'image' },
+      { id: 14, url: '/media/gallery/gbms/fall25-gbm-14.jpg', type: 'image' },
+      { id: 15, url: '/media/gallery/gbms/fall25-gbm-15.jpg', type: 'image' },
+      { id: 16, url: '/media/gallery/gbms/fall25-gbm-16.jpg', type: 'image' },
+      { id: 17, url: '/media/gallery/gbms/fall25-gbm-17.jpg', type: 'image' },
+      { id: 18, url: '/media/gallery/gbms/fall25-gbm-18.jpg', type: 'image' },
+      { id: 19, url: '/media/gallery/gbms/fall25-gbm-19.jpg', type: 'image' },
+      { id: 20, url: '/media/gallery/gbms/fall25-gbm-20.jpg', type: 'image' },
+      { id: 21, url: '/media/gallery/gbms/fall25-gbm-21.jpg', type: 'image' },
+      { id: 22, url: '/media/gallery/gbms/fall25-gbm-22.jpg', type: 'image' },
+      { id: 23, url: '/media/gallery/gbms/fall25-gbm-23.jpg', type: 'image' },
+      { id: 24, url: '/media/gallery/gbms/fall25-gbm-24.jpg', type: 'image' },
+      { id: 25, url: '/media/gallery/gbms/fall25-gbm-25.jpg', type: 'image' },
+      { id: 26, url: '/media/gallery/gbms/gbms-3.jpg', type: 'image' },
+      { id: 27, url: '/media/gallery/gbms/gbms-4.jpg', type: 'image' },
+      { id: 28, url: '/media/gallery/gbms/gbms-5.jpg', type: 'image' },
+      { id: 29, url: '/media/gallery/gbms/gbms-6.jpg', type: 'image' },
+      { id: 30, url: '/media/gallery/gbms/gbms-7.jpg', type: 'image' },
+      { id: 31, url: '/media/gallery/gbms/gbms-8.jpg', type: 'image' },
+      { id: 32, url: '/media/gallery/gbms/gbms-9.jpg', type: 'image' },
+      { id: 33, url: '/media/gallery/gbms/gbms-10.jpg', type: 'image' },
+      { id: 34, url: '/media/gallery/gbms/gbms-11.jpg', type: 'image' },
+      { id: 35, url: '/media/gallery/gbms/gbms-12.jpg', type: 'image' },
+      { id: 36, url: '/media/gallery/gbms/gbms-13.jpg', type: 'image' },
+      { id: 37, url: '/media/gallery/gbms/gbms-14.jpg', type: 'image' },
+      { id: 38, url: '/media/gallery/gbms/gbms-15.jpg', type: 'image' },
+      { id: 39, url: '/media/gallery/gbms/gbms-16.jpg', type: 'image' },
+      { id: 40, url: '/media/gallery/gbms/gbms-17.jpg', type: 'image' },
+      { id: 41, url: '/media/gallery/gbms/gbms-18.jpg', type: 'image' },
+      { id: 42, url: '/media/gallery/gbms/gbms-19.jpg', type: 'image' },
+      { id: 43, url: '/media/gallery/gbms/gbms-20.jpg', type: 'image' },
+      { id: 44, url: '/media/gallery/gbms/gbms-21.jpg', type: 'image' },
+    ]
   }
 ];
 
@@ -151,6 +251,9 @@ function PhotoCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
   const autoplayRef = useRef(null);
+  
+  // Scroll animations
+  const [galleryIntroRef, galleryIntroVisible] = useScrollAnimation();
 
   const stopAutoplay = useCallback(() => {
     if (autoplayRef.current) {
@@ -231,7 +334,9 @@ function PhotoCarousel() {
       visible.push({ ...photoAlbums[index], position: i, arrayIndex: index });
     }
     
-    return visible;
+    // Sort by arrayIndex to maintain stable DOM order for smooth transitions
+    // CSS 'order' property handles visual positioning
+    return visible.sort((a, b) => a.arrayIndex - b.arrayIndex);
   };
 
   return (
@@ -245,7 +350,7 @@ function PhotoCarousel() {
 
       <section className="gallery-section">
         <div className="gallery-content">
-          <div className="gallery-intro">
+          <div className={`gallery-intro slide-up ${galleryIntroVisible ? 'visible' : ''}`} ref={galleryIntroRef}>
             <h2>Our Photo Gallery</h2>
             <p>
               Our gallery shows the moments of joy, growth, and hope that we create at our events. 
@@ -262,7 +367,8 @@ function PhotoCarousel() {
                 {getVisibleAlbums().map((album) => (
                   <div
                     key={album.id}
-                    className={`carousel-item ${album.position === 0 ? 'center' : ''} ${album.position !== 0 ? 'faded' : ''}`}
+                    className={`carousel-item ${album.position === 0 ? 'center' : ''} ${album.position !== 0 ? 'faded' : ''} ${Math.abs(album.position) === 2 ? 'outer-item' : ''}`}
+                    style={{ order: album.position + 2 }}
                     onClick={() => {
                       if (album.position === 0) {
                         handleAlbumClick(album.id);
@@ -272,7 +378,7 @@ function PhotoCarousel() {
                     }}
                   >
                     <div className="album-thumbnail">
-                      <img src={album.thumbnail} alt={album.title} />
+                      <img src={album.thumbnail} alt={album.title} loading="lazy" />
                       <div className="album-overlay">
                         <h3>{album.title}</h3>
                         <p>{album.description}</p>
@@ -298,6 +404,10 @@ function PhotoCarousel() {
 // Vlogs Carousel Component (Video)
 function VlogsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Scroll animation for vlogs section
+  const [vlogsSectionRef] = useScrollAnimation();
+  const [vlogsIntroRef, vlogsIntroVisible] = useScrollAnimation();
 
   const next = () => {
     setCurrentIndex((p) => (p + 1) % vlogs.length);
@@ -314,7 +424,9 @@ function VlogsCarousel() {
       const index = (currentIndex + i + total) % total;
       visible.push({ ...vlogs[index], position: i, arrayIndex: index });
     }
-    return visible;
+    // Sort by arrayIndex to maintain stable DOM order for smooth transitions
+    // This ensures CSS transitions work properly in both directions
+    return visible.sort((a, b) => a.arrayIndex - b.arrayIndex);
   };
 
   // Force reflow to ensure transitions are triggered when currentIndex changes
@@ -328,23 +440,27 @@ function VlogsCarousel() {
   }, [currentIndex]);
 
   return (
-    <div className="vlogs-section">
-      <div className="gallery-intro">
+    <div className="vlogs-section" ref={vlogsSectionRef}>
+      <div className={`gallery-intro slide-up ${vlogsIntroVisible ? 'visible' : ''}`} ref={vlogsIntroRef}>
         <h2>
           In the NAYborhood Vlogs
           <a 
-            href="https://www.youtube.com/@nooralyateemutd" 
+            href="https://www.youtube.com/@nooralyateemutd/videos" 
             target="_blank" 
             rel="noopener noreferrer"
             className="youtube-channel-link"
             aria-label="Visit Noor Al Yateem YouTube Channel"
           >
             <span className="youtube-logo-placeholder">
-              <img 
-                src="/media/gallery/nay-circular-logo.png" 
-                alt="Noor Al Yateem Logo" 
+              <svg 
                 className="youtube-logo-img"
-              />
+                viewBox="0 0 28.57 20"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="YouTube"
+              >
+                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 0 14.285 0 14.285 0C14.285 0 5.35042 0 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C0 5.35042 0 10 0 10C0 10 0 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5701 5.35042 27.9727 3.12324Z" fill="#FF0000"/>
+                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"/>
+              </svg>
             </span>
           </a>
         </h2>
@@ -365,19 +481,21 @@ function VlogsCarousel() {
                 ? `https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${item.youtubeId}&controls=1&modestbranding=1&rel=0`
                 : `https://www.youtube.com/embed/${item.youtubeId}?loop=1&playlist=${item.youtubeId}&controls=1&modestbranding=1&rel=0`;
 
-              // Calculate offset from center in pixels
+              // Calculate offset from center in pixels (matching photo carousel spacing)
+              // Photo carousel: 300px base width + 30px gap = 330px between centers
+              // Reduced spacing between outer items (-2/-1 and 1/2) by 50px
               let offsetX = 0;
               
               if (item.position === -2) {
-                offsetX = -649.5;
+                offsetX = -610; // Reduced from -660 to bring closer to -1
               } else if (item.position === -1) {
-                offsetX = -364.5;
+                offsetX = -330; // 300px + 30px gap (unchanged)
               } else if (item.position === 0) {
                 offsetX = 0;
               } else if (item.position === 1) {
-                offsetX = 364.5;
+                offsetX = 330; // 300px + 30px gap (unchanged)
               } else if (item.position === 2) {
-                offsetX = 649.5;
+                offsetX = 610; // Reduced from 660 to bring closer to 1
               }
 
               // Build transform string for smooth transitions
@@ -468,7 +586,11 @@ function AlbumPage() {
 
       <div className="masonry-container">
         {album.photos.map((photo, index) => (
-          <div key={photo.id} className="masonry-item" style={{ animationDelay: `${index * 0.1}s` }}>
+          <div 
+            key={photo.id} 
+            className="masonry-item" 
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
             {photo.type === 'video' ? (
               <div className="video-container">
                 <video
@@ -488,6 +610,7 @@ function AlbumPage() {
                 src={photo.url}
                 alt={`${album.title} ${photo.id}`}
                 onClick={() => setSelectedPhotoUrl(photo.url)}
+                loading="lazy"
               />
             )}
           </div>
@@ -500,7 +623,7 @@ function AlbumPage() {
             <button className="image-modal-close" aria-label="Close" onClick={() => setSelectedPhotoUrl(null)}>
               ×
             </button>
-            <img src={selectedPhotoUrl} alt="Selected" />
+            <img src={selectedPhotoUrl} alt="Selected" loading="lazy" />
           </div>
         </div>
       )}

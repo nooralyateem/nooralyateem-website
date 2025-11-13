@@ -25,7 +25,7 @@
 }
 
 .gallery-section {
-  padding: 140px 20px; /* more space to accommodate vlogs section */
+  padding: var(--spacing-5xl) var(--spacing-lg);
   background: var(--color-bg-cream);
 }
 
@@ -62,23 +62,23 @@
 }
 
 .youtube-logo-placeholder {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: var(--color-primary);
+  width: 40px;
+  height: 28px;
+  border-radius: 4px;
+  background: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border: 2px solid var(--color-text-dark);
+  overflow: visible;
+  border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
+  margin-left: 8px;
 }
 
 .youtube-logo-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
 }
 
@@ -152,28 +152,30 @@
   opacity: 0.7;
 }
 
+/* Reduce spacing between outer items and their adjacent items */
+/* This brings the leftmost/rightmost items closer to the second items */
+.carousel-item.outer-item {
+  margin-left: -25px;
+  margin-right: -25px;
+}
+
 .album-thumbnail {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-light);
   transform-origin: center center;
-  /* Explicit transition for all animatable properties */
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-              border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Default state for non-center, non-faded items */
+  transition: all var(--transition-slow);
   transform: scale(0.9);
 }
 
 /* Center item - largest scale */
 .carousel-item.center .album-thumbnail {
   transform: scale(1.33);
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-card);
 }
 
 /* Faded items - smallest scale */
@@ -239,10 +241,15 @@
 }
 
 .carousel-btn:hover {
-  background: var(--color-primary);
-  opacity: 0.9;
+  background: var(--color-text-darker);
+  opacity: 1;
   transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 4px 12px rgba(146, 207, 221, 0.4);
+  box-shadow: var(--shadow-hover);
+}
+
+.carousel-btn:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .carousel-btn.prev {
@@ -275,8 +282,8 @@
   width: 300px;
   height: 200px;
   /* Smooth transitions for transform and opacity only (z-index is set inline and shouldn't transition) */
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-              opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center center;
   will-change: transform;
   /* Z-index is set inline via style attribute to ensure proper stacking order */
@@ -289,8 +296,9 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: center;
+  transform-origin: center center;
+  transition: all var(--transition-slow);
+  transform: scale(0.9);
 }
 
 .carousel-item.center .vlog-thumbnail {
@@ -358,7 +366,7 @@
 /* Album Page Styles */
 .album-page {
   min-height: 100vh;
-  background: var(--color-bg-white);
+  background: var(--color-bg-cream);
   opacity: 0;
   transition: opacity 0.6s ease;
 }
@@ -407,31 +415,35 @@
   opacity: 0.9;
 }
 
-/* Masonry Layout */
+/* Masonry Layout - fills gaps intelligently */
 .masonry-container {
   padding: 60px 20px;
   max-width: 1400px;
   margin: 0 auto;
-  columns: 4;
+  column-count: 4;
   column-gap: 20px;
+  column-fill: balance;
 }
 
 .masonry-item {
-  break-inside: avoid;
-  margin-bottom: 20px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-base);
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
   transform: translateY(30px);
   cursor: pointer;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
 }
 
 .masonry-item:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-card);
 }
 
 .masonry-item img {
@@ -439,13 +451,18 @@
   height: auto;
   display: block;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-base);
+}
+
+.masonry-item:hover img {
+  transform: scale(1.05);
 }
 
 /* Video Styles */
 .video-container {
   position: relative;
   width: 100%;
+  display: block;
 }
 
 .video-container video {
@@ -483,14 +500,20 @@
   justify-content: center;
   color: var(--color-text-white);
   font-size: 1.5rem;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-light);
 }
 
 .play-button:hover {
-  background: var(--color-primary);
-  opacity: 0.9;
+  background: var(--color-text-darker);
+  opacity: 1;
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(146, 207, 221, 0.4);
+  box-shadow: var(--shadow-hover);
+}
+
+.play-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* Animations */
@@ -572,7 +595,7 @@
 /* Responsive Styles */
 @media (max-width: 1200px) {
   .masonry-container {
-    columns: 3;
+    column-count: 3;
   }
 }
 
@@ -617,7 +640,7 @@
   }
 
   .masonry-container {
-    columns: 2;
+    column-count: 2;
     padding: 40px 15px;
   }
 
@@ -656,7 +679,7 @@
   }
 
   .masonry-container {
-    columns: 1;
+    column-count: 1;
     padding: 30px 10px;
   }
 

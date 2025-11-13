@@ -253,6 +253,12 @@
   gap: 20px;
 }
 
+.selected-date-events .event-card {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
 @media (max-width: 1024px) {
   .calendar-today-wrapper {
     grid-template-columns: 1fr;
@@ -770,4 +776,3 @@
     font-size: 1.6rem;
   }
 }
-

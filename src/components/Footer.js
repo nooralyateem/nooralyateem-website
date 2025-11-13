@@ -47,16 +47,15 @@ function Footer() {
             <div className="footer-nav-column">
               <h4 className="footer-nav-header">ABOUT US</h4>
               <ul className="footer-nav-list">
-                <li><Link to="/about">Our story</Link></li>
-                <li><a href="#partners">Our partners</a></li>
-                <li><a href="#team">Meet our team</a></li>
+                <li><a href="/about#mission">Our Mission</a></li>
+                <li><a href="/about#team">Meet Our Team</a></li>
               </ul>
             </div>
 
             <div className="footer-nav-column">
               <h4 className="footer-nav-header">LEARN MORE</h4>
               <ul className="footer-nav-list">
-                <li><Link to="/gallery">News & Media</Link></li>
+                <li><a href="/contact#get-in-touch">Get in Touch</a></li>
                 <li><a href="/contact#faq">FAQ</a></li>
               </ul>
             </div>
