@@ -759,7 +759,7 @@
 
 @media (max-width: 768px) {
   .upcoming-event-section {
-    padding: var(--spacing-xl) 0 60px 0;
+    padding: var(--spacing-xl) 0 var(--spacing-4xl) 0;
     overflow-x: hidden;
   }
 
@@ -827,7 +827,7 @@
 
   .view-all-events-wrapper {
     margin-top: var(--spacing-3xl);
-    margin-bottom: -45px;
+    margin-bottom: 0;
   }
 
   .view-all-events-btn {
@@ -837,6 +837,10 @@
 }
 
 @media (max-width: 480px) {
+  .upcoming-event-section {
+    padding: var(--spacing-xl) 0 var(--spacing-4xl) 0;
+  }
+
   .upcoming-events-header {
     gap: var(--spacing-sm);
     padding: 0 var(--spacing-sm);
@@ -889,7 +893,8 @@
   }
 
   .view-all-events-wrapper {
-    margin-bottom: -30px;
+    margin-top: var(--spacing-3xl);
+    margin-bottom: 0;
   }
 
   .view-all-events-btn {
@@ -930,8 +935,8 @@
 /* Mobile Responsive - Bow Tie Divider */
 @media (max-width: 768px) {
   .bowtie-divider {
-    padding: 0 0 var(--spacing-xs) 0;
-    margin-top: -70px;
+    padding: var(--spacing-lg) 0 var(--spacing-xs) 0;
+    margin-top: 0;
   }
 
   .bowtie-divider-container {
@@ -946,8 +951,8 @@
 
 @media (max-width: 480px) {
   .bowtie-divider {
-    padding: 0 0 var(--spacing-xs) 0;
-    margin-top: -40px;
+    padding: var(--spacing-lg) 0 var(--spacing-xs) 0;
+    margin-top: 0;
   }
 
   .bowtie-divider-container {
@@ -963,7 +968,7 @@
 @media (max-width: 768px) {
   .event-recap {
     padding: var(--spacing-xs) 0 var(--spacing-4xl) 0;
-    margin-top: -80px;
+    margin-top: 0;
   }
 
   .event-recap-container {
@@ -1000,7 +1005,7 @@
 @media (max-width: 480px) {
   .event-recap {
     padding: var(--spacing-xs) 0 var(--spacing-3xl) 0;
-    margin-top: -50px;
+    margin-top: 0;
   }
 
   .event-recap-container {
