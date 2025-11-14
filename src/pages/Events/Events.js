@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
 import './Events.css';
 
@@ -30,10 +31,24 @@ function Events() {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState('All');
+  const location = useLocation();
   
   // Scroll animations
   const [calendarSectionRef, calendarVisible] = useScrollAnimation();
   const [upcomingEventsRef, upcomingEventsVisible] = useScrollAnimation();
+
+  // Scroll to calendar section if hash is present in URL
+  useEffect(() => {
+    if (location.hash === '#calendar') {
+      // Small delay to ensure the page has rendered
+      setTimeout(() => {
+        const calendarElement = document.getElementById('calendar');
+        if (calendarElement) {
+          calendarElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [location.hash]);
 
   const eventsData = [
     {
@@ -289,7 +304,7 @@ function Events() {
         </div>
       </section>
 
-      <section className="events-section">
+      <section className="events-section" id="calendar">
         <div className="events-content">
           <div className={`section-header slide-up ${calendarVisible ? 'visible' : ''}`} ref={calendarSectionRef}>
             <h2>Interactive Calendar</h2>

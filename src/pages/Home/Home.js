@@ -5,37 +5,22 @@ import useCountUp from '../../hooks/useCountUp';
 import './Home.css';
 
 function Home() {
-  // Upcoming events data - get first 3 upcoming events
+  // Upcoming events data - get first 3 upcoming events (images only)
   const upcomingEvents = [
     {
       id: 1,
-      title: "Field Day - Collab with Ihsan",
-      date: "2025-11-09",
-      time: "12:00 PM – 5:00 PM",
-      location: "Maruf Dallas",
-      description: "A fun field day with activities and community collaboration.",
-      fullDescription: "Join us for Field Day in collaboration with Ihsan. Enjoy games, sports, and community bonding throughout the afternoon.",
-      image: "/media/gallery/field-days/Mar'uf flyer.png"
+      title: "Quran Night - Collab with MSA",
+      image: "/quran-night.jpg"
     },
     {
       id: 2,
-      title: "Popups 4 A Purpose",
-      date: "2025-11-10",
-      time: "2:00 PM – 4:00 PM",
-      location: "The Plinth",
-      description: "Featuring vendors, including Hot Chocolate by NaY.",
-      fullDescription: "Support local vendors and community initiatives at Popups 4 A Purpose. Vendors include Hot Chocolate by NaY.",
-      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
+      title: "Self Care Kit Making",
+      image: "/selfcare-kit.jpg"
     },
     {
       id: 3,
-      title: "Quran Night - Collab with MSA",
-      date: "2025-11-14",
-      time: "5:00 PM – 10:00 PM",
-      location: "SSA Auditorium",
-      description: "An evening of Quran recitation and reflection with MSA.",
-      fullDescription: "Experience a special Quran Night in collaboration with MSA, featuring recitations, reflections, and community gathering.",
-      image: "/media/gallery/field-days/field-days-thumbnail.jpeg"
+      title: "Bye Bye BBQ",
+      image: "/bye-bye-bbq.jpg"
     }
   ];
 
@@ -137,7 +122,7 @@ function Home() {
               {getVisibleEvents().map((event) => (
                 <div
                   key={event.id}
-                  className={`event-card-wrapper ${event.position === 0 ? 'center' : ''} ${event.position !== 0 ? 'faded' : ''}`}
+                  className={`event-image-card ${event.position === 0 ? 'center' : ''} ${event.position !== 0 ? 'faded' : ''}`}
                   onClick={() => {
                     if (event.position !== 0) {
                       setCurrentEventIndex(event.arrayIndex);
@@ -145,33 +130,13 @@ function Home() {
                   }}
                 >
                   {event.image && (
-                    <div className="event-image-wrapper">
-                      <img 
-                        src={event.image} 
-                        alt={event.title}
-                        className="event-image"
-                        loading="lazy"
-                      />
-                    </div>
+                    <img 
+                      src={event.image} 
+                      alt={event.title}
+                      className="event-image-only"
+                      loading="lazy"
+                    />
                   )}
-                  <div className="event-content-wrapper">
-                    <div className="event-date-badge">{event.date}</div>
-                    <h3 className="event-title">{event.title}</h3>
-                    <div className="event-details">
-                      <div className="event-detail-item">
-                        <span className="event-icon">⏰</span>
-                        <span className="event-detail-text">{event.time}</span>
-                      </div>
-                      <div className="event-detail-item">
-                        <span className="event-icon">📍</span>
-                        <span className="event-detail-text">{event.location}</span>
-                      </div>
-                    </div>
-                    <p className="event-description">{event.description}</p>
-                    <Link to="/events" className="event-details-btn">
-                      View Details & RSVP
-                    </Link>
-                  </div>
                 </div>
               ))}
             </div>
@@ -183,6 +148,12 @@ function Home() {
             >
               ›
             </button>
+          </div>
+          
+          <div className="view-all-events-wrapper">
+            <Link to="/events#calendar" className="view-all-events-btn">
+              View All Events
+            </Link>
           </div>
         </div>
       </section>
