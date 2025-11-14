@@ -302,10 +302,10 @@ function Home() {
 
       {/* Bow Tie Divider */}
       <div className="bowtie-divider">
-        <div className="bowtie-divider-line"></div>
-        <img src="/bowtie-element.png" alt="" className="bowtie-divider-bow" />
-        <div className="bowtie-divider-line"></div>
-      </div>
+        <div className="bowtie-divider-container">
+          <img src="/bowtie-element.png" alt="" className="bowtie-divider-bow" />
+        </div>
+          </div>
 
       {/* Event Recap Section */}
       <section id="event-recap" className="event-recap" ref={eventRecapSectionRef}>

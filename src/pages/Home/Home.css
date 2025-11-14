@@ -432,7 +432,10 @@
   justify-content: center;
   align-items: center;
   margin-top: var(--spacing-4xl);
+  margin-bottom: -60px;
   padding: 0 var(--spacing-lg);
+  position: relative;
+  z-index: 5;
 }
 
 .view-all-events-btn {
@@ -468,41 +471,50 @@
 /* Bow Tie Divider */
 .bowtie-divider {
   background: var(--color-bg-cream);
-  padding: var(--spacing-2xl) 0;
+  padding: 0 0 var(--spacing-xs) 0;
+  margin-top: -90px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--spacing-md);
   position: relative;
+  z-index: 1;
+}
+
+.bowtie-divider-container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 var(--spacing-lg);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .bowtie-divider-line {
-  flex: 1;
-  max-width: 500px;
-  height: 2px;
-  background: var(--color-primary);
-  opacity: 0.6;
+  display: none;
 }
 
 .bowtie-divider-bow {
-  width: 150px;
+  width: 100%;
   height: auto;
-  max-height: 120px;
+  max-height: 600px;
   object-fit: contain;
   opacity: 0.8;
-  flex-shrink: 0;
+  margin: -50px 0;
 }
 
 /* Event Recap Section */
 .event-recap {
   background: var(--color-bg-cream);
-  padding: var(--spacing-5xl) 0 calc(var(--spacing-5xl) * 2.5) 0;
+  padding: var(--spacing-xs) 0 var(--spacing-5xl) 0;
   width: 100%;
   position: relative;
   overflow: visible;
   z-index: 1;
-  margin-top: 0;
+  margin-top: -90px;
 }
 
 .event-recap-container {
@@ -815,6 +827,7 @@
 
   .view-all-events-wrapper {
     margin-top: var(--spacing-3xl);
+    margin-bottom: -45px;
   }
 
   .view-all-events-btn {
@@ -875,6 +888,10 @@
     right: 2px;
   }
 
+  .view-all-events-wrapper {
+    margin-bottom: -30px;
+  }
+
   .view-all-events-btn {
     padding: 12px 28px;
     font-size: 1rem;
@@ -913,40 +930,40 @@
 /* Mobile Responsive - Bow Tie Divider */
 @media (max-width: 768px) {
   .bowtie-divider {
-    padding: var(--spacing-xl) 0;
-    gap: var(--spacing-sm);
+    padding: 0 0 var(--spacing-xs) 0;
+    margin-top: -70px;
   }
 
-  .bowtie-divider-line {
-    max-width: 200px;
+  .bowtie-divider-container {
+    padding: 0 var(--spacing-xl);
   }
 
   .bowtie-divider-bow {
-    width: 100px;
-    max-height: 80px;
+    max-height: 400px;
+    margin: -30px 0;
   }
 }
 
 @media (max-width: 480px) {
   .bowtie-divider {
-    padding: var(--spacing-lg) 0;
-    gap: var(--spacing-xs);
+    padding: 0 0 var(--spacing-xs) 0;
+    margin-top: -40px;
   }
 
-  .bowtie-divider-line {
-    max-width: 150px;
+  .bowtie-divider-container {
+    padding: 0 var(--spacing-lg);
   }
 
   .bowtie-divider-bow {
-    width: 80px;
-    max-height: 65px;
+    max-height: 320px;
+    margin: -20px 0;
   }
 }
 
 @media (max-width: 768px) {
   .event-recap {
-    padding: var(--spacing-4xl) 0;
-    margin-top: 0;
+    padding: var(--spacing-xs) 0 var(--spacing-4xl) 0;
+    margin-top: -80px;
   }
 
   .event-recap-container {
@@ -982,8 +999,8 @@
 
 @media (max-width: 480px) {
   .event-recap {
-    padding: var(--spacing-3xl) 0;
-    margin-top: 0;
+    padding: var(--spacing-xs) 0 var(--spacing-3xl) 0;
+    margin-top: -50px;
   }
 
   .event-recap-container {

@@ -10,8 +10,9 @@
 /* Upper Section - White Background */
 .footer-upper {
   background: var(--color-bg-cream);
-  padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
   width: 100%;
+  margin-top: 0;
 }
 
 .footer-upper-content {
