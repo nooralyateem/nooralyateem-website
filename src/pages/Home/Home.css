@@ -726,34 +726,44 @@
 @media (max-width: 768px) {
   .upcoming-event-section {
     padding: var(--spacing-xl) 0 60px 0;
+    overflow-x: hidden;
   }
 
   .upcoming-events-header {
     margin-bottom: 0;
     gap: var(--spacing-md);
+    padding: 0 var(--spacing-md);
   }
 
   .upcoming-event-section .section-title {
     font-size: 2.5rem;
     text-align: center;
+    white-space: normal;
   }
 
   .bowtie-element {
-    height: 300px;
+    height: 200px;
+    display: none; /* Hide on mobile for better space usage */
+  }
+
+  .upcoming-event-container {
+    padding: 0 var(--spacing-md);
+    overflow-x: hidden;
   }
 
   .event-carousel-wrapper {
-    padding: 0 20px;
+    padding: 0 60px;
     gap: 10px;
+    overflow: visible;
   }
 
   .event-carousel-track {
-    gap: 30px;
+    gap: 20px;
   }
 
   .event-image-card {
-    max-width: 95%;
-    width: 95%;
+    max-width: 90%;
+    width: 280px;
     height: auto;
   }
 
@@ -762,22 +772,22 @@
   }
 
   .event-image-card.faded {
-    transform: scale(0.75);
+    transform: scale(0.7);
     opacity: 0.3;
   }
 
   .carousel-arrow {
-    width: 60px;
-    height: 60px;
-    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
   }
 
   .carousel-arrow-left {
-    left: -25px;
+    left: 5px;
   }
 
   .carousel-arrow-right {
-    right: -25px;
+    right: 5px;
   }
 
   .view-all-events-wrapper {
@@ -793,18 +803,52 @@
 @media (max-width: 480px) {
   .upcoming-events-header {
     gap: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
   }
 
   .upcoming-event-section .section-title {
-    font-size: 2.25rem;
+    font-size: 2rem;
+    white-space: normal;
   }
 
   .bowtie-element {
-    height: 250px;
+    display: none;
+  }
+
+  .upcoming-event-container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .event-carousel-wrapper {
+    padding: 0 50px;
   }
 
   .event-image-card {
+    width: 240px;
     height: auto;
+  }
+
+  .event-image-card.center {
+    transform: scale(1.05) translateZ(20px);
+  }
+
+  .event-image-card.faded {
+    transform: scale(0.65);
+    opacity: 0.25;
+  }
+
+  .carousel-arrow {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+
+  .carousel-arrow-left {
+    left: 2px;
+  }
+
+  .carousel-arrow-right {
+    right: 2px;
   }
 
   .view-all-events-btn {
