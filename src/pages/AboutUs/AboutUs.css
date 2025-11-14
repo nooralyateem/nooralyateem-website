@@ -556,8 +556,21 @@
   }
 
   /* Adjust image positioning for tablet - scale down pixel values proportionally */
-  .lead-image-container img[style*="objectPosition"] {
-    object-position: center center !important;
+  /* Container is 150px on tablet vs 200px on desktop = 0.75 ratio */
+  .lead-image-president {
+    object-position: -31px 0px !important;
+  }
+  .lead-image-external-vp {
+    object-position: -30px 6px !important;
+  }
+  .lead-image-treasurer {
+    object-position: -32px 0px !important;
+  }
+  .lead-image-marketing-ahmed {
+    object-position: 3px -30px !important;
+  }
+  .lead-image-external-outreach {
+    object-position: 0px -21px !important;
   }
 }
 
@@ -589,9 +602,22 @@
     line-height: 1.4;
   }
 
-  /* Center images on mobile - override inline object-position styles */
-  .lead-image-container img[style*="objectPosition"] {
-    object-position: center center !important;
+  /* Adjust image positioning for mobile - scale down pixel values proportionally */
+  /* Container is 120px on mobile vs 200px on desktop = 0.6 ratio */
+  .lead-image-president {
+    object-position: -25px 0px !important;
+  }
+  .lead-image-external-vp {
+    object-position: -24px 5px !important;
+  }
+  .lead-image-treasurer {
+    object-position: -26px 0px !important;
+  }
+  .lead-image-marketing-ahmed {
+    object-position: 2px -24px !important;
+  }
+  .lead-image-external-outreach {
+    object-position: 0px -17px !important;
   }
 
   .about-hero-content h1 {
