@@ -300,16 +300,21 @@ function Home() {
         </div>
       </section>
 
+      {/* Bow Tie Divider */}
+      <div className="bowtie-divider">
+        <div className="bowtie-divider-line"></div>
+        <img src="/bowtie-element.png" alt="" className="bowtie-divider-bow" />
+        <div className="bowtie-divider-line"></div>
+      </div>
+
       {/* Event Recap Section */}
       <section id="event-recap" className="event-recap" ref={eventRecapSectionRef}>
-        <img src="/event-recap-element.png" alt="" className="event-recap-element event-recap-element-top-left" />
-        <img src="/event-recap-element.png" alt="" className="event-recap-element event-recap-element-bottom-right" />
         <div className="event-recap-container">
           <div className={`event-recap-content slide-up ${eventRecapContentVisible ? 'visible' : ''}`} ref={eventRecapContentRef}>
             <div className="event-recap-text">
               <h2 className="event-recap-title">
                 {eventRecap.title}
-            </h2>
+              </h2>
               <p className="event-recap-description">
                 {eventRecap.description}
               </p>
@@ -334,6 +339,7 @@ function Home() {
                     alt={`Event recap ${currentRecapImageIndex + 1}`}
                     className="event-recap-image"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
             </div>

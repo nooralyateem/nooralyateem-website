@@ -481,20 +481,20 @@ function VlogsCarousel() {
                 : `https://www.youtube.com/embed/${item.youtubeId}?loop=1&playlist=${item.youtubeId}&controls=1&modestbranding=1&rel=0`;
 
               // Calculate offset from center in pixels (matching photo carousel spacing)
-              // Photo carousel: 300px base width + 30px gap = 330px between centers
+              // Photo carousel: 380px base width + 30px gap = 410px between centers
               // Reduced spacing between outer items (-2/-1 and 1/2) by 50px
               let offsetX = 0;
               
               if (item.position === -2) {
-                offsetX = -610; // Reduced from -660 to bring closer to -1
+                offsetX = -770; // Adjusted for new width
               } else if (item.position === -1) {
-                offsetX = -330; // 300px + 30px gap (unchanged)
+                offsetX = -410; // 380px + 30px gap
               } else if (item.position === 0) {
                 offsetX = 0;
               } else if (item.position === 1) {
-                offsetX = 330; // 300px + 30px gap (unchanged)
+                offsetX = 410; // 380px + 30px gap
               } else if (item.position === 2) {
-                offsetX = 610; // Reduced from 660 to bring closer to 1
+                offsetX = 770; // Adjusted for new width
               }
 
               // Build transform string for smooth transitions

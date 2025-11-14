@@ -27,7 +27,7 @@ function AboutUs() {
           <div id="mission" ref={missionRef} className={`slide-up ${missionVisible ? 'visible' : ''}`}>
             <h2>Mission</h2>
             <p>
-              Inspired by the values of compassion and charity in Islam, We're committed to uplifting orphaned and refugee children by offering love, support, and a nurturing space to help them thrive. Our organization strives to equip these children with the tools and opportunities needed to spread kindness, empower resilience, and inspire a spirit of giving throughout the community.
+              Inspired by the values of compassion and charity in Islam, we're committed to uplifting orphaned and refugee children by offering love, support, and a nurturing space to help them thrive. Our organization strives to equip these children with the tools and opportunities needed to spread kindness, empower resilience, and inspire a spirit of giving throughout the community.
             </p>
           </div>
 
