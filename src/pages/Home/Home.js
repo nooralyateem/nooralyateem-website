@@ -53,7 +53,6 @@ function Home() {
   const [heroSubtitleRef, heroSubtitleVisible] = useScrollAnimation();
   const [heroButtonsRef, heroButtonsVisible] = useScrollAnimation();
   const [heroLearnMoreRef, heroLearnMoreVisible] = useScrollAnimation();
-  const [eventsSectionRef, eventsVisible] = useScrollAnimation();
   const [eventRecapSectionRef] = useScrollAnimation();
   const [eventRecapContentRef, eventRecapContentVisible] = useScrollAnimation();
 
@@ -225,10 +224,10 @@ function Home() {
       </section>
 
       {/* Upcoming Event Section */}
-      <section id="upcoming-event" className="upcoming-event-section" ref={eventsSectionRef}>
+      <section id="upcoming-event" className="upcoming-event-section">
         <div className="upcoming-events-header">
           <img src="/bowtie-element.png" alt="" className="bowtie-element bowtie-left" />
-          <h2 className={`section-title slide-up ${eventsVisible ? 'visible' : ''}`}>Upcoming Events</h2>
+          <h2 className="section-title">Upcoming Events</h2>
           <img src="/bowtie-element.png" alt="" className="bowtie-element bowtie-right" />
         </div>
         
