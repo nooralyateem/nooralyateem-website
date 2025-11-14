@@ -100,7 +100,7 @@ function Events() {
     },
     {
       id: 5,
-      title: "Bonfire BBQ",
+      title: "Bye Bye BBQ",
       date: "2025-12-04",
       time: "5:00 PM - 7:00 PM",
       location: "Helix Hall or bonfire pit",
