@@ -255,7 +255,7 @@ function ContactVendors() {
               onKeyDown={handleFaqKeyDown(0)}
             >
               <div className="faq-question">
-                <h3>HOW DO I BECOME AN APPROVED VENDOR?</h3>
+                <h3>How do I become an approved vendor?</h3>
                 <span className={`faq-arrow ${openFaq === 0 ? 'open' : ''}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
                     <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -339,7 +339,7 @@ function ContactVendors() {
               onKeyDown={handleFaqKeyDown(4)}
             >
               <div className="faq-question">
-                <h3>WHO CAN I CONTACT FOR EVENT LOGISTICS?</h3>
+                <h3>WHO CAN I CONTACT FOR outreach?</h3>
                 <span className={`faq-arrow ${openFaq === 4 ? 'open' : ''}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
                     <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
