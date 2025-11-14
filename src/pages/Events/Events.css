@@ -733,9 +733,12 @@
     max-width: 400px;
     flex-direction: column;
     gap: 25px;
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
     z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 10px;
   }
 
   .month-grid {
@@ -929,23 +932,41 @@
   }
 
   .month-year-picker {
-    width: 95%;
+    width: calc(100% - 20px);
     max-width: 350px;
-    padding: 20px;
+    padding: 20px 15px;
+    margin: 10px;
+    max-height: 90vh;
+    box-sizing: border-box;
+  }
+
+  .picker-section {
+    padding: 0;
+  }
+
+  .picker-section h4 {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    padding: 0 5px;
   }
 
   .month-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
 
   .month-option {
-    font-size: 0.8rem;
-    padding: 5px 6px;
+    font-size: 0.75rem;
+    padding: 6px 4px;
+  }
+
+  .year-list {
+    max-height: 120px;
   }
 
   .year-option {
-    font-size: 0.8rem;
-    padding: 5px 6px;
+    font-size: 0.75rem;
+    padding: 6px 4px;
   }
 
   .selected-date-events {

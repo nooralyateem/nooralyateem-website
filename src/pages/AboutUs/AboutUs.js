@@ -27,7 +27,7 @@ function AboutUs() {
           <div id="mission" ref={missionRef} className={`slide-up ${missionVisible ? 'visible' : ''}`}>
             <h2>Mission</h2>
             <p>
-              Inspired by the values of compassion and charity in Islam, We're committed to uplifting orphaned and refugee children by offering love, support, and a nurturing space to help them thrive. Our organization strives to equip these children with the tools and opportunities needed to spread kindness, empower resilience, and inspire a spirit of giving throughout the community.
+              Inspired by the values of compassion and charity in Islam, we're committed to uplifting orphaned and refugee children by offering love, support, and a nurturing space to help them thrive. Our organization strives to equip these children with the tools and opportunities needed to spread kindness, empower resilience, and inspire a spirit of giving throughout the community.
             </p>
           </div>
 
@@ -50,7 +50,7 @@ function AboutUs() {
                 <img 
                   src="/media/leads/president.JPG" 
                   alt="Taha - President" 
-                  className="lead-image" 
+                  className="lead-image lead-image-president" 
                   loading="lazy"
                   style={{ objectPosition: '-41px 0px', transform: 'scale(1.0)' }}
                 />
@@ -67,7 +67,7 @@ function AboutUs() {
                 <img 
                   src="/media/leads/ExternalVP.JPG" 
                   alt="Saad - External Vice President" 
-                  className="lead-image" 
+                  className="lead-image lead-image-external-vp" 
                   loading="lazy"
                   style={{ objectPosition: '-40px 8px', transform: 'scale(1.1)' }}
                 />
@@ -106,7 +106,7 @@ function AboutUs() {
                 <img 
                   src="/media/leads/Treasurer.jpeg" 
                   alt="Labeebah Altaf - Treasurer" 
-                  className="lead-image" 
+                  className="lead-image lead-image-treasurer" 
                   loading="lazy"
                   style={{ objectPosition: '-43px 0px', transform: 'scale(1.0)' }}
                 />
@@ -134,7 +134,7 @@ function AboutUs() {
                 <img 
                   src="/media/leads/ExternalOutreachLead.JPG" 
                   alt="Sameeha - External Outreach Lead" 
-                  className="lead-image"
+                  className="lead-image lead-image-external-outreach"
                   loading="lazy"
                   style={{ objectPosition: '0px -28px', transform: 'scale(1.0)' }}
                   onError={(e) => {
@@ -188,7 +188,7 @@ function AboutUs() {
                 <img 
                   src="/media/leads/Marketing.JPG" 
                   alt="Ahmed - Marketing Lead" 
-                  className="lead-image" 
+                  className="lead-image lead-image-marketing-ahmed" 
                   loading="lazy"
                   style={{ objectPosition: '4px -40px', transform: 'scale(1.05)' }}
                 />
