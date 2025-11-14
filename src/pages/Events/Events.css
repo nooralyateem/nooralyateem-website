@@ -191,6 +191,12 @@
   align-items: start;
 }
 
+@media (max-width: 1024px) {
+  .calendar-today-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Calendar Styles */
 .calendar-container {
   background: white;
@@ -664,7 +670,13 @@
   }
 
   .events-section {
-    padding: 60px 20px;
+    padding: 60px 15px;
+    overflow-x: hidden;
+  }
+
+  .events-content {
+    max-width: 100%;
+    padding: 0;
   }
 
   .section-header h2 {
@@ -672,53 +684,44 @@
   }
 
   .calendar-events-wrapper {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 30px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .calendar-today-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
   }
 
   .calendar-container {
     position: relative;
     top: 0;
-  }
-
-  .events-sidebar {
-    max-height: none;
-    overflow-y: visible;
-  }
-
-  .event-filters {
-    gap: 10px;
-  }
-
-  .filter-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-
-  .events-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .selected-date-events .events-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .calendar-container {
-    padding: 20px;
+    padding: 15px;
     margin-bottom: 0;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .calendar-header {
-    margin-bottom: 20px;
-    flex-direction: column;
-    gap: 15px;
+    margin-bottom: 15px;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .calendar-month-year-btn {
-    min-width: 150px;
-    font-size: 1rem;
+    min-width: 140px;
+    font-size: 0.95rem;
+    padding: 10px 16px;
   }
 
   .month-year-picker {
@@ -727,14 +730,23 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 450px;
+    max-width: 400px;
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
   }
 
   .month-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
+    gap: 8px;
+  }
+
+  .month-option {
+    padding: 6px 8px;
+    font-size: 0.85rem;
   }
 
   .year-list {
@@ -742,27 +754,123 @@
     max-height: 150px;
   }
 
+  .year-option {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+
   .calendar-month-year {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .calendar-nav-btn {
     width: 35px;
     height: 35px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .calendar-grid {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .calendar-weekdays {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .weekday {
+    padding: 10px 2px;
+    font-size: 0.8rem;
+  }
+
+  .calendar-days {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    width: 100%;
   }
 
   .calendar-day {
-    min-height: 50px;
+    min-height: 45px;
+    aspect-ratio: 1;
+    padding: 2px;
   }
 
   .day-number {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .event-indicator {
+    width: 6px;
+    height: 6px;
+  }
+
+  .calendar-side-panel {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .events-today-section,
+  .selected-day-section {
+    width: 100%;
+  }
+
+  .selected-date-events {
+    padding: 15px;
+  }
+
+  .selected-date-events h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .events-sidebar {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .event-filters {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .event-card {
+    padding: 20px;
+  }
+
+  .event-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .selected-date-events .events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .upcoming-events-section {
+    width: 100%;
+  }
+
+  .upcoming-events-section h2 {
+    font-size: 1.8rem;
   }
 
   .modal-content {
     margin: 10px;
     max-height: 95vh;
+    width: calc(100% - 20px);
   }
 
   .event-modal-header,
@@ -774,5 +882,89 @@
 
   .event-modal-header h2 {
     font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .events-section {
+    padding: 50px 10px;
+  }
+
+  .calendar-container {
+    padding: 12px;
+  }
+
+  .calendar-header {
+    gap: 8px;
+  }
+
+  .calendar-month-year-btn {
+    min-width: 120px;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .calendar-nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .weekday {
+    padding: 8px 1px;
+    font-size: 0.75rem;
+  }
+
+  .calendar-day {
+    min-height: 40px;
+  }
+
+  .day-number {
+    font-size: 0.8rem;
+  }
+
+  .event-indicator {
+    width: 5px;
+    height: 5px;
+  }
+
+  .month-year-picker {
+    width: 95%;
+    max-width: 350px;
+    padding: 20px;
+  }
+
+  .month-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .month-option {
+    font-size: 0.8rem;
+    padding: 5px 6px;
+  }
+
+  .year-option {
+    font-size: 0.8rem;
+    padding: 5px 6px;
+  }
+
+  .selected-date-events {
+    padding: 12px;
+  }
+
+  .selected-date-events h3 {
+    font-size: 1rem;
+  }
+
+  .event-card {
+    padding: 15px;
+  }
+
+  .event-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .event-description {
+    font-size: 1rem;
   }
 }

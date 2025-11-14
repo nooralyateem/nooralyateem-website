@@ -181,7 +181,7 @@ function Home() {
       {/* Hero Section */}
       <section id="home" className="hero">
         <video className="hero-video" autoPlay loop muted playsInline>
-          <source src="/NaY Field Day.mp4" type="video/mp4" />
+          <source src="/NaY%20Field%20Day.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="hero-overlay"></div>

@@ -206,6 +206,8 @@
   transition: transform 0.3s ease;
   border-radius: 0 0 20px 20px;
   overflow: visible;
+  max-height: 100%;
+  box-sizing: border-box;
 }
 
 .carousel-item:hover .album-overlay,
@@ -216,11 +218,16 @@
 .album-overlay h3 {
   font-size: 1.3rem;
   margin-bottom: 5px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .album-overlay p {
   font-size: 0.9rem;
   opacity: 0.9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
 }
 
 .carousel-btn {
@@ -621,22 +628,57 @@
   }
 
   .carousel-wrapper {
-    padding: 0 40px;
+    padding: 0 50px;
   }
 
   .carousel-track {
-    gap: 15px;
+    gap: 10px;
   }
 
   .carousel-item {
-    width: 200px;
-    height: 140px;
+    width: 180px;
+    height: 120px;
+  }
+
+  .carousel-item.center .album-thumbnail {
+    transform: scale(1.2);
+  }
+
+  .carousel-item.faded .album-thumbnail {
+    transform: scale(0.7);
+  }
+
+  .album-overlay {
+    padding: 12px;
+  }
+
+  /* Always show overlay on mobile for center item */
+  .carousel-item.center .album-overlay {
+    transform: translateY(0);
+  }
+
+  .album-overlay h3 {
+    font-size: 1rem;
+    margin-bottom: 3px;
+  }
+
+  .album-overlay p {
+    font-size: 0.75rem;
+    line-height: 1.3;
   }
 
   .carousel-btn {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
+  }
+
+  .carousel-btn.prev {
+    left: 5px;
+  }
+
+  .carousel-btn.next {
+    right: 5px;
   }
 
   .masonry-container {
@@ -666,16 +708,74 @@
   .gallery-cta h3 {
     font-size: 1.6rem;
   }
+
+  .vlog-carousel-track {
+    height: 200px;
+  }
+
+  .vlog-carousel-item {
+    width: 180px;
+    height: 120px;
+  }
+
+  .carousel-item.center .vlog-thumbnail {
+    transform: scale(1.2);
+  }
+
+  .carousel-item.faded .vlog-thumbnail {
+    transform: scale(0.7);
+  }
 }
 
 @media (max-width: 480px) {
   .carousel-wrapper {
-    padding: 0 30px;
+    padding: 0 45px;
   }
 
   .carousel-item {
-    width: 150px;
-    height: 100px;
+    width: 140px;
+    height: 90px;
+  }
+
+  .carousel-item.center .album-thumbnail {
+    transform: scale(1.15);
+  }
+
+  .carousel-item.faded .album-thumbnail {
+    transform: scale(0.65);
+  }
+
+  .album-overlay {
+    padding: 8px;
+  }
+
+  /* Always show overlay on mobile for center item */
+  .carousel-item.center .album-overlay {
+    transform: translateY(0);
+  }
+
+  .album-overlay h3 {
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+  }
+
+  .album-overlay p {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .carousel-btn.prev {
+    left: 2px;
+  }
+
+  .carousel-btn.next {
+    right: 2px;
   }
 
   .masonry-container {
@@ -689,6 +789,23 @@
 
   .album-header p {
     font-size: 1rem;
+  }
+
+  .vlog-carousel-track {
+    height: 180px;
+  }
+
+  .vlog-carousel-item {
+    width: 140px;
+    height: 90px;
+  }
+
+  .carousel-item.center .vlog-thumbnail {
+    transform: scale(1.15);
+  }
+
+  .carousel-item.faded .vlog-thumbnail {
+    transform: scale(0.65);
   }
 }
 
