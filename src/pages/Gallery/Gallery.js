@@ -21,7 +21,6 @@ const photoAlbums = [
       { id: 8, url: '/media/gallery/field-days/fall25-maruf-field-day-8.jpg', type: 'image' },
       { id: 9, url: '/media/gallery/field-days/fall25-maruf-field-day-9.jpg', type: 'image' },
       { id: 10, url: '/media/gallery/field-days/fall25-maruf-field-day-10.jpg', type: 'image' },
-      { id: 11, url: '/media/gallery/field-days/fall25-maruf-field-day-11.jpg', type: 'image' },
       { id: 12, url: '/media/gallery/field-days/fall25-maruf-field-day-12.jpg', type: 'image' },
       { id: 13, url: '/media/gallery/field-days/fall25-maruf-field-day-13.jpg', type: 'image' },
       { id: 14, url: '/media/gallery/field-days/fall25-maruf-field-day-14.jpg', type: 'image' },

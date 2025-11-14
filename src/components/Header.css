@@ -80,7 +80,7 @@
 .nav .nav-link:not(.dropdown-link)::after {
   content: '';
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   left: 0;
   right: 0;
   height: 3px;
@@ -281,6 +281,18 @@
     font-size: 1rem;
     transition: var(--transition-fast);
     justify-content: space-between;
+  }
+
+  .nav .nav-item {
+    width: 100%;
+  }
+
+  .nav .nav-item button.nav-link.dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    text-align: left;
+    display: flex;
+    align-items: center;
   }
   
   .nav .nav-link:hover {

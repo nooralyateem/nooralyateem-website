@@ -39,7 +39,21 @@ function AboutUs() {
           <div className="leads-grid" ref={leadsGridRef}>
             <div className={`lead-card slide-up delay-1 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/president.JPG" alt="Taha - President" className="lead-image" loading="lazy" />
+                {/* 
+                  To adjust image position within circle, change objectPosition value:
+                  - "center center" = centered (default)
+                  - "top center" = move up, "bottom center" = move down
+                  - "center left" = move left, "center right" = move right
+                  - "50% 30%" = percentage positioning (horizontal, vertical)
+                  - "50px 20px" = pixel positioning
+                */}
+                <img 
+                  src="/media/leads/president.JPG" 
+                  alt="Taha - President" 
+                  className="lead-image" 
+                  loading="lazy"
+                  style={{ objectPosition: '-41px 0px', transform: 'scale(1.0)' }}
+                />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Taha Ahmed</h3>
@@ -50,7 +64,13 @@ function AboutUs() {
 
             <div className={`lead-card slide-up delay-2 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/ExternalVP.JPG" alt="Saad - External Vice President" className="lead-image" loading="lazy" />
+                <img 
+                  src="/media/leads/ExternalVP.JPG" 
+                  alt="Saad - External Vice President" 
+                  className="lead-image" 
+                  loading="lazy"
+                  style={{ objectPosition: '-40px 8px', transform: 'scale(1.1)' }}
+                />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Saad Syed</h3>
@@ -83,7 +103,13 @@ function AboutUs() {
 
             <div className={`lead-card slide-up delay-5 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Treasurer.jpeg" alt="Labeebah Altaf - Treasurer" className="lead-image" loading="lazy" />
+                <img 
+                  src="/media/leads/Treasurer.jpeg" 
+                  alt="Labeebah Altaf - Treasurer" 
+                  className="lead-image" 
+                  loading="lazy"
+                  style={{ objectPosition: '-43px 0px', transform: 'scale(1.0)' }}
+                />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Labeebah Altaf</h3>
@@ -110,6 +136,7 @@ function AboutUs() {
                   alt="Sameeha - External Outreach Lead" 
                   className="lead-image"
                   loading="lazy"
+                  style={{ objectPosition: '0px -28px', transform: 'scale(1.0)' }}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Q5ZDlkOSIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+';
@@ -158,7 +185,13 @@ function AboutUs() {
 
             <div className={`lead-card slide-up delay-5 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Marketing.JPG" alt="Ahmed - Marketing Lead" className="lead-image" loading="lazy" />
+                <img 
+                  src="/media/leads/Marketing.JPG" 
+                  alt="Ahmed - Marketing Lead" 
+                  className="lead-image" 
+                  loading="lazy"
+                  style={{ objectPosition: '4px -40px', transform: 'scale(1.05)' }}
+                />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Ahmed Khan</h3>
@@ -169,7 +202,13 @@ function AboutUs() {
 
             <div className={`lead-card slide-up delay-6 ${leadsGridVisible ? 'visible' : ''}`}>
               <div className="lead-image-container">
-                <img src="/media/leads/Marketing2.JPG" alt="Zuhaab - Marketing Lead" className="lead-image" loading="lazy" />
+                <img 
+                  src="/media/leads/Marketing2.JPG" 
+                  alt="Zuhaab - Marketing Lead" 
+                  className="lead-image" 
+                  loading="lazy"
+                  style={{ objectPosition: 'center center', transform: 'scale(1.0)' }}
+                />
               </div>
               <div className="lead-info">
                 <h3 className="lead-name">Zuhaab Agha</h3>

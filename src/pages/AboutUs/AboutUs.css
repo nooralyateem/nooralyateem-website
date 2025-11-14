@@ -393,6 +393,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center; /* Default: centered. Adjust with inline style or data attribute */
   display: block;
   transition: transform var(--transition-base);
 }
