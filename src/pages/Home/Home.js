@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
-import useCountUp from '../../hooks/useCountUp';
 import './Home.css';
 
 function Home() {
@@ -25,28 +24,63 @@ function Home() {
   ];
 
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const autoRotateIntervalRef = useRef(null);
+  const resumeTimeoutRef = useRef(null);
   
+  // Event recap data - placeholder images and description
+  const eventRecapImages = [
+    "/carnival1.JPG",
+    "/carnival2.JPG",
+    "/carnival3.JPG",
+    "/carnival5.JPG",
+    "/carnival7.JPG"
+  ];
+  
+  const [currentRecapImageIndex, setCurrentRecapImageIndex] = useState(0);
+  const [isRecapPaused, setIsRecapPaused] = useState(false);
+  const recapCarouselIntervalRef = useRef(null);
+  const recapResumeTimeoutRef = useRef(null);
+  
+  const eventRecap = {
+    title: "Event Recap",
+    description: "Our recent event brought together members of the community for an evening of connection and purpose. Students, volunteers, and supporters gathered to participate in meaningful activities and discussions. The event featured engaging workshops, interactive sessions, and opportunities to learn more about our mission. Attendees left inspired and connected, ready to make a positive impact in their communities.",
+    images: eventRecapImages
+  };
+
   // Scroll animations
   const [heroLogoRef, heroLogoVisible] = useScrollAnimation();
   const [heroSubtitleRef, heroSubtitleVisible] = useScrollAnimation();
   const [heroButtonsRef, heroButtonsVisible] = useScrollAnimation();
   const [heroLearnMoreRef, heroLearnMoreVisible] = useScrollAnimation();
   const [eventsSectionRef, eventsVisible] = useScrollAnimation();
-  const [aboutSectionRef] = useScrollAnimation();
-  const [aboutContentRef, aboutContentVisible] = useScrollAnimation();
-  const [statsRef, statsVisible] = useScrollAnimation();
-
-  // Count-up animations for stats
-  const [stat1Ref, stat1Count] = useCountUp('500+', 2500);
-  const [stat2Ref, stat2Count] = useCountUp('10000+', 2500);
-  const [stat3Ref, stat3Count] = useCountUp(15, 2000);
+  const [eventRecapSectionRef] = useScrollAnimation();
+  const [eventRecapContentRef, eventRecapContentVisible] = useScrollAnimation();
 
   const nextEvent = () => {
+    // Clear any pending resume timeout
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+    setIsPaused(true);
     setCurrentEventIndex((prevIndex) => (prevIndex + 1) % upcomingEvents.length);
+    // Resume auto-rotation after 6 seconds (4s delay + 2s buffer) if not hovering
+    resumeTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 6000);
   };
 
   const prevEvent = () => {
+    // Clear any pending resume timeout
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+    setIsPaused(true);
     setCurrentEventIndex((prevIndex) => (prevIndex - 1 + upcomingEvents.length) % upcomingEvents.length);
+    // Resume auto-rotation after 6 seconds (4s delay + 2s buffer) if not hovering
+    resumeTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 6000);
   };
 
   const getVisibleEvents = () => {
@@ -62,6 +96,85 @@ function Home() {
     
     return visible;
   };
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    // Clear any existing interval
+    if (autoRotateIntervalRef.current) {
+      clearInterval(autoRotateIntervalRef.current);
+    }
+
+    // Only set up auto-rotation if not paused
+    if (!isPaused) {
+      autoRotateIntervalRef.current = setInterval(() => {
+        setCurrentEventIndex((prevIndex) => (prevIndex + 1) % upcomingEvents.length);
+      }, 4000); // Rotate every 4 seconds
+    }
+
+    // Cleanup on unmount or when paused state changes
+    return () => {
+      if (autoRotateIntervalRef.current) {
+        clearInterval(autoRotateIntervalRef.current);
+      }
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
+    };
+  }, [isPaused, upcomingEvents.length]); // Re-run when paused state changes
+
+  const nextRecapImage = () => {
+    // Clear any pending resume timeout
+    if (recapResumeTimeoutRef.current) {
+      clearTimeout(recapResumeTimeoutRef.current);
+    }
+    setIsRecapPaused(true);
+    setCurrentRecapImageIndex((prevIndex) => (prevIndex + 1) % eventRecapImages.length);
+    // Resume auto-rotation after 5 seconds
+    recapResumeTimeoutRef.current = setTimeout(() => {
+      setIsRecapPaused(false);
+    }, 5000);
+  };
+
+  const prevRecapImage = () => {
+    // Clear any pending resume timeout
+    if (recapResumeTimeoutRef.current) {
+      clearTimeout(recapResumeTimeoutRef.current);
+    }
+    setIsRecapPaused(true);
+    setCurrentRecapImageIndex((prevIndex) => (prevIndex - 1 + eventRecapImages.length) % eventRecapImages.length);
+    // Resume auto-rotation after 5 seconds
+    recapResumeTimeoutRef.current = setTimeout(() => {
+      setIsRecapPaused(false);
+    }, 5000);
+  };
+
+  // Auto-rotate event recap carousel
+  useEffect(() => {
+    // Clear any existing interval
+    if (recapCarouselIntervalRef.current) {
+      clearInterval(recapCarouselIntervalRef.current);
+    }
+
+    // Don't auto-rotate if paused
+    if (isRecapPaused) {
+      return;
+    }
+
+    // Rotate images every 6 seconds
+    recapCarouselIntervalRef.current = setInterval(() => {
+      setCurrentRecapImageIndex((prevIndex) => (prevIndex + 1) % eventRecapImages.length);
+    }, 6000);
+
+    // Cleanup on unmount
+    return () => {
+      if (recapCarouselIntervalRef.current) {
+        clearInterval(recapCarouselIntervalRef.current);
+      }
+      if (recapResumeTimeoutRef.current) {
+        clearTimeout(recapResumeTimeoutRef.current);
+      }
+    };
+  }, [isRecapPaused, eventRecapImages.length]);
 
   return (
     <>
@@ -84,7 +197,7 @@ function Home() {
             className={`hero-subtitle slide-up delay-1 ${heroSubtitleVisible ? 'visible' : ''}`}
             ref={heroSubtitleRef}
           >
-            home is where humanity is
+          home is where humanity is
           </p>
           
           <div 
@@ -95,9 +208,16 @@ function Home() {
           </div>
           
           <a 
-            href="#about" 
+            href="#upcoming-event" 
             className={`hero-learn-more slide-up delay-3 ${heroLearnMoreVisible ? 'visible' : ''}`}
             ref={heroLearnMoreRef}
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('upcoming-event');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
           >
             Learn More ↓
           </a>
@@ -106,10 +226,25 @@ function Home() {
 
       {/* Upcoming Event Section */}
       <section id="upcoming-event" className="upcoming-event-section" ref={eventsSectionRef}>
-        <h2 className={`section-title slide-up ${eventsVisible ? 'visible' : ''}`}>Upcoming Events</h2>
+        <div className="upcoming-events-header">
+          <img src="/bowtie-element.png" alt="" className="bowtie-element bowtie-left" />
+          <h2 className={`section-title slide-up ${eventsVisible ? 'visible' : ''}`}>Upcoming Events</h2>
+          <img src="/bowtie-element.png" alt="" className="bowtie-element bowtie-right" />
+        </div>
         
         <div className="upcoming-event-container">
-          <div className="event-carousel-wrapper">
+          <div 
+            className="event-carousel-wrapper"
+            onMouseEnter={() => {
+              // Clear any pending resume timeout when hovering
+              if (resumeTimeoutRef.current) {
+                clearTimeout(resumeTimeoutRef.current);
+                resumeTimeoutRef.current = null;
+              }
+              setIsPaused(true);
+            }}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <button 
               className="carousel-arrow carousel-arrow-left" 
               onClick={prevEvent}
@@ -120,24 +255,31 @@ function Home() {
             
             <div className="event-carousel-track">
               {getVisibleEvents().map((event) => (
-                <div
+                <a
                   key={event.id}
+                  href="https://www.instagram.com/nooralyateemutd?igsh=aWUxeThzcWgyNWtj"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`event-image-card ${event.position === 0 ? 'center' : ''} ${event.position !== 0 ? 'faded' : ''}`}
-                  onClick={() => {
-                    if (event.position !== 0) {
-                      setCurrentEventIndex(event.arrayIndex);
-                    }
-                  }}
                 >
                   {event.image && (
-                    <img 
-                      src={event.image} 
-                      alt={event.title}
-                      className="event-image-only"
-                      loading="lazy"
-                    />
+                    <>
+                      <img 
+                        src={event.image} 
+                        alt={event.title}
+                        className="event-image-only"
+                        loading="lazy"
+                      />
+                      <div className="event-image-overlay">
+                        <svg className="instagram-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="2" y="2" width="20" height="20" rx="6" ry="6"/>
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                      </div>
+                    </>
                   )}
-                </div>
+                </a>
               ))}
             </div>
 
@@ -158,48 +300,51 @@ function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="about" ref={aboutSectionRef}>
-        <div className="about-container">
-          <div className={`about-content slide-right ${aboutContentVisible ? 'visible' : ''}`} ref={aboutContentRef}>
-            <h2 className="about-title">
-              Every child deserves a chance to thrive
+      {/* Event Recap Section */}
+      <section id="event-recap" className="event-recap" ref={eventRecapSectionRef}>
+        <img src="/event-recap-element.png" alt="" className="event-recap-element event-recap-element-top-left" />
+        <img src="/event-recap-element.png" alt="" className="event-recap-element event-recap-element-bottom-right" />
+        <div className="event-recap-container">
+          <div className={`event-recap-content slide-up ${eventRecapContentVisible ? 'visible' : ''}`} ref={eventRecapContentRef}>
+            <div className="event-recap-text">
+              <h2 className="event-recap-title">
+                {eventRecap.title}
             </h2>
-            <p className="about-description">
-              Orphaned children face immense challenges - from lack of basic necessities to 
-              limited access to education and healthcare. Without support, their futures remain uncertain.
-            </p>
-            <p className="about-description">
-              We're building a comprehensive support system to transform lives through education, 
-              healthcare, and empowerment programs.
-            </p>
-            <a href="#upcoming-event" className="about-btn">
-              Explore Our Impact
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
-
-          <div className={`about-stats slide-left ${statsVisible ? 'visible' : ''}`} ref={statsRef}>
-            <p className="stats-header">Since starting our work, we've:</p>
-            
-            <div className="stat-item">
-              <div className="stat-category">TRANSFORMED LIVES.</div>
-              <div className="stat-number" ref={stat1Ref}>{stat1Count}</div>
-              <div className="stat-desc">children supported through our programs</div>
+              <p className="event-recap-description">
+                {eventRecap.description}
+              </p>
             </div>
 
-            <div className="stat-item">
-              <div className="stat-category">PROVIDED NOURISHMENT.</div>
-              <div className="stat-number" ref={stat2Ref}>{stat2Count}</div>
-              <div className="stat-desc">meals served to children in need</div>
+            <div className="event-recap-carousel-wrapper">
+              <button 
+                className="recap-carousel-arrow recap-carousel-arrow-up" 
+                onClick={prevRecapImage}
+                aria-label="Previous image"
+              >
+                ↑
+              </button>
+              
+              <div className="event-recap-gallery">
+                <div 
+                  key={currentRecapImageIndex}
+                  className="event-recap-image-wrapper fade-in"
+                >
+                  <img 
+                    src={eventRecap.images[currentRecapImageIndex]} 
+                    alt={`Event recap ${currentRecapImageIndex + 1}`}
+                    className="event-recap-image"
+                    loading="lazy"
+                  />
+                </div>
             </div>
 
-            <div className="stat-item">
-              <div className="stat-category">EXPANDED GLOBAL REACH.</div>
-              <div className="stat-number" ref={stat3Ref}>{stat3Count}</div>
-              <div className="stat-desc">countries where we make a difference</div>
+              <button 
+                className="recap-carousel-arrow recap-carousel-arrow-down" 
+                onClick={nextRecapImage}
+                aria-label="Next image"
+              >
+                ↓
+              </button>
             </div>
           </div>
         </div>

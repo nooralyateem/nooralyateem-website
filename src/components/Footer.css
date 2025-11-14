@@ -3,12 +3,14 @@
   margin: 0;
   padding: 0;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.101);
+  position: relative;
+  z-index: 10;
 }
 
 /* Upper Section - White Background */
 .footer-upper {
   background: var(--color-bg-cream);
-  padding: var(--spacing-3xl) var(--spacing-lg);
+  padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
   width: 100%;
 }
 
@@ -25,7 +27,7 @@
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 0;
 }
 
 .footer-logo {
@@ -41,11 +43,16 @@
 }
 
 .footer-mission-text {
-  font-size: 0.95rem;
-  color: var(--color-text-darker);
-  line-height: 1.6;
+  height: auto;
+  width: auto;
+  max-height: 8rem;
+  max-width: 360px;
   margin: 0;
-  padding-left: 1.1em;
+  margin-left: -4.5em;
+  margin-top: -60px;
+  padding-left: 0;
+  object-fit: contain;
+  display: block;
 }
 
 .footer-website {

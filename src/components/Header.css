@@ -133,6 +133,7 @@
   background: var(--color-bg-cream);
   box-shadow: var(--shadow-medium);
   border-radius: var(--radius-md);
+  border: 1px solid var(--color-text-darker);
   padding: var(--spacing-sm) 0;
   flex-direction: column;
   z-index: 1001;

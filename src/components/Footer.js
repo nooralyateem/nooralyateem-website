@@ -30,9 +30,11 @@ function Footer() {
             <div className="footer-logo">
               <img src="/NaY Logo transparent.png" alt="Noor Al Yateem" className="footer-logo-image" />
             </div>
-            <p className="footer-mission-text">
-            home is where humanity is ♡
-            </p>
+            <img 
+              src="/slogan-clear.jpg" 
+              alt="home is where humanity is" 
+              className="footer-mission-text"
+            />
           </div>
 
           {/* Middle Columns - Navigation Links */}
